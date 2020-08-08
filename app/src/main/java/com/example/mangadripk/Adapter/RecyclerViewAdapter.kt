@@ -1,4 +1,4 @@
-package com.example.mangadripk
+package com.example.mangadripk.Adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.mangadripk.Activity.Manga_Activity
+import com.example.mangadripk.Classes.Manga
+import com.example.mangadripk.R
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -26,7 +30,9 @@ class RecyclerViewAdapter(
         val view: View
         val mInflater = LayoutInflater.from(context)
         view = mInflater.inflate(R.layout.item_manga, parent, false)
-        return MyViewHolder(view)
+        return MyViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(
@@ -35,11 +41,14 @@ class RecyclerViewAdapter(
     ) {
         holder.manga_title.text = Data[position].title
         Picasso.get().load(Data[position].thumbnail).into(holder.manga_img)
-//        holder.cardView.setOnClickListener(View.OnClickListener {
-//            val intent = Intent(context, Manga_Activity::class.java)
-//            intent.putExtra("URL", Data[position].description)
-//            context.startActivity(intent)
-//        })
+        holder.cardView.setOnClickListener(View.OnClickListener {
+            val model = Data[position]
+            val URL : String? = model.description
+
+            val intent = Intent(context, Manga_Activity::class.java)
+            intent.putExtra("URL", URL)
+            context.startActivity(intent)
+        })
     }
 
     override fun getItemCount(): Int {
@@ -59,10 +68,10 @@ class RecyclerViewAdapter(
         }
     }
 
-//    fun setFilter(newList: ArrayList<Manga?>?) {
-//        Data = ArrayList()
-//        Data.addAll(newList)
-//        notifyDataSetChanged()
-//    }
+    fun setFilter(newList: ArrayList<Manga>) {
+        Data = ArrayList()
+        Data.addAll(newList)
+        notifyDataSetChanged()
+    }
 
 }

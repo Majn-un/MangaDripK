@@ -1,4 +1,4 @@
-package com.example.mangadripk
+package com.example.mangadripk.Classes
 
 class Manga {
     var title: String? = null

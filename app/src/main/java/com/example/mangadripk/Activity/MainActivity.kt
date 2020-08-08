@@ -1,4 +1,4 @@
-package com.example.mangadripk
+package com.example.mangadripk.Activity
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mangadripk.Classes.Manga
+import com.example.mangadripk.R
+import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -26,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         getWebsite()
 
         val myrv = findViewById<View>(R.id.recyclerview_id) as RecyclerView
-        myAdapter = RecyclerViewAdapter(this, lstManga)
+        myAdapter =
+            RecyclerViewAdapter(this, lstManga)
         myrv.layoutManager = GridLayoutManager(this, 3)
         myrv.adapter = myAdapter
     }
@@ -49,12 +53,12 @@ class MainActivity : AppCompatActivity() {
 //                newText = newText.toLowerCase()
 //                val newList: ArrayList<Manga> = ArrayList<Manga>()
 //                for (manga in lstManga!!) {
-//                    val title: String = manga.getTitle().toLowerCase()
+//                    val title: String? = manga.title?.toLowerCase()
 //                    if (title.contains(newText)) {
 //                        newList.add(manga)
 //                    }
 //                }
-//                myAdapter.setFilter(newList)
+//                myAdapter?.setFilter(newList)
 //                return true
 //            }
 //        }
@@ -98,7 +102,11 @@ class MainActivity : AppCompatActivity() {
 //                        for (m in 0 until int_MangaLink) {
 //                            MangaLink += description.eq(i).select("a").eq(1).attr("abs:href").charAt(m) ///
 //                        }
-                        val test = Manga(title, MangaLink, imgUrl)
+                        val test = Manga(
+                            title,
+                            MangaLink,
+                            imgUrl
+                        )
                         lstManga.add(test)
                     }
                 } catch (ignored: IOException) {
