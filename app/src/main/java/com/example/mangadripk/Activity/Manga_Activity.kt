@@ -56,7 +56,7 @@ class Manga_Activity : AppCompatActivity() {
 //            intent.putExtra("__cfduid", cookies1)
 //            intent.putExtra("ci_session", cookies2)
 //            startActivity(intent)
-//        }
+//        }//
     }
 
     private val mangaData: Unit
