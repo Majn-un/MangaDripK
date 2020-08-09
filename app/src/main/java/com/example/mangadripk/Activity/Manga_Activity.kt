@@ -50,13 +50,13 @@ class Manga_Activity : AppCompatActivity() {
 
         button_for_chapters =
             findViewById<View>(R.id.chapters_button) as Button
-//        button_for_chapters!!.setOnClickListener {
-//            val intent = Intent(this@Manga_Activity, Chapter_Activity::class.java)
-//            intent.putExtra("URL", Manga_URL)
-//            intent.putExtra("__cfduid", cookies1)
-//            intent.putExtra("ci_session", cookies2)
-//            startActivity(intent)
-//        }//
+        button_for_chapters!!.setOnClickListener {
+            val intent = Intent(this@Manga_Activity, Chapter_Activity::class.java)
+            intent.putExtra("URL", Manga_URL)
+            intent.putExtra("__cfduid", cookies1)
+            intent.putExtra("ci_session", cookies2)
+            startActivity(intent)
+        }//
     }
 
     private val mangaData: Unit

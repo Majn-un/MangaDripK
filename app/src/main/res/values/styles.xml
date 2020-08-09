@@ -20,7 +20,15 @@
     </style>
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
         <!--        <item name="android:windowBackground">@drawable/kenichi</item>-->
+    </style>
+    <style name="PageView" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+    <style name="Main">
+        <item name="android:windowFullscreen">true</item>
     </style>
     <style name="ProgressBarStyle">
         <item name="colorAccent">@color/colorPrimary</item>
