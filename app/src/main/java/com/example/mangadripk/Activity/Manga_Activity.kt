@@ -24,7 +24,8 @@ import java.util.regex.Pattern
 class Manga_Activity : AppCompatActivity() {
     private val myAdapter: RecyclerViewAdapter? = null
     private var button_for_chapters: Button? = null
-//    var refreshLayout: SwipeRefreshLayout? = null
+
+    //    var refreshLayout: SwipeRefreshLayout? = null
     private var manga_title: TextView? = null
     private var manga_description: TextView? = null
     private var manga_status: TextView? = null
@@ -96,7 +97,7 @@ class Manga_Activity : AppCompatActivity() {
                         val title =
                             doc.select("div.story-info-right").select("h1").text()
                         setValues(description, author, status, title, img_URL)
-                        Log.d("Yuh", description+author+status+title+img_URL)
+                        Log.d("Yuh", description + author + status + title + img_URL)
                     } else if (Mangakaklot_Searcher.find()) {
                         val author_2 =
                             doc.select("ul.manga-info-text").select("li").eq(1).select("a").eq(0)
@@ -110,7 +111,7 @@ class Manga_Activity : AppCompatActivity() {
                         val img_URL =
                             doc.select("div.manga-info-pic").select("img").attr("src")
                         setValues(description_2, author_2, status_2, title_2, img_URL)
-                        Log.d("Yuh", description_2+author_2+status_2+title_2+img_URL)
+                        Log.d("Yuh", description_2 + author_2 + status_2 + title_2 + img_URL)
 
                     } else {
                         Log.d("Not Found", "Could not find the source")

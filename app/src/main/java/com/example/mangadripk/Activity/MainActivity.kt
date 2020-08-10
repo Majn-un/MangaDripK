@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity() {
                 val n = rand.nextInt(2000)
                 Thread.sleep(n.toLong())
                 val res: Connection.Response = Jsoup
-                        .connect("https://mangakakalot.com/manga_list?type=topview&category=all&state=all&page=1")
-                        .method(Connection.Method.POST)
-                        .execute()
+                    .connect("https://mangakakalot.com/manga_list?type=topview&category=all&state=all&page=1")
+                    .method(Connection.Method.POST)
+                    .execute()
                 cookie = res.cookies()
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity() {
                     val rand = Random()
                     val n = rand.nextInt(2000)
                     Thread.sleep(n.toLong())
-                    val doc: Document = Jsoup.connect("https://mangakakalot.com/manga_list?type=topview&category=all&state=all&page=1")
+                    val doc: Document =
+                        Jsoup.connect("https://mangakakalot.com/manga_list?type=topview&category=all&state=all&page=1")
                             .cookies(cookie)
                             .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36")
                             .referrer("https://mangakakalot.com/manga_list?type=topview&category=all&state=all&page=1")
