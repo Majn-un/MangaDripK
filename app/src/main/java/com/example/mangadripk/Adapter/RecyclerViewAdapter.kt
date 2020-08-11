@@ -46,7 +46,6 @@ class RecyclerViewAdapter(
         holder.cardView.setOnClickListener(View.OnClickListener {
             val model = Data[position]
             val URL : String? = model.mangaUrl
-
             val intent = Intent(context, Manga_Activity::class.java)
             intent.putExtra("URL", URL)
             context.startActivity(intent)
