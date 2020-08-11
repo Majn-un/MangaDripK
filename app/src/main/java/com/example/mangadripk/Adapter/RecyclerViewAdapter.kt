@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.R
+import com.example.mangadripk.Sources.MangaModel
 import com.squareup.picasso.Picasso
 import java.util.*
 
 
 class RecyclerViewAdapter(
     private val context: Context,
-    private var Data: MutableList<Manga>
+    private var Data: List<MangaModel>
 ) :
     RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(
@@ -40,10 +41,11 @@ class RecyclerViewAdapter(
         position: Int
     ) {
         holder.manga_title.text = Data[position].title
-        Picasso.get().load(Data[position].thumbnail).into(holder.manga_img)
+        println(Data[position].imageUrl)
+        Picasso.get().load(Data[position].imageUrl).into(holder.manga_img)
         holder.cardView.setOnClickListener(View.OnClickListener {
             val model = Data[position]
-            val URL : String? = model.description
+            val URL : String? = model.mangaUrl
 
             val intent = Intent(context, Manga_Activity::class.java)
             intent.putExtra("URL", URL)
@@ -68,10 +70,10 @@ class RecyclerViewAdapter(
         }
     }
 
-    fun setFilter(newList: ArrayList<Manga>) {
-        Data = ArrayList()
-        Data.addAll(newList)
-        notifyDataSetChanged()
-    }
+//    fun setFilter(newList: ArrayList<Manga>) {
+//        Data = ArrayList()
+//        Data.addAll(newList)
+//        notifyDataSetChanged()
+//    }
 
 }
