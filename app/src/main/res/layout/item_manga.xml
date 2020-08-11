@@ -23,7 +23,7 @@
             android:layout_height="165dp"
             android:background="#2d2d2d"
             android:scaleType="centerCrop"
-            cardview:tint="@color/colorPrimaryDark" />
+            />
 
         <TextView
             android:id="@+id/manga_title_id"
