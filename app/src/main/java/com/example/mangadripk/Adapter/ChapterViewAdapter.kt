@@ -32,8 +32,8 @@ class ChapterViewAdapter(
             val intent = Intent(context, Page_Activity::class.java)
             intent.putExtra("Name", Data[position].name)
             intent.putExtra("Link", Data[position].link)
-            intent.putExtra("ci_session", Data[position].cookie1)
-            intent.putExtra("__cfduid", Data[position].cookie2)
+//            intent.putExtra("ci_session", Data[position].cookie1)
+//            intent.putExtra("__cfduid", Data[position].cookie2)
             context.startActivity(intent)
         }
     }

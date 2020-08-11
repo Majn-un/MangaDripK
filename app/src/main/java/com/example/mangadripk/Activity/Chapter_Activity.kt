@@ -68,42 +68,15 @@ class Chapter_Activity : AppCompatActivity() {
 //                    val rand = Random()
 //                    val n = rand.nextInt(2000)
 //                    Thread.sleep(n.toLong())
-                    val doc =
-                        Jsoup.connect(Manga_URL) //                            .cookies(cookies)
-                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36")
-                            .referrer(Manga_URL)
-                            .get()
-                    val description =
-                        doc.select("div.panel-story-chapter-list").select("li")
+                    val doc = Jsoup.connect(Manga_URL).get()
+                    val description = doc.select("div[id=chapterlist]").select("ul.detail-main-list").select("li")
                     val length = description.size
-                    if (length == 0) {
-                        val des_2 =
-                            doc.select("div.chapter-list").select("div")
-                        val des_2_length = des_2.size
-                        for (i2 in 0 until des_2_length) {
-                            val Link =
-                                doc.select("div.chapter-list").select("div").eq(i2).select("a")
-                                    .attr("href")
-                            val Chapter_Title =
-                                doc.select("div.chapter-list").select("div").eq(i2).select("a")
-                                    .attr("title")
-                            val Date =
-                                doc.select("div.chapter-list").select("div").eq(i2).eq(2).text()
-                            val chap = Chapter(Chapter_Title, Link, Cookie2, Cookie1)
-                            lstChapter.add(chap)
-                        }
-                        //
-                    } else {
-                        for (i in 0 until length) {
-                            val Link =
-                                description.eq(i).select("li").select("a").attr("abs:href")
-                            val Chapter_Title =
-                                description.eq(i).select("li").select("a").text()
-                            val Date =
-                                description.eq(1).select("li").select("span").eq(1).text()
-                            val chap = Chapter(Chapter_Title, Link, Cookie2, Cookie1)
-                            lstChapter.add(chap)
-                        }
+                    for (i in 0 until length) {
+                        val Link = description.eq(i).select("a").attr("abs:href")
+                        val Chapter_Title = description.eq(i).select("a").select("p.title3").text()
+                        val Date = description.eq(1).select("a").select("p.title2").text()
+                        val chap = Chapter(Chapter_Title, Link)
+                        lstChapter.add(chap)
                     }
 //                    progressDialog!!.dismiss()
                 } catch (ignored: IOException) {
