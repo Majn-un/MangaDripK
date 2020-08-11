@@ -27,7 +27,7 @@ object MangaHere : MangaSource {
                 title = it.select("a").first().attr("title"),
                 description = "",
                 mangaUrl = it.select("a").first().attr("abs:href"),
-                imageUrl = it.select("img.manga-list-1-cover")?.first()?.attr("src") ?: "",
+                imageUrl = it.select("  img.manga-list-1-cover")?.first()?.attr("src") ?: "",
                 source = Sources.MANGA_HERE
             )
         }.filter { it.title.isNotEmpty() }
@@ -59,7 +59,7 @@ object MangaHere : MangaSource {
                 MangaModel(
                     title = it.select("a").first().attr("title"),
                     description = it.select("p.manga-list-4-item-tip").last().text(),
-                    mangaUrl = "$baseUrl${it.select(".manga-list-4-item-title > a")
+                     mangaUrl = "$baseUrl${it.select(".manga-list-4-item-title > a")
                         .first().attr("href")}",
                     imageUrl = it.select("img.manga-list-4-cover").first().attr("abs:src"),
                     source = Sources.MANGA_HERE
