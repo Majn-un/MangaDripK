@@ -54,8 +54,6 @@ class Manga_Activity : AppCompatActivity() {
         button_for_chapters!!.setOnClickListener {
             val intent = Intent(this@Manga_Activity, Chapter_Activity::class.java)
             intent.putExtra("URL", Manga_URL)
-            intent.putExtra("__cfduid", cookies1)
-            intent.putExtra("ci_session", cookies2)
             startActivity(intent)
         }//
     }
@@ -64,60 +62,14 @@ class Manga_Activity : AppCompatActivity() {
         private get() {
             Thread(Runnable {
                 try {
-//                    val rand = Random()
-//                    val n = rand.nextInt(2000)
-//                    Thread.sleep(n.toLong())
-//                    val res = Jsoup
-//                        .connect(Manga_URL)
-//                        .method(Connection.Method.POST)
-//                        .execute()
-//                    cookies1 = res.cookie("__cfduid")
-//                    cookies2 = res.cookie("ci_session")
-//                    val cookies =
-//                        res.cookies()
-//                    Log.d("Manga cookies", cookies.toString() + "")
-                    val doc = Jsoup.connect(Manga_URL)
-                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36")
-                        .referrer(Manga_URL)
-                        .get()
-                    val Manganelo =
-                        Pattern.compile("//manganelo.com/")
-                    val Mangakakalot =
-                        Pattern.compile("//mangakakalot.com/")
-                    val Manganelo_Searcher = Manganelo.matcher(Manga_URL)
-                    val Mangakaklot_Searcher =
-                        Mangakakalot.matcher(Manga_URL)
-                    if (Manganelo_Searcher.find()) {
-                        val author = doc.select("td.table-value").eq(1).text()
-                        val status = doc.select("td.table-value").eq(2).text()
-                        val description =
-                            doc.select("div.panel-story-info-description").text()
-                        val img_URL =
-                            doc.select("span.info-image").select("img").attr("src")
-                        val title =
-                            doc.select("div.story-info-right").select("h1").text()
-                        setValues(description, author, status, title, img_URL)
-                        Log.d("Yuh", description + author + status + title + img_URL)
-                    } else if (Mangakaklot_Searcher.find()) {
-                        val author_2 =
-                            doc.select("ul.manga-info-text").select("li").eq(1).select("a").eq(0)
-                                .text() + " " + doc.select("ul.manga-info-text").select("li").eq(1)
-                                .select("a").eq(1).text()
-                        val status_2 =
-                            doc.select("ul.manga-info-text").select("li").eq(2).text()
-                        val description_2 = doc.select("div#noidungm").text()
-                        val title_2 =
-                            doc.select("ul.manga-info-text").select("h1").eq(0).text()
-                        val img_URL =
-                            doc.select("div.manga-info-pic").select("img").attr("src")
-                        setValues(description_2, author_2, status_2, title_2, img_URL)
-                        Log.d("Yuh", description_2 + author_2 + status_2 + title_2 + img_URL)
-
-                    } else {
-                        Log.d("Not Found", "Could not find the source")
-                    }
-                } catch (ignored: IOException) {
-                    Log.d("Yuh", "Something is not working")
+//
+                    val doc = Jsoup.connect(Manga_URL).get()
+                    val title = doc.select("span.detail-info-right-title-font").text()
+                    val status = doc.select("span.detail-info-right-title-tip").text()
+                    val description = doc.select("p.fullcontent").text()
+                    val author = doc.select("p.detail-info-right-say").select("a").text()
+                    val imageUrl = doc.select("img.detail-info-cover-img").select("img[src^=http]").attr("abs:src")
+                    setValues(description,author,status,title,imageUrl)
                 } catch (ignored: InterruptedException) {
                     Log.d("Yuh", "Something is not working")
                 }
