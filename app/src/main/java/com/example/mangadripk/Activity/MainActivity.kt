@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.R
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
-import com.example.mangadripk.Sources.MangaModel
 import com.example.mangadripk.Sources.Sources
+import com.programmersbox.manga_sources.mangasources.MangaModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jsoup.Connection
@@ -30,9 +30,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        lstManga = ArrayList()
         loadNewManga()
-//        println(lstManga)
+
         val myrv = findViewById<View>(R.id.recyclerview_id) as RecyclerView
         myAdapter = RecyclerViewAdapter(this, mangaList)
         myrv.layoutManager = GridLayoutManager(this, 3)
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 val list = Sources.MANGA_HERE.getManga(1).toList()
                 mangaList.addAll(list)
-                println(list[1])
+//                println(list[1])
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
 //                    adapter2.addItems(list)

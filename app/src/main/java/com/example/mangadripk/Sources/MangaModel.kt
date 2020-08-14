@@ -1,7 +1,8 @@
-package com.example.mangadripk.Sources
+package com.programmersbox.manga_sources.mangasources
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.mangadripk.Sources.Sources
 import com.example.mangadripk.Sources.utilites.NetworkHelper
 
 interface MangaSource {

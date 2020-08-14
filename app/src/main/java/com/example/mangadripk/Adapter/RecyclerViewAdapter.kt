@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.R
-import com.example.mangadripk.Sources.MangaModel
+import com.example.mangadripk.Sources.Sources
+import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.squareup.picasso.Picasso
 import java.util.*
 
 
-class RecyclerViewAdapter(
+class RecyclerViewAdapter (
     private val context: Context,
     private var Data: List<MangaModel>
 ) :
@@ -45,9 +46,19 @@ class RecyclerViewAdapter(
         Picasso.get().load(Data[position].imageUrl).into(holder.manga_img)
         holder.cardView.setOnClickListener(View.OnClickListener {
             val model = Data[position]
-            val URL : String? = model.mangaUrl
+            val mangaUrl : String = model.mangaUrl
+            val imgUrl : String = model.imageUrl
+            val description : String = model.description
+            val title : String = model.title
+            val source : Sources = model.source
+
             val intent = Intent(context, Manga_Activity::class.java)
-            intent.putExtra("URL", URL)
+                intent.putExtra("mangaUrl",mangaUrl)
+                intent.putExtra("imgUrl",imgUrl)
+                intent.putExtra("description",description)
+                intent.putExtra("title",title)
+                intent.putExtra("source",Sources.toString())
+
             context.startActivity(intent)
         })
     }

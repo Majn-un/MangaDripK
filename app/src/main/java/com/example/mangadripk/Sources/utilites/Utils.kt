@@ -1,6 +1,6 @@
 package com.example.mangadripk.Sources.utilites
 
-import com.example.mangadripk.Sources.MangaContext
+import com.programmersbox.manga_sources.mangasources.MangaContext
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import okhttp3.Request

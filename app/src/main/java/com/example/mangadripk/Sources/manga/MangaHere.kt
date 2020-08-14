@@ -1,6 +1,7 @@
 package com.example.mangadripk.Sources.manga
 
 import com.example.mangadripk.Sources.*
+import com.programmersbox.manga_sources.mangasources.*
 import com.squareup.duktape.Duktape
 import okhttp3.CacheControl
 //import com.squareup.duktape.Duktape
@@ -128,7 +129,7 @@ object MangaHere : MangaSource {
     override fun getPageInfo(chapterModel: ChapterModel): PageModel =
         pageListParse(Jsoup.connect(chapterModel.url).get())
 
-    private fun pageListParse(document: Document): PageModel {
+    fun pageListParse(document: Document): PageModel {
         val bar = document.select("script[src*=chapter_bar]")
         val duktape = Duktape.create()
 
@@ -181,7 +182,6 @@ object MangaHere : MangaSource {
                 IntRange(1, pagesNumber).map { i ->
 
                     val pageLink = "$pageBase/chapterfun.ashx?cid=$chapterId&page=$i&key=$secretKey"
-
                     var responseText = ""
 
                     for (tr in 1..3) {
@@ -224,7 +224,7 @@ object MangaHere : MangaSource {
         )
     }
 
-    private fun extractSecretKey(html: String, duktape: Duktape): String {
+    fun extractSecretKey(html: String, duktape: Duktape): String {
 
         val secretKeyScriptLocation = html.indexOf("eval(function(p,a,c,k,e,d)")
         val secretKeyScriptEndLocation = html.indexOf("</script>", secretKeyScriptLocation)

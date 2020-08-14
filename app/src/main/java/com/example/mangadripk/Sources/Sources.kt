@@ -1,25 +1,27 @@
 package com.example.mangadripk.Sources
 
-import com.example.mangadripk.Sources.manga.MangaHere
+import com.example.mangadripk.Sources.manga.*
+import com.programmersbox.manga_sources.mangasources.MangaSource
 
-//import com.example.mangadripk.Sources.manga.*
+//import com.programmersbox.manga_sources.mangasources.manga.*
 
 enum class Sources(
     val domain: String,
     val isAdult: Boolean = false,
     val filterOutOfUpdate: Boolean = false,
-    val source: MangaHere
+    val source: MangaSource
 ) : MangaSource by source {
 
     //MANGA_EDEN(domain = "mangaeden", filterOutOfUpdate = true, source = MangaEden),
+//    MANGANELO(domain = "manganelo", source = Manganelo),
     MANGA_HERE(domain = "mangahere", source = MangaHere);
 //    MANGA_4_LIFE(domain = "manga4life", source = MangaFourLife),
 //    NINE_ANIME(domain = "nineanime", source = NineAnime),
-//    MANGAKAKALOT(domain = "mangakakalot", source = Mangakakalot);
+//    MANGAKAKALOT(domain = "mangakakalot", source = Mangakakalot),
 //    MANGAMUTINY(domain = "mangamutiny", source = Mangamutiny),
 //    MANGA_PARK(domain = "mangapark", source = MangaPark),
-
-    //MANGA_DOG(domain = "mangadog", source = MangaDog),
+//
+//    //MANGA_DOG(domain = "mangadog", source = MangaDog),
 //    INKR(domain = "mangarock", source = com.programmersbox.manga_sources.mangasources.manga.INKR),
 //    TSUMINO(domain = "tsumino", isAdult = true, source = Tsumino);
 
