@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mangadripk.Activity.Page_Activity
 import com.example.mangadripk.Classes.Chapter
 import com.example.mangadripk.R
+import com.example.mangadripk.Sources.Sources
 
 class ChapterViewAdapter(
     private val context: Context,
@@ -29,11 +30,20 @@ class ChapterViewAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.chapter_title.setText(Data[position].name)
         holder.cardView.setOnClickListener {
+            val model = Data[position]
+            val name : String? = model.name
+            val url : String? = model.link
+            val uploadedtime : Long? = model.uploadedTime
+            val source : Sources? = model.sources
+            val upload : String? = model.uploaded
+
             val intent = Intent(context, Page_Activity::class.java)
-            intent.putExtra("Name", Data[position].name)
-            intent.putExtra("Link", Data[position].link)
-//            intent.putExtra("ci_session", Data[position].cookie1)
-//            intent.putExtra("__cfduid", Data[position].cookie2)
+            intent.putExtra("name",name)
+            intent.putExtra("url",url)
+            intent.putExtra("uploadedtime",uploadedtime)
+            intent.putExtra("upload",upload)
+            intent.putExtra("source", source.toString())
+
             context.startActivity(intent)
         }
     }

@@ -8,16 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mangadripk.Activity.Manga_Activity
-import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.R
-import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.squareup.picasso.Picasso
-import java.util.*
 
 
 class RecyclerViewAdapter (
@@ -50,14 +46,12 @@ class RecyclerViewAdapter (
             val imgUrl : String = model.imageUrl
             val description : String = model.description
             val title : String = model.title
-            val source : Sources = model.source
 
             val intent = Intent(context, Manga_Activity::class.java)
                 intent.putExtra("mangaUrl",mangaUrl)
                 intent.putExtra("imgUrl",imgUrl)
                 intent.putExtra("description",description)
                 intent.putExtra("title",title)
-                intent.putExtra("source",Sources.toString())
 
             context.startActivity(intent)
         })

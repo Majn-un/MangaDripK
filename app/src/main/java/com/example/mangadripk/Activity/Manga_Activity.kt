@@ -62,15 +62,12 @@ class Manga_Activity : AppCompatActivity() {
                 if (mangaUrl != null) {
                     if (imgUrl != null) {
                         ShineManga = MangaModel(it,description,mangaUrl,imgUrl,Sources.MANGA_HERE)
-//                        println(ShineManga.title)
-
                     }
                 }
             }
         }
 
         MangaActivity()
-//        mangaData
 
         button_for_chapters = findViewById<View>(R.id.chapters_button) as Button
         button_for_chapters!!.setOnClickListener {
@@ -86,35 +83,16 @@ class Manga_Activity : AppCompatActivity() {
     }
 
     private fun MangaActivity() {
-//        refresh.isRefreshing = true
         GlobalScope.launch {
             try {
                 val mangaActivity = ShineManga.toInfoModel()
                 setValues(ShineManga.description,"","",ShineManga.title,ShineManga.imageUrl)
-//                val Pages = mangaActivity.chapters[1].getPageInfo()
-//                println("YUH"+Pages)
-
-//                mangaList.addAll(list)
-//                println(list[1])
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
-//                    adapter2.addItems(list)
-//                    search_layout.suffixText = "${mangaList.size}"
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-//                FirebaseCrashlytics.getInstance().log("$currentSource had an error")
-//                FirebaseCrashlytics.getInstance().recordException(e)
-//                Firebase.analytics.logEvent("manga_load_error") {
-//                    param(FirebaseAnalytics.Param.ITEM_NAME, currentSource.name)
             }
-//                runOnUiThread {
-//                    MaterialAlertDialogBuilder(this@MainActivity)
-//                        .setTitle(R.string.wentWrong)
-//                        .setMessage(getString(R.string.wentWrongInfo, currentSource.name))
-//                        .setPositiveButton(R.string.ok) { d, _ -> d.dismiss() }
-//                        .show()
-//                }
         }
     }
 

@@ -1,26 +1,29 @@
 package com.example.mangadripk.Classes
 
+import com.example.mangadripk.Sources.Sources
 import java.io.Serializable
 
 
 class Chapter : Serializable {
     var name: String? = null
     var link: String? = null
-//    var cookie1: String? = null
-//    var cookie2: String? = null
+    var sources: Sources? = null
+    var uploadedTime: Long? = null
+    var uploaded: String? = null
 
-    //    private Map<String, String> Cookies;
-    constructor() {}
     constructor(
         Chapter_Title: String?,
-        Chapter_Link: String?
-//        cookie1: String?,
-//        cookie2: String?
+        Chapter_Link: String?,
+        Chapter_Sources: Sources?,
+        Chapter_uploaded: String?,
+        Chapter_upload: Long?
+
     ) {
         name = Chapter_Title
         link = Chapter_Link
-//        this.cookie1 = cookie1
-//        this.cookie2 = cookie2
+        uploaded = Chapter_uploaded
+        uploadedTime = Chapter_upload
+        sources = Chapter_Sources
     }
 
 }
