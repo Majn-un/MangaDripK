@@ -24,6 +24,9 @@ class Chapter_Activity : AppCompatActivity() {
     private var myAdapter: ChapterViewAdapter? = null
     private var chapter_title: TextView? = null
     lateinit var lstChapter: MutableList<Chapter>
+    private var OG_name: String? = null
+    private var OG_Thumb: String? = null
+
     private var ChapterManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,9 @@ class Chapter_Activity : AppCompatActivity() {
         val imgUrl = intent.getStringExtra("imgUrl")
         val description = intent.getStringExtra("description")
         val title = intent.getStringExtra("title")
+        OG_name = intent.getStringExtra("title")
+        OG_Thumb = intent.getStringExtra("imgUrl")
+
         val MangaYUH = title?.let {
             if (description != null) {
                 if (mangaUrl != null) {
@@ -60,7 +66,7 @@ class Chapter_Activity : AppCompatActivity() {
             try {
                 val mangaActivity = ChapterManga.toInfoModel()
                 for (item in mangaActivity.chapters) {
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,item.uploaded,item.uploadedTime))
+                    lstChapter.add(Chapter(item.name,item.url,item.sources,item.uploaded,item.uploadedTime, OG_Thumb,OG_name))
                 }
 
                 runOnUiThread {
