@@ -38,7 +38,6 @@ class RecyclerViewAdapter (
         position: Int
     ) {
         holder.manga_title.text = Data[position].title
-        println(Data[position].imageUrl)
         Picasso.get().load(Data[position].imageUrl).into(holder.manga_img)
         holder.cardView.setOnClickListener(View.OnClickListener {
             val model = Data[position]
@@ -68,8 +67,7 @@ class RecyclerViewAdapter (
 
         init {
             manga_title = itemView.findViewById<View>(R.id.manga_title_id) as TextView
-            manga_img =
-                itemView.findViewById<View>(R.id.manga_cover_id) as ImageView
+            manga_img = itemView.findViewById<View>(R.id.manga_cover_id) as ImageView
             cardView = itemView.findViewById<View>(R.id.manga) as CardView
         }
     }

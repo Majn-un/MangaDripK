@@ -16,7 +16,6 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,15 +26,11 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-
         <activity android:name=".Activity.Manga_Activity" />
         <activity android:name=".Activity.Chapter_Activity" />
         <activity
             android:name=".Activity.Page_Activity"
             android:theme="@style/PageView"/>
-
-
-
     </application>
 
 </manifest>

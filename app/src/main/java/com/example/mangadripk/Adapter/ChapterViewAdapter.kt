@@ -36,6 +36,8 @@ class ChapterViewAdapter(
             val uploadedtime : Long? = model.uploadedTime
             val source : Sources? = model.sources
             val upload : String? = model.uploaded
+            val ogT : String? = model.OG_Thumb
+            val ogN : String? = model.OG_Name
 
             val intent = Intent(context, Page_Activity::class.java)
             intent.putExtra("name",name)
@@ -43,6 +45,9 @@ class ChapterViewAdapter(
             intent.putExtra("uploadedtime",uploadedtime)
             intent.putExtra("upload",upload)
             intent.putExtra("source", source.toString())
+            intent.putExtra("OGN",ogN)
+            intent.putExtra("OGT",ogT)
+
 
             context.startActivity(intent)
         }
