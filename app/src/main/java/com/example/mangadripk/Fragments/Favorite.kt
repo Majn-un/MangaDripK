@@ -40,13 +40,14 @@ class Favorite : Fragment() {
                 val manga = MangaModel(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
 
                 (lstManga as ArrayList<MangaModel>).add(manga)
-//                myDB.close()
-                val myrv: RecyclerView = view.findViewById(R.id.favorite_id)
-                myAdapter = RecyclerViewAdapter(activity!!, lstManga as ArrayList<MangaModel>)
-                myrv.layoutManager = GridLayoutManager(activity, 3)
-                myrv.adapter = myAdapter
+
             }
         }
+        myDB!!.close()
+        val myrv: RecyclerView = view.findViewById(R.id.favorite_id)
+        myAdapter = RecyclerViewAdapter(activity!!, lstManga as ArrayList<MangaModel>)
+        myrv.layoutManager = GridLayoutManager(activity, 3)
+        myrv.adapter = myAdapter
         return view
     }
 

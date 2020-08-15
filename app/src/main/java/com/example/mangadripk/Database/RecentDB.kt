@@ -40,8 +40,7 @@ class RecentDB(context: Context?) :
         contentValues.put(KEY_NAME2, manga.thumbnail)
         contentValues.put(KEY_THUMB, manga.Link)
 
-        val result =
-            db.insert(TABLE_NAME, null, contentValues)
+        val result = db.insert(TABLE_NAME, null, contentValues)
 
         //if date as inserted incorrectly it will return -1
         return result != -1L

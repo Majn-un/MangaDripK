@@ -42,25 +42,21 @@ class Recent : Fragment() {
             Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG).show()
         } else {
             while (data.moveToNext()) {
-                println(data.getString(1))
-                println(data.getString(2))
-                println(data.getString(3))
-                println(data.getString(4))
                 val manga = Recent(data.getString(3),data.getString(1),data.getString(2),data.getString(4))
-
+                println(manga.title)
 //                val manga = com.example.mangadripk.Classes.Recent(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
 //
                 (lstRecent as ArrayList<Recent>).add(manga)
-                myDB!!.close()
-                val myrv = view.findViewById(R.id.recent_id) as RecyclerView
-                myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
-                myrv.layoutManager = GridLayoutManager(activity, 1)
-                myrv.adapter = myAdapter
 
-                (lstRecent as ArrayList<Recent>).add(Recent("Yuh","Chapter 1","https://avt.mkklcdnv6.com/28/k/19-1583500216.jpg","yuh"))
-                return view
+
             }
         }
+
+        myDB!!.close()
+        val myrv = view.findViewById(R.id.recent_id) as RecyclerView
+        myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
+        myrv.layoutManager = GridLayoutManager(activity, 1)
+        myrv.adapter = myAdapter
         return view
     }
 
