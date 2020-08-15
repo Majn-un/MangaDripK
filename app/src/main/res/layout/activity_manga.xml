@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Manga_Activity">
 
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refreshLayout">
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -75,7 +78,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
-                        android:text="Favorite" />
+                        android:text="Favorite"
+                        android:layout_marginRight="10dp"/>
+
+
+                    <Button
+                        android:id="@+id/download_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:text="Download" />
 
 
                 </LinearLayout>
@@ -85,4 +97,5 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

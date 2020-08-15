@@ -38,8 +38,13 @@ class ChapterViewAdapter(
             val upload : String? = model.uploaded
             val ogT : String? = model.OG_Thumb
             val ogN : String? = model.OG_Name
-
+            var list_string = ""
+            for (i in Data.indices) {
+                list_string += Data[i].name + " - " + Data[i]
+                    .link + " , "
+            }
             val intent = Intent(context, Page_Activity::class.java)
+            intent.putExtra("Chapter_List", list_string)
             intent.putExtra("name",name)
             intent.putExtra("url",url)
             intent.putExtra("uploadedtime",uploadedtime)

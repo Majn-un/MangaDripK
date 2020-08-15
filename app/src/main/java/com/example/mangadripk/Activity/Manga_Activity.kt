@@ -9,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mangadripk.Adapter.ChapterViewAdapter
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Manga
@@ -19,6 +21,9 @@ import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_chapter.*
+import kotlinx.android.synthetic.main.activity_manga.*
+import kotlinx.android.synthetic.main.activity_manga.refreshLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -87,6 +92,12 @@ class Manga_Activity : AppCompatActivity() {
         button_for_favorites = findViewById<View>(R.id.favorite_button) as Button
         button_for_favorites!!.setOnClickListener {
             updateFavorite()
+        }
+
+        refreshLayout.setOnRefreshListener {
+            progressDialog.show(this)
+            MangaActivity()
+            refreshLayout.isRefreshing = false
         }
     }
 

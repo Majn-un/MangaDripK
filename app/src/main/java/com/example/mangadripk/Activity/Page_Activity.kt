@@ -2,10 +2,11 @@ package com.example.mangadripk.Activity
 
 //import android.app.ProgressDialog
 
-import android.R.attr.thumbnail
 import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -24,17 +25,23 @@ import java.util.*
 
 class Page_Activity : AppCompatActivity() {
     lateinit var lstPages: MutableList<Page>
+    lateinit var chapterList: MutableList<Array<String>>
     private var myViewPager: PageViewAdapter? = null
     private var Page_Model: ChapterModel = ChapterModel("","","",Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var OG_name : String? = ""
     var recent : Recent = Recent("","","","")
     private val progressDialog = CustomProgressDialog()
+    var Chapter_List: String? = ""
+    private var index = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
         progressDialog.show(this)
+
+        val next = findViewById<View>(R.id.button2) as Button
+        val previous = findViewById<View>(R.id.button1) as Button
 
         val intent = intent
         val url = intent.getStringExtra("url")
@@ -42,6 +49,29 @@ class Page_Activity : AppCompatActivity() {
         val OG_thumb = intent.getStringExtra("OGN")
         val name : String? = intent.getStringExtra("name")
         val upload = intent.getStringExtra("upload")
+        Chapter_List = intent.extras!!.getString("Chapter_List")
+        val aList: ArrayList<*> = ArrayList<Any?>(
+            Arrays.asList(*Chapter_List!!.split(",".toRegex()).toTypedArray()
+            )
+        )
+        for (i in aList.indices) {
+            val beta: ArrayList<*> = ArrayList<Any?>(
+                Arrays.asList(
+                    *aList[i].toString().split("-".toRegex()).toTypedArray()
+                )
+
+            )
+            println(beta)
+
+        }
+
+//        for (i in chapterList.indices) {
+//            if (chapterList[i][0] == " $name ") {
+//                index = i
+//                break
+//            }
+//        }
+
         val uploadedTime = intent.getStringExtra("uploadtime")
         val MangaYUH = name?.let {
             if (url != null) {
@@ -60,6 +90,36 @@ class Page_Activity : AppCompatActivity() {
         val myrv = findViewById<View>(R.id.view_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
         myrv.adapter = myViewPager
+
+        next.setOnClickListener(View.OnClickListener {
+//            if (index == 0) {
+//                Log.d("Newest Chapter Enabled", "YUH")
+//            } else {
+//                Page_Model = ChapterModel(chapterList[index-1][1] as String,
+//                    chapterList[index - 1][0] as String,"",Sources.MANGA_HERE)
+//                println(Page_Model)
+//                //                    Log.d("Chapter Link Previous",Chapter_URL );
+//                index = index - 1
+//                lstPages = ArrayList()
+//                mangaPages()
+//                myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
+//                myrv.adapter = myViewPager
+//            }
+        })
+
+        previous.setOnClickListener(View.OnClickListener {
+//            if (index + 1 == bList.size) {
+//                Log.d("Oldest Chapter Enabled", "YUH")
+//            } else {
+//                Page_Model = ChapterModel(bList.get(index + 1).get(2),bList.get(index + 1).get(1),"",Sources.MANGA_HERE)
+//                index = index + 1
+//                //                    Log.d("Chapter Link Next", Chapter_URL);
+//                lstPages = ArrayList()
+//                mangaPages()
+//                myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
+//                myrv.adapter = myViewPager
+//            }
+        })
     }
 
     private fun updateRecent() {
@@ -93,6 +153,7 @@ class Page_Activity : AppCompatActivity() {
     private fun mangaPages() {
         GlobalScope.launch {
             try {
+                println(Page_Model)
                 val mangaActivity = Page_Model.getPageInfo()
                 for (i in 0 until mangaActivity.pages.size) {
                     val page = Page(mangaActivity.pages[i],(i+1).toString())

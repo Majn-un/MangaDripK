@@ -14,6 +14,7 @@ import com.example.mangadripk.Classes.Chapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import kotlinx.android.synthetic.main.activity_chapter.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -60,6 +61,16 @@ class Chapter_Activity : AppCompatActivity() {
         myAdapter = ChapterViewAdapter(this, lstChapter)
         myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         myrv.adapter = myAdapter
+
+        refreshLayout.setOnRefreshListener {
+            progressDialog.show(this)
+            lstChapter.clear()
+            ChapterActivity()
+            myAdapter = ChapterViewAdapter(this, lstChapter)
+            myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            myrv.adapter = myAdapter
+            refreshLayout.isRefreshing = false
+        }
 
     }
 
