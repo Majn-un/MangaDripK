@@ -1,46 +1,34 @@
 package com.example.mangadripk.Activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import com.example.mangadripk.Fragments.Favorite
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+//import com.example.mangadripk.Fragments.FavoriteFragment
+import com.example.mangadripk.Fragments.Library
+import com.example.mangadripk.Fragments.Recent
 import com.example.mangadripk.R
-import com.example.mangadripk.Adapter.RecyclerViewAdapter
-import com.example.mangadripk.Sources.Sources
-import com.programmersbox.manga_sources.mangasources.MangaModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private var myAdapter: RecyclerViewAdapter? = null
-    private val mangaList = mutableListOf<MangaModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        loadNewManga()
-
-        val myrv = findViewById<View>(R.id.recyclerview_id) as RecyclerView
-        myAdapter = RecyclerViewAdapter(this, mangaList)
-        myrv.layoutManager = GridLayoutManager(this, 3)
-        myrv.adapter = myAdapter
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.setOnNavigationItemSelectedListener(navListener)
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, Library()).commit()
     }
 
-
-    private fun loadNewManga() {
-//        refresh.isRefreshing = true
-        GlobalScope.launch {
-            try {
-                val list = Sources.MANGA_HERE.getManga(1).toList()
-                mangaList.addAll(list)
-                runOnUiThread {
-                    myAdapter?.notifyDataSetChanged()
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                }
+    private val navListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            var selectedFragment: Fragment? = null
+            when (item.itemId) {
+                R.id.nav_library -> selectedFragment = Library()
+                R.id.nav_favorite -> selectedFragment = Favorite()
+                R.id.nav_recent -> selectedFragment = Recent()
             }
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment!!).commit()
+            true
         }
-    }
+}
