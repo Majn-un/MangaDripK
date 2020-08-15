@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
@@ -19,6 +20,7 @@ import java.util.*
 class Library : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
     private val mangaList = mutableListOf<MangaModel>()
+    private val progressDialog = CustomProgressDialog()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +28,14 @@ class Library : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view : View = inflater.inflate(R.layout.fragment_library, container, false)
-
+        activity?.let { progressDialog.show(it) }
         loadNewManga()
 
         val myrv = view.findViewById(R.id.recyclerview_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
         myrv.layoutManager = GridLayoutManager(activity, 3)
         myrv.adapter = myAdapter
+
         return view
     }
 
@@ -45,6 +48,8 @@ class Library : Fragment() {
                 Objects.requireNonNull(activity)?.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
+                progressDialog.dialog.dismiss()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

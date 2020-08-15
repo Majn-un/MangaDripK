@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Adapter.RecentViewAdapter
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
 import com.example.mangadripk.Database.RecentDB
@@ -24,6 +25,7 @@ import java.util.*
 
 class Recent : Fragment() {
     private var myAdapter: RecentViewAdapter? = null
+    private val progressDialog = CustomProgressDialog()
 
     var lstRecent: MutableList<Recent>? = null
     var myDB: RecentDB? = null
@@ -34,6 +36,7 @@ class Recent : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view : View = inflater.inflate(R.layout.fragment_recent, container, false)
+        activity?.let { progressDialog.show(it) }
 
         lstRecent = ArrayList<Recent>()
         myDB = RecentDB(activity)
@@ -53,10 +56,13 @@ class Recent : Fragment() {
         }
 
         myDB!!.close()
+
         val myrv = view.findViewById(R.id.recent_id) as RecyclerView
         myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
         myrv.layoutManager = GridLayoutManager(activity, 1)
         myrv.adapter = myAdapter
+        progressDialog.dialog.dismiss()
+
         return view
     }
 

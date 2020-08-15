@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
@@ -28,10 +29,13 @@ class Page_Activity : AppCompatActivity() {
     var myDB: RecentDB? = null
     var OG_name : String? = ""
     var recent : Recent = Recent("","","","")
+    private val progressDialog = CustomProgressDialog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
+        progressDialog.show(this)
+
         val intent = intent
         val url = intent.getStringExtra("url")
         OG_name = intent.getStringExtra("OGT")
@@ -65,6 +69,7 @@ class Page_Activity : AppCompatActivity() {
             if (data.getString(3) == OG_name) {
                 println("Already in recents")
                 return
+                TODO("IMPLEMENT A FUNCTION THAT UPDATES DATABASE")
             }
         }
         myDB!!.addData(recent)
@@ -91,11 +96,14 @@ class Page_Activity : AppCompatActivity() {
                 val mangaActivity = Page_Model.getPageInfo()
                 for (i in 0 until mangaActivity.pages.size) {
                     val page = Page(mangaActivity.pages[i],(i+1).toString())
+                    println(page.link)
                     lstPages.add(page)
                 }
                 runOnUiThread {
                     myViewPager?.notifyDataSetChanged()
                 }
+                progressDialog.dialog.dismiss()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

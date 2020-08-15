@@ -1,5 +1,6 @@
 package com.example.mangadripk.Fragments
 
+import android.app.ProgressDialog
 import android.database.Cursor
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
-import com.example.mangadripk.Classes.Manga
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Database.FavoriteDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
@@ -20,6 +21,7 @@ import java.util.*
 
 class Favorite : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
+    private val progressDialog = CustomProgressDialog()
 
     var lstManga: List<MangaModel>? = null
     var myDB: FavoriteDB? = null
@@ -28,8 +30,11 @@ class Favorite : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view : View = inflater.inflate(R.layout.fragment_favorite, container, false)
+        activity?.let { progressDialog.show(it) }
+
         lstManga = ArrayList<MangaModel>()
         myDB = FavoriteDB(activity)
         val data: Cursor = myDB!!.listContents
@@ -48,6 +53,7 @@ class Favorite : Fragment() {
         myAdapter = RecyclerViewAdapter(activity!!, lstManga as ArrayList<MangaModel>)
         myrv.layoutManager = GridLayoutManager(activity, 3)
         myrv.adapter = myAdapter
+        progressDialog.dialog.dismiss()
         return view
     }
 

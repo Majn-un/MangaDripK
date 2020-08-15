@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
@@ -26,6 +27,7 @@ class Manga_Activity : AppCompatActivity() {
     private val myAdapter: RecyclerViewAdapter? = null
     private var button_for_chapters: Button? = null
     private var button_for_favorites: Button? = null
+    private val progressDialog = CustomProgressDialog()
 
     var myDB: FavoriteDB? = null
 
@@ -42,6 +44,7 @@ class Manga_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga)
+        progressDialog.show(this)
 
         manga_status = findViewById<View>(R.id.status) as TextView
 //        manga_author = findViewById<View>(R.id.author) as TextView
@@ -122,6 +125,8 @@ class Manga_Activity : AppCompatActivity() {
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
+                progressDialog.dialog.dismiss()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -141,6 +146,7 @@ class Manga_Activity : AppCompatActivity() {
 //            manga_status!!.text = "Status: "
             manga_title!!.text = title
             Picasso.get().load(img_URL).into(img)
+
         }
     }
 }

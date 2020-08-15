@@ -21,7 +21,8 @@ object MangaHere : MangaSource {
     private const val baseUrl = "https://www.mangahere.cc"
     override val websiteUrl: String = baseUrl
 
-    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("$baseUrl/directory/$pageNumber.htm?latest")
+//    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("$baseUrl/directory/$pageNumber.htm?latest")
+    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/ranking/")
         .cookie("isAdult", "1").get()
         .select(".manga-list-1-list li").map {
             MangaModel(
