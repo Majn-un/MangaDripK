@@ -11,13 +11,13 @@ import com.example.mangadripk.Classes.Recent
 
 
 class RecentDB(context: Context?) :
-    SQLiteOpenHelper(context, DATABASE_NAME, null, 2) {
+    SQLiteOpenHelper(context, DATABASE_NAME, null, 3) {
     override fun onCreate(db: SQLiteDatabase) {
         val createTable =
             ("CREATE TABLE " + TABLE_NAME + " ("
-                    + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME1 +
-                    " TEXT, " + KEY_NAME2 + " TEXT, " + KEY_THUMB + " TEXT, "
-                    + KEY_URL + " TEXT" + ")")
+                    + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME1 +
+                    " TEXT, " + KEY_NAME2 + " TEXT, " + KEY_URL + " TEXT, "
+                    + KEY_THUMB + " TEXT" + ")")
         db.execSQL(createTable)
     }
 
@@ -35,10 +35,10 @@ class RecentDB(context: Context?) :
     ): Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_NAME1, manga.title)
-        contentValues.put(KEY_NAME2, manga.chapter)
-        contentValues.put(KEY_THUMB, manga.thumbnail)
-        contentValues.put(KEY_URL, manga.Link)
+        contentValues.put(KEY_URL, manga.title)
+        contentValues.put(KEY_NAME1, manga.chapter)
+        contentValues.put(KEY_NAME2, manga.thumbnail)
+        contentValues.put(KEY_THUMB, manga.Link)
 
         val result =
             db.insert(TABLE_NAME, null, contentValues)
@@ -69,7 +69,7 @@ class RecentDB(context: Context?) :
 
     companion object {
         const val DATABASE_NAME = "recent.db"
-        const val TABLE_NAME = "recent_data"
+        const val TABLE_NAME = "mylist_data"
         const val KEY_ID = "ID"
         const val KEY_NAME1 = "LINK"
         const val KEY_NAME2 = "NAME"

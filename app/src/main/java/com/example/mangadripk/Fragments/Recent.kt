@@ -13,6 +13,7 @@ import com.example.mangadripk.Adapter.RecentViewAdapter
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
+import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
@@ -25,7 +26,7 @@ class Recent : Fragment() {
     private var myAdapter: RecentViewAdapter? = null
 
     var lstRecent: MutableList<Recent>? = null
-    var myDB: FavoriteDB? = null
+    var myDB: RecentDB? = null
 
 
     override fun onCreateView(
@@ -34,17 +35,23 @@ class Recent : Fragment() {
     ): View? {
         val view : View = inflater.inflate(R.layout.fragment_recent, container, false)
 
-        lstRecent = ArrayList<com.example.mangadripk.Classes.Recent>()
-        myDB = FavoriteDB(activity)
+        lstRecent = ArrayList<Recent>()
+        myDB = RecentDB(activity)
         val data: Cursor = myDB!!.listContents
         if (data.count == 0) {
             Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG).show()
         } else {
             while (data.moveToNext()) {
+                println(data.getString(1))
+                println(data.getString(2))
+                println(data.getString(3))
+                println(data.getString(4))
+                val manga = Recent(data.getString(3),data.getString(1),data.getString(2),data.getString(4))
+
 //                val manga = com.example.mangadripk.Classes.Recent(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
 //
-//                (lstRecent as ArrayList<com.example.mangadripk.Classes.Recent>).add(manga)
-////                myDB.close()
+                (lstRecent as ArrayList<Recent>).add(manga)
+                myDB!!.close()
                 val myrv = view.findViewById(R.id.recent_id) as RecyclerView
                 myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
                 myrv.layoutManager = GridLayoutManager(activity, 1)

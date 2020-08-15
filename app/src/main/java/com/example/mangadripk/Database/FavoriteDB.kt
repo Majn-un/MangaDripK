@@ -17,8 +17,8 @@ class FavoriteDB(context: Context?) :
     override fun onCreate(db: SQLiteDatabase) {
         val createTable =
             ("CREATE TABLE " + TABLE_NAME + " ("
-                    + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME +
-                    " TEXT, " + KEY_LINK + " TEXT, " + KEY_THUMB + " TEXT" + ")")
+                    + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME +
+                    " TEXT," + KEY_LINK + " TEXT," + KEY_THUMB + " TEXT" + ")")
         db.execSQL(createTable)
     }
 

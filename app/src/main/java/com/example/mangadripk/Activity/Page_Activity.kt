@@ -62,31 +62,31 @@ class Page_Activity : AppCompatActivity() {
 //        println("debugging2"+OG_name)
 //        println("debugging2"+Page_Model.url)
 //        println("debugging2"+name)
-//        myDB = RecentDB(this)
-//        val data: Cursor = myDB!!.listContents
-//        var found = false
-//        if (myDB!!.isEmpty() == 0) {
-//            println("First Entry")
-//            AddData(recent)
-//        } else {
-//            while (data.moveToNext()) {
-//                println(data.getString(2))
-//                if (data.getString(2) == name) {
-//                    println("Already a favorite")
-//                    found = true
-//                    break
-////                        Toast.makeText(this@Manga_Activity, "Already a favorite", Toast.LENGTH_LONG).show()
-//                }
-//
-//            }
-//
-//            if (found == false) {
-//                println("YUUH")
-//                AddData(recent)
-//            }
-////            println(data)
-//            myDB!!.close()
-//        }
+        myDB = RecentDB(this)
+        val data: Cursor = myDB!!.listContents
+        var found = false
+        if (myDB!!.isEmpty() == 0) {
+            println("First Entry")
+            AddData(recent)
+        } else {
+            while (data.moveToNext()) {
+                println(data.getString(2))
+                if (data.getString(2) == name) {
+                    println("Already a favorite")
+                    found = true
+                    break
+//                        Toast.makeText(this@Manga_Activity, "Already a favorite", Toast.LENGTH_LONG).show()
+                }
+
+            }
+
+            if (found == false) {
+                println("YUUH")
+                AddData(recent)
+            }
+//            println(data)
+            myDB!!.close()
+        }
 
         lstPages = ArrayList()
         mangaPages()
