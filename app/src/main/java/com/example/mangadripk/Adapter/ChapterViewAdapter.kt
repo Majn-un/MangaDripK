@@ -55,6 +55,8 @@ class ChapterViewAdapter(
 
 
             context.startActivity(intent)
+            TODO("CHAPTER LIST IS NULL")
+
         }
     }
 
