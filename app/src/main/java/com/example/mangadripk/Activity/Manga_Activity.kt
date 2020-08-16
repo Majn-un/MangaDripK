@@ -95,12 +95,13 @@ class Manga_Activity : AppCompatActivity() {
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
             if (data.getString(2) == Manga_URL) {
-                println("Already in Favorite")
+                Toast.makeText(this, "Already Favorited", Toast.LENGTH_SHORT).show()
                 return
                 TODO("REPLACES THE ITEM WITH THE SAME NAME")
             }
         }
         myDB!!.addData(ShineManga)
+        Toast.makeText(this, "Added to Favorites", Toast.LENGTH_SHORT).show()
         myDB!!.close()
     }
 

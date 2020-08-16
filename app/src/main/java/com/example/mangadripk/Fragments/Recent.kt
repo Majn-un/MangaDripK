@@ -50,9 +50,10 @@ class Recent : Fragment() {
         }
 
         myDB!!.close()
-
+        val lstRev = lstRecent as List<Recent>
+        val lstRev2 = lstRev.asReversed()
         val myrv = view.findViewById(R.id.recent_id) as RecyclerView
-        myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
+        myAdapter = activity?.let { RecentViewAdapter(it, lstRev2) }
         myrv.layoutManager = GridLayoutManager(activity, 1)
         myrv.adapter = myAdapter
         progressDialog.dialog.dismiss()

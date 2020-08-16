@@ -47,9 +47,11 @@ class Favorite : Fragment() {
 
             }
         }
+        val lstMangaC = lstManga as List<MangaModel>
+        val lstMangaRev = lstMangaC.asReversed()
         myDB!!.close()
         val myrv: RecyclerView = view.findViewById(R.id.favorite_id)
-        myAdapter = RecyclerViewAdapter(activity!!, lstManga as ArrayList<MangaModel>)
+        myAdapter = RecyclerViewAdapter(activity!!, lstMangaRev)
         myrv.layoutManager = GridLayoutManager(activity, 3)
         myrv.adapter = myAdapter
         progressDialog.dialog.dismiss()
