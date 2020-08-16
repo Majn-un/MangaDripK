@@ -21,7 +21,8 @@ object MangaHere : MangaSource {
     private const val baseUrl = "https://www.mangahere.cc"
     override val websiteUrl: String = baseUrl
 
-    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("$baseUrl/directory/$pageNumber.htm?latest")
+//    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("$baseUrl/directory/$pageNumber.htm?latest")
+    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/ranking/")
         .cookie("isAdult", "1").get()
         .select(".manga-list-1-list li").map {
             MangaModel(
@@ -71,11 +72,13 @@ object MangaHere : MangaSource {
     }
 
     override fun toInfoModel(model: MangaModel): MangaInfoModel {
-        val doc = Jsoup.connect(model.mangaUrl).get()
+        val doc = Jsoup.connect(model.mangaUrl).cookie("isAdult", "1").get()
         return MangaInfoModel(
             title = model.title,
             description = doc.select("p.fullcontent").text(),
+            author = doc.select("p.detail-info-right-say").text(),
             mangaUrl = model.mangaUrl,
+            status = doc.select("span.detail-info-right-title-tip").text(),
             imageUrl = doc.select("img.detail-info-cover-img").select("img[src^=http]").attr("abs:src"),
             chapters = doc.select("div[id=chapterlist]").select("ul.detail-main-list").select("li").map {
                 ChapterModel(
@@ -127,7 +130,7 @@ object MangaHere : MangaSource {
     }
 
     override fun getPageInfo(chapterModel: ChapterModel): PageModel =
-        pageListParse(Jsoup.connect(chapterModel.url).get())
+        pageListParse(Jsoup.connect(chapterModel.url).cookie("isAdult", "1").get())
 
     fun pageListParse(document: Document): PageModel {
         val bar = document.select("script[src*=chapter_bar]")

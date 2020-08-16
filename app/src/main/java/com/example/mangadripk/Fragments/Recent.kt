@@ -10,20 +10,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Adapter.RecentViewAdapter
-import com.example.mangadripk.Adapter.RecyclerViewAdapter
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
-import com.example.mangadripk.Database.FavoriteDB
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
-import com.example.mangadripk.Sources.Sources
-import com.programmersbox.manga_sources.mangasources.MangaModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 
 class Recent : Fragment() {
     private var myAdapter: RecentViewAdapter? = null
+    private val progressDialog = CustomProgressDialog()
 
     var lstRecent: MutableList<Recent>? = null
     var myDB: RecentDB? = null
@@ -34,6 +30,7 @@ class Recent : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view : View = inflater.inflate(R.layout.fragment_recent, container, false)
+        activity?.let { progressDialog.show(it) }
 
         lstRecent = ArrayList<Recent>()
         myDB = RecentDB(activity)
@@ -42,25 +39,24 @@ class Recent : Fragment() {
             Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG).show()
         } else {
             while (data.moveToNext()) {
-                println(data.getString(1))
-                println(data.getString(2))
-                println(data.getString(3))
-                println(data.getString(4))
                 val manga = Recent(data.getString(3),data.getString(1),data.getString(2),data.getString(4))
-
+                println(manga.title)
 //                val manga = com.example.mangadripk.Classes.Recent(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
 //
                 (lstRecent as ArrayList<Recent>).add(manga)
-                myDB!!.close()
-                val myrv = view.findViewById(R.id.recent_id) as RecyclerView
-                myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
-                myrv.layoutManager = GridLayoutManager(activity, 1)
-                myrv.adapter = myAdapter
 
-                (lstRecent as ArrayList<Recent>).add(Recent("Yuh","Chapter 1","https://avt.mkklcdnv6.com/28/k/19-1583500216.jpg","yuh"))
-                return view
+
             }
         }
+
+        myDB!!.close()
+
+        val myrv = view.findViewById(R.id.recent_id) as RecyclerView
+        myAdapter = activity?.let { RecentViewAdapter(it, lstRecent as ArrayList<Recent>) }
+        myrv.layoutManager = GridLayoutManager(activity, 1)
+        myrv.adapter = myAdapter
+        progressDialog.dialog.dismiss()
+
         return view
     }
 

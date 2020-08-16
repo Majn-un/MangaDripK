@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.mangadripk.Adapter.ChapterViewAdapter
 import com.example.mangadripk.Classes.Chapter
+import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import kotlinx.android.synthetic.main.activity_chapter.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -26,12 +28,14 @@ class Chapter_Activity : AppCompatActivity() {
     lateinit var lstChapter: MutableList<Chapter>
     private var OG_name: String? = null
     private var OG_Thumb: String? = null
+    private val progressDialog = CustomProgressDialog()
 
     private var ChapterManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
+        progressDialog.show(this)
 
         chapter_title = findViewById<View>(R.id.chapter_title) as? TextView
         val intent = intent
@@ -58,6 +62,16 @@ class Chapter_Activity : AppCompatActivity() {
         myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         myrv.adapter = myAdapter
 
+        refreshLayout.setOnRefreshListener {
+            progressDialog.show(this)
+            lstChapter.clear()
+            ChapterActivity()
+            myAdapter = ChapterViewAdapter(this, lstChapter)
+            myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            myrv.adapter = myAdapter
+            refreshLayout.isRefreshing = false
+        }
+
     }
 
 
@@ -72,9 +86,12 @@ class Chapter_Activity : AppCompatActivity() {
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
+                progressDialog.dialog.dismiss()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+
     }
 }

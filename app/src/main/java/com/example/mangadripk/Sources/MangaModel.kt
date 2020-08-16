@@ -35,7 +35,9 @@ data class MangaInfoModel(
     val imageUrl: String,
     val chapters: List<ChapterModel>,
     val genres: List<String>,
-    val alternativeNames: List<String>
+    val alternativeNames: List<String>,
+    val author: String,
+    val status: String
 ) : ViewModel()
 
 data class ChapterModel(
