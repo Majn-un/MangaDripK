@@ -16,7 +16,6 @@ import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_manga.refreshLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -25,11 +24,9 @@ class Manga_Activity : AppCompatActivity() {
     private val myAdapter: RecyclerViewAdapter? = null
     private var button_for_chapters: Button? = null
     private var button_for_favorites: Button? = null
+    private var button_for_resume: Button? = null
     private val progressDialog = CustomProgressDialog()
-
     var myDB: FavoriteDB? = null
-
-    //    var refreshLayout: SwipeRefreshLayout? = null
     private var manga_title: TextView? = null
     private var manga_description: TextView? = null
     private var manga_status: TextView? = null
@@ -80,18 +77,17 @@ class Manga_Activity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        button_for_resume = findViewById<View>(R.id.resume) as Button
+        button_for_resume!!.setOnClickListener {
+            TODO("IMPLEMENT RESUME ALGORITHM")
+        }
+
         myDB = FavoriteDB(this)
-        val data: Cursor = myDB!!.listContents
         button_for_favorites = findViewById<View>(R.id.favorite_button) as Button
         button_for_favorites!!.setOnClickListener {
             updateFavorite()
         }
 
-        refreshLayout.setOnRefreshListener {
-            progressDialog.show(this)
-            MangaActivity()
-            refreshLayout.isRefreshing = false
-        }
     }
 
     private fun updateFavorite() {
@@ -101,6 +97,7 @@ class Manga_Activity : AppCompatActivity() {
             if (data.getString(2) == Manga_URL) {
                 println("Already in Favorite")
                 return
+                TODO("REPLACES THE ITEM WITH THE SAME NAME")
             }
         }
         myDB!!.addData(ShineManga)

@@ -72,7 +72,7 @@ object MangaHere : MangaSource {
     }
 
     override fun toInfoModel(model: MangaModel): MangaInfoModel {
-        val doc = Jsoup.connect(model.mangaUrl).get()
+        val doc = Jsoup.connect(model.mangaUrl).cookie("isAdult", "1").get()
         return MangaInfoModel(
             title = model.title,
             description = doc.select("p.fullcontent").text(),
@@ -130,7 +130,7 @@ object MangaHere : MangaSource {
     }
 
     override fun getPageInfo(chapterModel: ChapterModel): PageModel =
-        pageListParse(Jsoup.connect(chapterModel.url).get())
+        pageListParse(Jsoup.connect(chapterModel.url).cookie("isAdult", "1").get())
 
     fun pageListParse(document: Document): PageModel {
         val bar = document.select("script[src*=chapter_bar]")

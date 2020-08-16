@@ -3,6 +3,7 @@ package com.example.mangadripk.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.mangadripk.Fragments.Download
 import com.example.mangadripk.Fragments.Favorite
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_library -> selectedFragment = Library()
                 R.id.nav_favorite -> selectedFragment = Favorite()
                 R.id.nav_recent -> selectedFragment = Recent()
+                R.id.nav_download -> selectedFragment = Download()
             }
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment!!).commit()
             true
