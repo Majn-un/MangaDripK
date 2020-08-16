@@ -10,6 +10,8 @@ import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import kotlinx.android.synthetic.main.activity_manga.*
+import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -33,12 +35,12 @@ class Library : Fragment() {
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
         myrv.layoutManager = GridLayoutManager(activity, 3)
         myrv.adapter = myAdapter
+        progressDialog.dialog.dismiss()
 
         return view
     }
 
     private fun loadNewManga() {
-//        refresh.isRefreshing = true
         GlobalScope.launch {
             try {
                 val list = Sources.MANGA_HERE.getManga(1).toList()
@@ -46,7 +48,6 @@ class Library : Fragment() {
                 Objects.requireNonNull(activity)?.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
-                progressDialog.dialog.dismiss()
 
             } catch (e: Exception) {
                 e.printStackTrace()

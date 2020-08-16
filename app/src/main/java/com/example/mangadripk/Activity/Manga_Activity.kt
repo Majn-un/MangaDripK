@@ -45,7 +45,7 @@ class Manga_Activity : AppCompatActivity() {
         progressDialog.show(this)
 
         manga_status = findViewById<View>(R.id.status) as TextView
-//        manga_author = findViewById<View>(R.id.author) as TextView
+        manga_author = findViewById<View>(R.id.author) as TextView
         manga_title = findViewById<View>(R.id.depth_title) as TextView
         manga_description = findViewById<View>(R.id.depth_description) as TextView
         img = findViewById<View>(R.id.manga_thumbnail) as ImageView
@@ -125,7 +125,8 @@ class Manga_Activity : AppCompatActivity() {
         GlobalScope.launch {
             try {
                 val mangaActivity = ShineManga.toInfoModel()
-                setValues(ShineManga.description,"","",ShineManga.title,ShineManga.imageUrl)
+                setValues(mangaActivity.description,mangaActivity.author,mangaActivity.status,ShineManga.title,ShineManga.imageUrl)
+                println(mangaActivity.status)
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
@@ -146,8 +147,8 @@ class Manga_Activity : AppCompatActivity() {
     ) {
         runOnUiThread {
             manga_description!!.text = description
-//            manga_author!!.text = "Author: "
-//            manga_status!!.text = "Status: "
+            manga_author!!.text = author
+            manga_status!!.text = "Status: $status"
             manga_title!!.text = title
             Picasso.get().load(img_URL).into(img)
 

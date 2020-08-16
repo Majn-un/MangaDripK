@@ -76,7 +76,9 @@ object MangaHere : MangaSource {
         return MangaInfoModel(
             title = model.title,
             description = doc.select("p.fullcontent").text(),
+            author = doc.select("p.detail-info-right-say").text(),
             mangaUrl = model.mangaUrl,
+            status = doc.select("span.detail-info-right-title-tip").text(),
             imageUrl = doc.select("img.detail-info-cover-img").select("img[src^=http]").attr("abs:src"),
             chapters = doc.select("div[id=chapterlist]").select("ul.detail-main-list").select("li").map {
                 ChapterModel(
