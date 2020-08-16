@@ -40,14 +40,10 @@ class Recent : Fragment() {
         } else {
             while (data.moveToNext()) {
                 val manga = Recent(data.getString(3),data.getString(1),data.getString(2),data.getString(4))
-                println(manga.title)
-//                val manga = com.example.mangadripk.Classes.Recent(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
-//
                 (lstRecent as ArrayList<Recent>).add(manga)
-
-
             }
         }
+
 
         myDB!!.close()
 

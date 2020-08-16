@@ -57,27 +57,29 @@ class RecentViewAdapter(
         holder.chapter_title.setText(Data[position].chapter)
         holder.manga_title.setText(Data[position].title)
         Picasso.get().load(Data[position].thumbnail).into(holder.manga_thumb)
-//        holder.cardView.setOnClickListener {
-//            val model = Data[position]
-//            val name : String? = model.name
-//            val url : String? = model.link
+
+        holder.cardView.setOnClickListener {
+            val model = Data[position]
+            val name : String? = model.chapter
+            val url : String? = model.Link
 //            val uploadedtime : Long? = model.uploadedTime
-//            val source : Sources? = model.sources
+            val source : Sources? = Sources.MANGA_HERE
 //            val upload : String? = model.uploaded
-//            val ogT : String? = model.OG_Thumb
-//            val ogN : String? = model.OG_Name
-//
-//            val intent = Intent(context, Page_Activity::class.java)
-//            intent.putExtra("name",name)
-//            intent.putExtra("url",url)
-//            intent.putExtra("uploadedtime",uploadedtime)
-//            intent.putExtra("upload",upload)
-//            intent.putExtra("source", source.toString())
-//            intent.putExtra("OGN",ogN)
-//            intent.putExtra("OGT",ogT)
-//
-//
-//            context.startActivity(intent)
-//        }
+            val ogT : String? = model.thumbnail
+            val ogN : String? = model.title
+
+            val intent = Intent(context, Page_Activity::class.java)
+            intent.putExtra("Chapter_List", "list_string")
+            intent.putExtra("name",name)
+            intent.putExtra("url",url)
+            intent.putExtra("uploadedtime","uploadedtime")
+            intent.putExtra("upload","upload")
+            intent.putExtra("source", source.toString())
+            intent.putExtra("OGN",ogN)
+            intent.putExtra("OGT",ogT)
+
+
+            context.startActivity(intent)
+        }
     }
 }
