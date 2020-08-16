@@ -44,7 +44,6 @@ class Recent : Fragment() {
             }
         }
 
-
         myDB!!.close()
         val lstRev = lstRecent as List<Recent>
         val lstRev2 = lstRev.asReversed()

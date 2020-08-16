@@ -39,7 +39,6 @@ class Page_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
         progressDialog.show(this)
-
         val next = findViewById<View>(R.id.button2) as Button
         val previous = findViewById<View>(R.id.button1) as Button
 

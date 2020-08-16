@@ -38,6 +38,7 @@ class CustomProgressDialog {
         view.cp_title.setTextColor(Color.WHITE)
 
         dialog = CustomDialog(context)
+        dialog.setCancelable(false);
         dialog.setContentView(view)
         dialog.show()
         return dialog
