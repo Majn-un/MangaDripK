@@ -2,20 +2,14 @@ package com.example.mangadripk.Fragments
 
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mangadripk.Adapter.ChapterViewAdapter
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
-import kotlinx.android.synthetic.main.activity_chapter.*
-import kotlinx.android.synthetic.main.activity_chapter.refreshLayout
-import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*

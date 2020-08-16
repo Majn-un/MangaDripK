@@ -10,16 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Adapter.RecentViewAdapter
-import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
-import com.example.mangadripk.Database.FavoriteDB
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
-import com.example.mangadripk.Sources.Sources
-import com.programmersbox.manga_sources.mangasources.MangaModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 

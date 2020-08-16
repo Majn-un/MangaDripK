@@ -10,6 +10,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.core.content.res.ResourcesCompat
+import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.R
 import kotlinx.android.synthetic.main.progress_dialog_view.view.*
 
