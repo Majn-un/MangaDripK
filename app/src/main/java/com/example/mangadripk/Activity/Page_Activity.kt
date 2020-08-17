@@ -124,12 +124,13 @@ class Page_Activity : AppCompatActivity() {
         while (data.moveToNext()) {
             if (data.getString(3) == OG_name) {
                 println("Already in recents")
-                return
-                TODO("IMPLEMENT A FUNCTION THAT UPDATES DATABASE")
+                myDB!!.deleteData(data.getString(3))
+
             }
         }
         myDB!!.addData(recent)
         myDB!!.close()
+
     }
 
     private fun AddData(

@@ -1,5 +1,6 @@
 package com.example.mangadripk.Database
 
+import android.R.id
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -7,7 +8,6 @@ import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.mangadripk.Classes.Recent
-
 
 
 class RecentDB(context: Context?) :
@@ -65,6 +65,18 @@ class RecentDB(context: Context?) :
         return(NoOfRows)
 
     }
+    fun getID( name: String): Cursor{
+        val db = this.writableDatabase
+        val query = " SELECT $KEY_ID FROM $TABLE_NAME WHERE $KEY_NAME1= '$name'"
+        return db.rawQuery(query, null)
+    }
+    fun deleteData( name:String){
+        val db = this.writableDatabase
+        val query = ("DELETE FROM " + TABLE_NAME + " WHERE "
+                + KEY_URL + "= '" + name+"'")
+        db.execSQL(query)
+    }
+
 
     companion object {
         const val DATABASE_NAME = "recent.db"
