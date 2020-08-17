@@ -1,11 +1,12 @@
 package com.example.mangadripk.Fragments
 
+import android.app.SearchManager
+import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,19 +23,19 @@ class Favorite : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
     private val progressDialog = CustomProgressDialog()
 
-    var lstManga: List<MangaModel>? = null
+    private var mangaList = mutableListOf<MangaModel>()
     var myDB: FavoriteDB? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         val view : View = inflater.inflate(R.layout.fragment_favorite, container, false)
         activity?.let { progressDialog.show(it) }
 
-        lstManga = ArrayList<MangaModel>()
+        mangaList = ArrayList<MangaModel>()
         myDB = FavoriteDB(activity)
         val data: Cursor = myDB!!.listContents
         if (data.count == 0) {
@@ -43,11 +44,11 @@ class Favorite : Fragment() {
             while (data.moveToNext()) {
                 val manga = MangaModel(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
 
-                (lstManga as ArrayList<MangaModel>).add(manga)
+                (mangaList as ArrayList<MangaModel>).add(manga)
 
             }
         }
-        val lstMangaC = lstManga as List<MangaModel>
+        val lstMangaC = mangaList as List<MangaModel>
         val lstMangaRev = lstMangaC.asReversed()
         myDB!!.close()
         val myrv: RecyclerView = view.findViewById(R.id.favorite_id)
@@ -56,6 +57,37 @@ class Favorite : Fragment() {
         myrv.adapter = myAdapter
         progressDialog.dialog.dismiss()
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity!!.menuInflater.inflate(R.menu.search_menu, menu)
+        val searchViewItem = menu.findItem(R.id.action_search)
+        val searchManager = activity!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = searchViewItem.actionView as SearchView
+        searchView.queryHint = "Search..."
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
+        searchView.setIconifiedByDefault(false)
+        val queryTextListener: SearchView.OnQueryTextListener =
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(s: String): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    var newText = newText
+                    newText = newText.toLowerCase()
+                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
+                    for (manga in mangaList) {
+                        val title: String = manga.title.toLowerCase()
+                        if (title.contains(newText)) {
+                            newList.add(manga)
+                        }
+                    }
+                    myAdapter?.setFilter(newList)
+                    return false
+                }
+            }
+        searchView.setOnQueryTextListener(queryTextListener)
     }
 
 

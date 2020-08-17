@@ -72,10 +72,10 @@ class RecyclerViewAdapter (
         }
     }
 
-//    fun setFilter(newList: ArrayList<Manga>) {
-//        Data = ArrayList()
-//        Data.addAll(newList)
-//        notifyDataSetChanged()
-//    }
+    fun setFilter(newList: ArrayList<MangaModel>) {
+        Data = ArrayList()
+        (Data as ArrayList<MangaModel>).addAll(newList)
+        notifyDataSetChanged()
+    }
 
 }

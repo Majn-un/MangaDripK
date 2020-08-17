@@ -15,6 +15,7 @@ import com.example.mangadripk.Activity.Page_Activity
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
+import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
 
@@ -23,7 +24,7 @@ class RecentViewAdapter(
     Data: List<Recent>
 ) :
     RecyclerView.Adapter<RecentViewAdapter.MyViewHolder>() {
-    private val Data: List<Recent>
+    private var Data: List<Recent>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view: View
         val mInflater = LayoutInflater.from(context)
@@ -82,4 +83,11 @@ class RecentViewAdapter(
             context.startActivity(intent)
         }
     }
+
+    fun setFilter(newList: ArrayList<Recent>) {
+        Data = ArrayList()
+        (Data as ArrayList<Recent>).addAll(newList)
+        notifyDataSetChanged()
+    }
+
 }

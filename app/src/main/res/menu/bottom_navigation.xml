@@ -3,7 +3,7 @@
     <item
         android:id="@+id/nav_library"
         android:icon="@drawable/ic_baseline_explore_24"
-        android:title="Library"/>
+        android:title="Discover"/>
     <item
         android:id="@+id/nav_favorite"
         android:icon="@drawable/ic_baseline_favorite_24"
@@ -15,6 +15,7 @@
 
     <item
         android:id="@+id/nav_download"
+
         android:icon="@drawable/ic_baseline_vertical_align_bottom_24"
         android:title="Download"/>
 

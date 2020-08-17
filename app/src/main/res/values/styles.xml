@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:theme">@color/green</item>
 
     </style>
     <style name="NoAction_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -31,7 +32,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
     <style name="ProgressBarStyle">
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">#01CA01</item>
     </style>
     <style name="CustomDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
