@@ -65,7 +65,7 @@ class RecentViewAdapter(
         holder.rmButton.setOnClickListener(View.OnClickListener {
             var myDB: RecentDB? = null
             myDB = RecentDB(context)
-            Data[position].title?.let { it1 -> myDB!!.deleteData(it1) }
+            Data[position].title?.let { it1 -> myDB!!.deleteData(it1) } //helo
         })
 
         holder.cardView.setOnClickListener {
