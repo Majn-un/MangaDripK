@@ -1,13 +1,13 @@
 package com.example.mangadripk.Fragments
 
-import android.app.SearchManager
-import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangadripk.Adapter.RecentViewAdapter
@@ -15,8 +15,6 @@ import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
-import com.example.mangadripk.Sources.Sources
-import com.programmersbox.manga_sources.mangasources.MangaModel
 import java.util.*
 
 
@@ -27,7 +25,6 @@ class Recent : Fragment() {
     private var lstRecent: MutableList<Recent>? = null
     var myDB: RecentDB? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,10 +32,12 @@ class Recent : Fragment() {
         setHasOptionsMenu(true)
 
         val view: View = inflater.inflate(R.layout.fragment_recent, container, false)
+
         activity?.let { progressDialog.show(it) }
 
         lstRecent = ArrayList<Recent>()
         myDB = RecentDB(activity)
+
         val data: Cursor = myDB!!.listContents
         if (data.count == 0) {
             Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_SHORT)
