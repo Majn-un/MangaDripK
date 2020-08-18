@@ -56,7 +56,6 @@ class Recent : Fragment() {
                     data.getString(4),
                     data.getString(5)
                 )
-                println(data.getString(5))
                 (lstRecent as ArrayList<Recent>).add(manga)
             }
         }

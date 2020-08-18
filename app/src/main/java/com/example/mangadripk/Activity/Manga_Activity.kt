@@ -87,7 +87,13 @@ class Manga_Activity : AppCompatActivity() {
             val data: Cursor = myDB_recent.listContents
             while (data.moveToNext()) {
                 if (data.getString(3) == title) {
-                    val rec = Recent(data.getString(3),data.getString(2),data.getString(1),data.getString(4),data.getString(5))
+                    val rec = Recent(
+                        data.getString(3),
+                        data.getString(1),
+                        data.getString(2),
+                        data.getString(4),
+                        data.getString(5)
+                    )
                     val resume = Intent(this@Manga_Activity, Page_Activity::class.java)
                     resume.putExtra("Chapter_List", rec.chapter_link)
                     resume.putExtra("name",rec.chapter)
@@ -95,8 +101,8 @@ class Manga_Activity : AppCompatActivity() {
                     resume.putExtra("uploadedtime","uploadedtime")
                     resume.putExtra("upload","upload")
                     resume.putExtra("source", Sources.MANGA_HERE.toString())
-                    resume.putExtra("OGN",rec.title)
-                    resume.putExtra("OGT",rec.thumbnail)
+                    resume.putExtra("OGN",rec.thumbnail)
+                    resume.putExtra("OGT",rec.title)
                     found = true
                     startActivity(resume)
                 }
