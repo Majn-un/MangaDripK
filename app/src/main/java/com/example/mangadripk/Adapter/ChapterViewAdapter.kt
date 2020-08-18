@@ -43,6 +43,7 @@ class ChapterViewAdapter(
                 list_string += Data[i].name + " - " + Data[i]
                     .link + " , "
             }
+
             val intent = Intent(context, Page_Activity::class.java)
             intent.putExtra("Chapter_List", list_string)
             intent.putExtra("name",name)
