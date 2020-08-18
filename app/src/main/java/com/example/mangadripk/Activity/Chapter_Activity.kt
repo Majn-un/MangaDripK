@@ -80,7 +80,7 @@ class Chapter_Activity : AppCompatActivity() {
             try {
                 val mangaActivity = ChapterManga.toInfoModel()
                 for (item in mangaActivity.chapters) {
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,item.uploaded,item.uploadedTime, OG_Thumb,OG_name))
+                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, OG_Thumb,OG_name))
                 }
 
                 runOnUiThread {
@@ -94,4 +94,5 @@ class Chapter_Activity : AppCompatActivity() {
         }
 
     }
+
 }

@@ -22,6 +22,7 @@ import java.util.*
 class Library : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
     private val mangaList = mutableListOf<MangaModel>()
+    private val test = mutableListOf<MangaModel>()
     private val progressDialog = CustomProgressDialog()
 
     override fun onCreateView(
@@ -54,22 +55,23 @@ class Library : Fragment() {
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(s: String): Boolean {
+                    val obj = Sources.MANGA_HERE.searchManga(s, 1, mangaList)
+                    println(obj)
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
                     var newText = newText
                     newText = newText.toLowerCase()
-                    val obj = Sources.MANGA_HERE.searchManga(newText, 1, mangaList)
-                    println(obj)
-                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
-                    for (manga in mangaList) {
-                        val title: String = manga.title.toLowerCase()
-                        if (title.contains(newText)) {
-                            newList.add(manga)
-                        }
-                    }
-                    myAdapter?.setFilter(newList)
+//                    println(obj)
+//                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
+//                    for (manga in mangaList) {
+//                        val title: String = manga.title.toLowerCase()
+//                        if (title.contains(newText)) {
+//                            newList.add(manga)
+//                        }
+//                    }
+//                    myAdapter?.setFilter(newList)
                     return false
                 }
             }

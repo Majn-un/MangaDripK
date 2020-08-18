@@ -11,9 +11,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
+import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
+import com.programmersbox.manga_sources.mangasources.MangaContext.context
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
@@ -77,9 +80,31 @@ class Manga_Activity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val myDB_recent = RecentDB(this)
+        var found = false
         button_for_resume = findViewById<View>(R.id.resume) as Button
         button_for_resume!!.setOnClickListener {
-            TODO("IMPLEMENT RESUME ALGORITHM")
+            val data: Cursor = myDB_recent.listContents
+            while (data.moveToNext()) {
+                if (data.getString(3) == title) {
+                    val rec = Recent(data.getString(3),data.getString(2),data.getString(1),data.getString(4))
+                    val resume = Intent(this@Manga_Activity, Page_Activity::class.java)
+                    resume.putExtra("Chapter_List", "list_string")
+                    resume.putExtra("name",rec.chapter)
+                    resume.putExtra("url",rec.Link)
+                    resume.putExtra("uploadedtime","uploadedtime")
+                    resume.putExtra("upload","upload")
+                    resume.putExtra("source", Sources.MANGA_HERE.toString())
+                    resume.putExtra("OGN",rec.title)
+                    resume.putExtra("OGT",rec.thumbnail)
+                    found = true
+                    startActivity(resume)
+                }
+            }
+
+            if (!found) {
+                Toast.makeText(this, "You haven't started it bruv", Toast.LENGTH_SHORT).show()
+            }
         }
 
         myDB = FavoriteDB(this)
@@ -97,7 +122,6 @@ class Manga_Activity : AppCompatActivity() {
             if (data.getString(2) == Manga_URL) {
                 Toast.makeText(this, "Already Favorited", Toast.LENGTH_SHORT).show()
                 return
-                TODO("REPLACES THE ITEM WITH THE SAME NAME")
             }
         }
         myDB!!.addData(ShineManga)

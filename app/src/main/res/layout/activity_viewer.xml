@@ -27,7 +27,24 @@
             android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:gravity="bottom|end"
+            android:text="\IG: ahas234"
+            android:textColor="#51FFFFFF"
+            android:textSize="20sp" />
+    </FrameLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
