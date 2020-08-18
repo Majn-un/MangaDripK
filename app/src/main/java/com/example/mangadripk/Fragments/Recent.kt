@@ -9,18 +9,23 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mangadripk.Adapter.ChapterViewAdapter
 import com.example.mangadripk.Adapter.RecentViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
+import kotlinx.android.synthetic.main.activity_chapter.*
 import java.util.*
 
 
 class Recent : Fragment() {
     private var myAdapter: RecentViewAdapter? = null
     private val progressDialog = CustomProgressDialog()
+    lateinit var chapterList: MutableList<List<String>>
+    private var index = 0
 
     private var lstRecent: MutableList<Recent>? = null
     var myDB: RecentDB? = null
@@ -48,14 +53,16 @@ class Recent : Fragment() {
                     data.getString(3),
                     data.getString(1),
                     data.getString(2),
-                    data.getString(4)
+                    data.getString(4),
+                    data.getString(5)
                 )
+                println(data.getString(5))
                 (lstRecent as ArrayList<Recent>).add(manga)
             }
         }
-
         myDB!!.close()
         val lstRev = lstRecent as List<Recent>
+
         val lstRev2 = lstRev.asReversed()
         val myrv = view.findViewById(R.id.recent_id) as RecyclerView
         myAdapter = activity?.let { RecentViewAdapter(it, lstRev2) }

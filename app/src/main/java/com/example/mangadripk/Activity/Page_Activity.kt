@@ -30,7 +30,7 @@ class Page_Activity : AppCompatActivity() {
     private var Page_Model: ChapterModel = ChapterModel("","","",Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var OG_name : String? = ""
-    var recent : Recent = Recent("","","","")
+    var recent : Recent = Recent("","","","","")
     private val progressDialog = CustomProgressDialog()
     var Chapter_List: String? = ""
     private var index = 0
@@ -76,7 +76,7 @@ class Page_Activity : AppCompatActivity() {
             }
         }
 
-        recent = Recent(OG_name,name,OG_thumb,Page_Model.url)
+        recent = Recent(OG_name,name,OG_thumb,Page_Model.url,Chapter_List)
         updateRecent()
 
         lstPages = ArrayList()
@@ -151,7 +151,6 @@ class Page_Activity : AppCompatActivity() {
         GlobalScope.launch {
             try {
 
-                println(Page_Model)
                 val mangaActivity = Page_Model.getPageInfo()
                 for (i in 0 until mangaActivity.pages.size) {
                     val page = Page(mangaActivity.pages[i],(i+1).toString())

@@ -11,13 +11,13 @@ import com.example.mangadripk.Classes.Recent
 
 
 class RecentDB(context: Context?) :
-    SQLiteOpenHelper(context, DATABASE_NAME, null, 3) {
+    SQLiteOpenHelper(context, DATABASE_NAME, null, 4) {
     override fun onCreate(db: SQLiteDatabase) {
         val createTable =
             ("CREATE TABLE " + TABLE_NAME + " ("
                     + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME1 +
                     " TEXT, " + KEY_NAME2 + " TEXT, " + KEY_URL + " TEXT, "
-                    + KEY_THUMB + " TEXT" + ")")
+                    + KEY_THUMB + " TEXT, " + KEY_CHAP + " TEXT" + ")")
         db.execSQL(createTable)
     }
 
@@ -39,6 +39,7 @@ class RecentDB(context: Context?) :
         contentValues.put(KEY_NAME1, manga.chapter)
         contentValues.put(KEY_NAME2, manga.thumbnail)
         contentValues.put(KEY_THUMB, manga.Link)
+        contentValues.put(KEY_CHAP, manga.chapter_link)
 
         val result = db.insert(TABLE_NAME, null, contentValues)
 
@@ -86,6 +87,8 @@ class RecentDB(context: Context?) :
         const val KEY_NAME2 = "NAME"
         const val KEY_THUMB = "THUMB"
         const val KEY_URL = "CHAP"
+        const val KEY_CHAP = "LIST"
+
 
     }
 }

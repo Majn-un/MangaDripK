@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -65,7 +66,8 @@ class RecentViewAdapter(
         holder.rmButton.setOnClickListener(View.OnClickListener {
             var myDB: RecentDB? = null
             myDB = RecentDB(context)
-            Data[position].title?.let { it1 -> myDB!!.deleteData(it1) } //helo
+            Data[position].title?.let { it1 -> myDB.deleteData(it1) }
+            Toast.makeText(context, "Removed", Toast.LENGTH_SHORT ).show()
         })
 
         holder.cardView.setOnClickListener {
@@ -75,11 +77,11 @@ class RecentViewAdapter(
 //            val uploadedtime : Long? = model.uploadedTime
             val source : Sources? = Sources.MANGA_HERE
 //            val upload : String? = model.uploaded
-            val ogT : String? = model.thumbnail
-            val ogN : String? = model.title
-
+            val ogT : String? = model.title
+            val ogN : String? = model.thumbnail
+            val chapter : String? = model.chapter_link
             val intent = Intent(context, Page_Activity::class.java)
-            intent.putExtra("Chapter_List", "list_string")
+            intent.putExtra("Chapter_List", chapter)
             intent.putExtra("name",name)
             intent.putExtra("url",url)
             intent.putExtra("uploadedtime","uploadedtime")
