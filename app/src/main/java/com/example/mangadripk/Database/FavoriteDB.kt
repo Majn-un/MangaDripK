@@ -65,6 +65,12 @@ class FavoriteDB(context: Context?) :
         return(NoOfRows)
 
     }
+    fun deleteData( name:String){
+        val db = this.writableDatabase
+        val query = ("DELETE FROM " + TABLE_NAME + " WHERE "
+                + KEY_NAME + "= '" + name+"'")
+        db.execSQL(query)
+    }
 
     companion object {
         const val DATABASE_NAME = "mylist.db"

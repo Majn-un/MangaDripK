@@ -34,16 +34,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/recent_title"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:background="#282828"
-                android:gravity="center_vertical"
-                android:text="Title"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:layout_height="57dp">
+                <TextView
+                    android:id="@+id/recent_title"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:background="#282828"
+                    android:gravity="center_vertical"
+                    android:text="Title"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/rmbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/green">
+
+                </Button>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/recent_chapter"
