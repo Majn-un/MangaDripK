@@ -19,6 +19,7 @@ import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
+import com.github.chrisbanes.photoview.PhotoView
 import com.programmersbox.manga_sources.mangasources.ChapterModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -118,18 +119,18 @@ class Page_Activity : AppCompatActivity() {
         })
 
 
-        mylayout.setOnClickListener(View.OnClickListener {
-            println("Clicked")
-            if (presenter.visibility == View.INVISIBLE) {
-                presenter.visibility = View.VISIBLE
-                presenter1.visibility = View.VISIBLE
-            } else {
-                presenter.visibility = View.INVISIBLE
-                presenter1.visibility = View.INVISIBLE
-
-
-            }
-        })
+//        page_image.setOnClickListener(View.OnClickListener {
+//            println("Clicked")
+//            if (presenter.visibility == View.INVISIBLE) {
+//                presenter.visibility = View.VISIBLE
+//                presenter1.visibility = View.VISIBLE
+//            } else {
+//                presenter.visibility = View.INVISIBLE
+//                presenter1.visibility = View.INVISIBLE
+//
+//
+//            }
+//        })
 
 //
         back.setOnClickListener(View.OnClickListener {

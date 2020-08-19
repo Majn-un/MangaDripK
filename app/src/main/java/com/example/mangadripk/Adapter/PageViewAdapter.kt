@@ -2,8 +2,10 @@ package com.example.mangadripk.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
 import androidx.viewpager.widget.PagerAdapter
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.R
@@ -15,6 +17,7 @@ class PageViewAdapter(
     PageList: List<Page>
 ) :
     PagerAdapter() {
+
     var PageList: List<Page>
     var inflater: LayoutInflater
     override fun getCount(): Int {
@@ -37,10 +40,27 @@ class PageViewAdapter(
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val page_layout: View = inflater.inflate(R.layout.activity_viewer, container, false)
+        val presenter: Toolbar = page_layout.findViewById<View>(R.id.presenter) as Toolbar
+
         val image_layout: View = inflater.inflate(R.layout.view_pager_item, container, false)
         val page_image: PhotoView = image_layout.findViewById<View>(R.id.page_image) as PhotoView
         Picasso.get().load(PageList[position].link).into(page_image)
         container.addView(image_layout)
+
+        page_image.setOnClickListener(View.OnClickListener {
+            println("clicked")
+
+            if (presenter.visibility == View.INVISIBLE) {
+                println("outside")
+                presenter.visibility = View.VISIBLE
+//                presenter1.visibility = View.VISIBLE
+            } else {
+                println("inside")
+                presenter.visibility = View.INVISIBLE
+//                presenter1.visibility = View.INVISIBLE
+            }
+        })
 
         return image_layout
     }
