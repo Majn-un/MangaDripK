@@ -52,16 +52,17 @@
         </FrameLayout>
     </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="wrap_content"
-        android:layout_height="625dp"
-        android:id="@+id/view_page">
-    </androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:id="@+id/view_page">
+        </androidx.viewpager.widget.ViewPager>
 
         <TextView
             android:layout_width="match_parent"
@@ -74,7 +75,5 @@
             android:text="HIDE">
 
         </TextView>
-
     </LinearLayout>
-
 </LinearLayout>
