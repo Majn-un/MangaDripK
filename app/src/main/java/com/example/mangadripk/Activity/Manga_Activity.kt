@@ -124,17 +124,17 @@ class Manga_Activity : AppCompatActivity() {
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
             if (data.getString(2) == Manga_URL) {
-                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24)
+                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24) //setting button to favorited(green)
             }
         }
         button_for_favorites!!.setOnClickListener {
-            if(button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_24, null)?.constantState) {
-                updateFavorite()
+            if(button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_24, null)?.constantState) {//checking if button is gray(unfavorited)
+                updateFavorite()//add to fav
                 button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24)
-            } else if (button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_green_24, null)?.constantState){
-                master_name?.let { it1 -> myDB!!.deleteData(it1) }
+            } else if (button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_green_24, null)?.constantState){//if manga is already faved
+                master_name?.let { it1 -> myDB!!.deleteData(it1) } //del from fav
                 Toast.makeText(this, "Unfavorited", Toast.LENGTH_SHORT ).show()
-                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_24)//change to gray
 
             }
 
