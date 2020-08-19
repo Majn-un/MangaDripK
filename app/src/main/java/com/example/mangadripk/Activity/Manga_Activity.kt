@@ -1,5 +1,6 @@
 package com.example.mangadripk.Activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
@@ -41,6 +44,7 @@ class Manga_Activity : AppCompatActivity() {
     private var ShineManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
 
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga)
@@ -120,17 +124,17 @@ class Manga_Activity : AppCompatActivity() {
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
             if (data.getString(2) == Manga_URL) {
-                button_for_favorites!!.setText("UNFAVORITE")
+                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24)
             }
         }
         button_for_favorites!!.setOnClickListener {
-            if (button_for_favorites!!.text == "FAVORITE") {
+            if(button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_24, null)?.constantState) {
                 updateFavorite()
-                button_for_favorites!!.setText("UNFAVORITE")
-            } else if (button_for_favorites!!.text == "UNFAVORITE"){
+                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24)
+            } else if (button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_green_24, null)?.constantState){
                 master_name?.let { it1 -> myDB!!.deleteData(it1) }
                 Toast.makeText(this, "Unfavorited", Toast.LENGTH_SHORT ).show()
-                button_for_favorites!!.setText("FAVORITE")
+                button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
 
             }
 
