@@ -131,7 +131,7 @@ class Page_Activity : AppCompatActivity() {
             }
         })
 
-
+//
         back.setOnClickListener(View.OnClickListener {
             if (index + 1 == chapterList.size) {
                 Log.d("Oldest Chapter Enabled", "YUH")
