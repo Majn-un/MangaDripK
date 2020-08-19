@@ -2,14 +2,14 @@ package com.example.mangadripk.Activity
 
 //import android.app.ProgressDialog
 
+import android.annotation.SuppressLint
 import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toolbar
+import android.view.View.OnTouchListener
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
@@ -37,6 +37,7 @@ class Page_Activity : AppCompatActivity() {
     var Chapter_List: String? = ""
     private var index = 0
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
@@ -44,10 +45,10 @@ class Page_Activity : AppCompatActivity() {
         val next = findViewById<View>(R.id.next) as Button
         val back = findViewById<View>(R.id.back) as Button
 
-        val hide = findViewById<View>(R.id.button3) as Button
-//        val text = findViewById<View>(R.id.text) as TextView
         val presenter = findViewById<View>(R.id.presenter) as Toolbar
+        val presenter1 = findViewById<View>(R.id.presenter1) as Toolbar
 
+        val mylayout =  findViewById<FrameLayout>(R.id.manga_reader) as FrameLayout
 
         val intent = intent
         val url = intent.getStringExtra("url")
@@ -72,6 +73,14 @@ class Page_Activity : AppCompatActivity() {
                 break
             }
         }
+
+//        works but breaks progress bar
+//        val title = findViewById<View>(R.id.manga_name) as TextView
+//        val chapter = findViewById<View>(R.id.chapter_name) as TextView
+//
+//        title.text = OG_name
+//        chapter.text = name
+
 
         val uploadedTime = intent.getStringExtra("uploadtime")
         val MangaYUH = name?.let {
@@ -108,16 +117,21 @@ class Page_Activity : AppCompatActivity() {
             }
         })
 
-        hide.setOnClickListener(View.OnClickListener {
 
-
+        mylayout.setOnClickListener(View.OnClickListener {
+            println("Clicked")
             if (presenter.visibility == View.INVISIBLE) {
                 presenter.visibility = View.VISIBLE
+                presenter1.visibility = View.VISIBLE
             } else {
                 presenter.visibility = View.INVISIBLE
-            }
-            })
+                presenter1.visibility = View.INVISIBLE
 
+
+            }
+        })
+
+//
         back.setOnClickListener(View.OnClickListener {
             if (index + 1 == chapterList.size) {
                 Log.d("Oldest Chapter Enabled", "YUH")
@@ -134,6 +148,7 @@ class Page_Activity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun updateRecent() {
         myDB = RecentDB(this)

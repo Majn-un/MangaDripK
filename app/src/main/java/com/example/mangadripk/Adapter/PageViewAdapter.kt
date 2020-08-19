@@ -37,12 +37,11 @@ class PageViewAdapter(
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val image_layout: View =
-            inflater.inflate(R.layout.view_pager_item, container, false)
-        val page_image: PhotoView =
-            image_layout.findViewById<View>(R.id.page_image) as PhotoView
+        val image_layout: View = inflater.inflate(R.layout.view_pager_item, container, false)
+        val page_image: PhotoView = image_layout.findViewById<View>(R.id.page_image) as PhotoView
         Picasso.get().load(PageList[position].link).into(page_image)
         container.addView(image_layout)
+
         return image_layout
     }
 
