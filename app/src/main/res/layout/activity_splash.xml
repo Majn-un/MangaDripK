@@ -7,6 +7,8 @@
     android:background="#191919"
     tools:context=".Splash">
 
+
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
@@ -22,14 +24,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="170dp"
-        tools:ignore="MissingConstraints">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="230dp"
@@ -55,5 +55,7 @@
             android:textSize="70sp"
             android:textStyle="bold"
             android:text="Drip" />
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

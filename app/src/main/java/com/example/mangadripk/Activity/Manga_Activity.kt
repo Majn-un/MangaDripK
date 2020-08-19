@@ -33,6 +33,8 @@ class Manga_Activity : AppCompatActivity() {
     private var manga_title: TextView? = null
     private var manga_description: TextView? = null
     private var manga_status: TextView? = null
+    private var master_name: String? = null
+
     private var manga_author: TextView? = null
     private var img: ImageView? = null
     private var Manga_URL: String? = null
@@ -54,7 +56,7 @@ class Manga_Activity : AppCompatActivity() {
         val imgUrl = intent.getStringExtra("imgUrl")
         val description = intent.getStringExtra("description")
         val title = intent.getStringExtra("title")
-
+        master_name = title
 
         val MangaYUH = title?.let {
             if (description != null) {
@@ -113,10 +115,25 @@ class Manga_Activity : AppCompatActivity() {
             }
         }
 
-        myDB = FavoriteDB(this)
         button_for_favorites = findViewById<View>(R.id.favorite_button) as Button
+        myDB = FavoriteDB(this)
+        val data: Cursor = myDB!!.listContents
+        while (data.moveToNext()) {
+            if (data.getString(2) == Manga_URL) {
+                button_for_favorites!!.setText("UNFAVORITE")
+            }
+        }
         button_for_favorites!!.setOnClickListener {
-            updateFavorite()
+            if (button_for_favorites!!.text == "FAVORITE") {
+                updateFavorite()
+                button_for_favorites!!.setText("UNFAVORITE")
+            } else if (button_for_favorites!!.text == "UNFAVORITE"){
+                master_name?.let { it1 -> myDB!!.deleteData(it1) }
+                Toast.makeText(this, "Unfavorited", Toast.LENGTH_SHORT ).show()
+                button_for_favorites!!.setText("FAVORITE")
+
+            }
+
         }
 
     }
