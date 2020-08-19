@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
@@ -40,10 +41,13 @@ class Page_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
         progressDialog.show(this)
-        val next = findViewById<View>(R.id.button2) as Button
-        val previous = findViewById<View>(R.id.button1) as Button
+        val next = findViewById<View>(R.id.next) as Button
+        val back = findViewById<View>(R.id.back) as Button
+
         val hide = findViewById<View>(R.id.button3) as Button
-        val text = findViewById<View>(R.id.text) as TextView
+//        val text = findViewById<View>(R.id.text) as TextView
+        val presenter = findViewById<View>(R.id.presenter) as Toolbar
+
 
         val intent = intent
         val url = intent.getStringExtra("url")
@@ -105,14 +109,16 @@ class Page_Activity : AppCompatActivity() {
         })
 
         hide.setOnClickListener(View.OnClickListener {
-            if (text.visibility == View.INVISIBLE) {
-                text.visibility = View.VISIBLE
+
+
+            if (presenter.visibility == View.INVISIBLE) {
+                presenter.visibility = View.VISIBLE
             } else {
-                text.visibility = View.INVISIBLE
+                presenter.visibility = View.INVISIBLE
             }
             })
 
-        previous.setOnClickListener(View.OnClickListener {
+        back.setOnClickListener(View.OnClickListener {
             if (index + 1 == chapterList.size) {
                 Log.d("Oldest Chapter Enabled", "YUH")
             } else {

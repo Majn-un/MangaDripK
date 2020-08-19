@@ -12,21 +12,6 @@
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_gravity="bottom" android:gravity="center">
 
-        <Button
-            android:text="Previous"
-            android:id="@+id/button1"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:text="Next"
-            android:id="@+id/button2"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <Button
             android:text="Hide"
@@ -34,6 +19,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="150dp"
             android:layout_height="wrap_content" />
 
         <FrameLayout
@@ -52,28 +38,20 @@
         </FrameLayout>
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="match_parent"
             android:id="@+id/view_page">
         </androidx.viewpager.widget.ViewPager>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/text"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:textSize="50dp"
-            android:visibility="visible"
-            android:text="HIDE">
-
-        </TextView>
-    </LinearLayout>
+      <include
+          android:id="@+id/presenter"
+          layout="@layout/presenter">
+      </include>
+    </FrameLayout>
 </LinearLayout>
