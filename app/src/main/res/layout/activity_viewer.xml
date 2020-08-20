@@ -17,22 +17,22 @@
         android:id="@+id/manga_reader">
 
 
+        <include
+            android:id="@+id/presenter"
+            layout="@layout/presenter">
+        </include>
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/view_page">
         </androidx.viewpager.widget.ViewPager>
 
-        <include
-            android:id="@+id/presenter"
-            layout="@layout/presenter">
-        </include>
 
         <include
             android:id="@+id/presenter1"
             layout="@layout/presenter1">
-
         </include>
+
     </FrameLayout>
 
 

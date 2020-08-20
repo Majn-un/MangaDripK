@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class Page_Activity : AppCompatActivity() {
+class Page_Activity : AppCompatActivity(), PageImageCallback {
     lateinit var lstPages: MutableList<Page>
     lateinit var chapterList: MutableList<List<String>>
     private var myViewPager: PageViewAdapter? = null
@@ -101,6 +101,7 @@ class Page_Activity : AppCompatActivity() {
         mangaPages()
         val myrv = findViewById<View>(R.id.view_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
+        myViewPager!!.setPageImageCallback(this)
         myrv.adapter = myViewPager
 
         next.setOnClickListener(View.OnClickListener {
@@ -116,23 +117,24 @@ class Page_Activity : AppCompatActivity() {
                 mangaPages()
                 chapter.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
+                myViewPager!!.setPageImageCallback(this)
                 myrv.adapter = myViewPager
             }
         })
 //
 
-        frame.setOnClickListener(View.OnClickListener {
-            println("Clicked")
-            if (presenter.visibility == View.INVISIBLE) {
-                presenter.visibility = View.VISIBLE
-                presenter1.visibility = View.VISIBLE
-            } else {
-                presenter.visibility = View.INVISIBLE
-                presenter1.visibility = View.INVISIBLE
-
-
-            }
-        })
+//        frame.setOnClickListener(View.OnClickListener {
+//            println("Clicked")
+//            if (presenter.visibility == View.INVISIBLE) {
+//                presenter.visibility = View.VISIBLE
+//                presenter1.visibility = View.VISIBLE
+//            } else {
+//                presenter.visibility = View.INVISIBLE
+//                presenter1.visibility = View.INVISIBLE
+//
+//
+//            }
+//        })
 
 //
         back.setOnClickListener(View.OnClickListener {
@@ -147,6 +149,7 @@ class Page_Activity : AppCompatActivity() {
                 mangaPages()
                 chapter.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
+                myViewPager!!.setPageImageCallback(this)
                 myrv.adapter = myViewPager
 
             }
@@ -202,6 +205,18 @@ class Page_Activity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+    }
+
+    override fun onClick() {
+        if (presenter.visibility == View.INVISIBLE) {
+            println("outside")
+            presenter.visibility = View.VISIBLE
+            presenter1.visibility = View.VISIBLE
+        } else {
+            println("inside")
+            presenter.visibility = View.INVISIBLE
+            presenter1.visibility = View.INVISIBLE
         }
     }
 }
