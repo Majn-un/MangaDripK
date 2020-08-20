@@ -67,14 +67,14 @@ class Library : Fragment() {
                     var newText = newText
                     newText = newText.toLowerCase()
 //                    println(obj)
-//                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
-//                    for (manga in mangaList) {
-//                        val title: String = manga.title.toLowerCase()
-//                        if (title.contains(newText)) {
-//                            newList.add(manga)
-//                        }
-//                    }
-//                    myAdapter?.setFilter(newList)
+                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
+                    for (manga in mangaList) {
+                        val title: String = manga.title.toLowerCase()
+                        if (title.contains(newText)) {
+                            newList.add(manga)
+                        }
+                    }
+                    myAdapter?.setFilter(newList)
                     return false
                 }
             }
