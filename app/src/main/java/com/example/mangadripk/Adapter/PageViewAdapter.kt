@@ -1,19 +1,16 @@
 package com.example.mangadripk.Adapter
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.viewpager.widget.PagerAdapter
-import com.example.mangadripk.Activity.PageImageCallback
+import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.R
 import com.github.chrisbanes.photoview.PhotoView
-import com.github.chrisbanes.photoview.PhotoViewAttacher
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_viewer.*
 
 
 class PageViewAdapter(

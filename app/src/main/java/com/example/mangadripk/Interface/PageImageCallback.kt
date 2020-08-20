@@ -1,5 +1,6 @@
-package com.example.mangadripk.Activity
+package com.example.mangadripk.Interface
 
 interface PageImageCallback {
     fun onClick()
+
 }

@@ -15,19 +15,18 @@ import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
+import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
-import com.github.chrisbanes.photoview.PhotoView
-import com.github.chrisbanes.photoview.PhotoViewAttacher
 import com.programmersbox.manga_sources.mangasources.ChapterModel
 import kotlinx.android.synthetic.main.activity_viewer.*
-import kotlinx.android.synthetic.main.item_chapter.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
 
-class Page_Activity : AppCompatActivity(), PageImageCallback {
+class Page_Activity : AppCompatActivity(),
+    PageImageCallback {
     lateinit var lstPages: MutableList<Page>
     lateinit var chapterList: MutableList<List<String>>
     private var myViewPager: PageViewAdapter? = null
@@ -210,11 +209,9 @@ class Page_Activity : AppCompatActivity(), PageImageCallback {
 
     override fun onClick() {
         if (presenter.visibility == View.INVISIBLE) {
-            println("outside")
             presenter.visibility = View.VISIBLE
             presenter1.visibility = View.VISIBLE
         } else {
-            println("inside")
             presenter.visibility = View.INVISIBLE
             presenter1.visibility = View.INVISIBLE
         }
