@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:id="@+id/manga"
+
+
+
+<androidx.cardview.widget.CardView android:id="@+id/manga"
     android:clickable="true"
     android:focusable="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?android:attr/selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="125dp"
     android:layout_height="250dp"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    cardview:cardCornerRadius="4dp">
+    cardview:cardCornerRadius="4dp"
 
-
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,5 +41,6 @@
 
 
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>
