@@ -6,9 +6,7 @@ import android.annotation.SuppressLint
 import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -20,7 +18,10 @@ import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.github.chrisbanes.photoview.PhotoView
+import com.github.chrisbanes.photoview.PhotoViewAttacher
 import com.programmersbox.manga_sources.mangasources.ChapterModel
+import kotlinx.android.synthetic.main.activity_viewer.*
+import kotlinx.android.synthetic.main.item_chapter.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -33,6 +34,8 @@ class Page_Activity : AppCompatActivity() {
     private var Page_Model: ChapterModel = ChapterModel("","","",Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var OG_name : String? = ""
+    var name : String? = ""
+
     var recent : Recent = Recent("","","","","")
     private val progressDialog = CustomProgressDialog()
     var Chapter_List: String? = ""
@@ -45,17 +48,21 @@ class Page_Activity : AppCompatActivity() {
         progressDialog.show(this)
         val next = findViewById<View>(R.id.next) as Button
         val back = findViewById<View>(R.id.back) as Button
+        val title = findViewById<View>(R.id.manga_name) as TextView
+        val chapter = findViewById<View>(R.id.chapter_name) as TextView
+//
 
+        val frame = findViewById<FrameLayout>(R.id.manga_reader) as FrameLayout
         val presenter = findViewById<View>(R.id.presenter) as Toolbar
         val presenter1 = findViewById<View>(R.id.presenter1) as Toolbar
-
-        val mylayout =  findViewById<FrameLayout>(R.id.manga_reader) as FrameLayout
 
         val intent = intent
         val url = intent.getStringExtra("url")
         OG_name = intent.getStringExtra("OGT")
+        title.text = OG_name
         val OG_thumb = intent.getStringExtra("OGN")
-        val name : String? = intent.getStringExtra("name")
+        name = intent.getStringExtra("name")
+        chapter.text = name
         val upload = intent.getStringExtra("upload")
         Chapter_List = intent.extras!!.getString("Chapter_List")
         val aList: ArrayList<*> = ArrayList<Any?>(
@@ -75,12 +82,6 @@ class Page_Activity : AppCompatActivity() {
             }
         }
 
-//        works but breaks progress bar
-//        val title = findViewById<View>(R.id.manga_name) as TextView
-//        val chapter = findViewById<View>(R.id.chapter_name) as TextView
-//
-//        title.text = OG_name
-//        chapter.text = name
 
 
         val uploadedTime = intent.getStringExtra("uploadtime")
@@ -113,24 +114,25 @@ class Page_Activity : AppCompatActivity() {
                 index = index - 1
                 lstPages = ArrayList()
                 mangaPages()
+                chapter.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
                 myrv.adapter = myViewPager
             }
         })
+//
+
+        frame.setOnClickListener(View.OnClickListener {
+            println("Clicked")
+            if (presenter.visibility == View.INVISIBLE) {
+                presenter.visibility = View.VISIBLE
+                presenter1.visibility = View.VISIBLE
+            } else {
+                presenter.visibility = View.INVISIBLE
+                presenter1.visibility = View.INVISIBLE
 
 
-//        page_image.setOnClickListener(View.OnClickListener {
-//            println("Clicked")
-//            if (presenter.visibility == View.INVISIBLE) {
-//                presenter.visibility = View.VISIBLE
-//                presenter1.visibility = View.VISIBLE
-//            } else {
-//                presenter.visibility = View.INVISIBLE
-//                presenter1.visibility = View.INVISIBLE
-//
-//
-//            }
-//        })
+            }
+        })
 
 //
         back.setOnClickListener(View.OnClickListener {
@@ -143,6 +145,7 @@ class Page_Activity : AppCompatActivity() {
                 //                    Log.d("Chapter Link Next", Chapter_URL);
                 lstPages = ArrayList()
                 mangaPages()
+                chapter.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
                 myrv.adapter = myViewPager
 
@@ -187,12 +190,13 @@ class Page_Activity : AppCompatActivity() {
                 val mangaActivity = Page_Model.getPageInfo()
                 for (i in 0 until mangaActivity.pages.size) {
                     val page = Page(mangaActivity.pages[i],(i+1).toString())
-                    println(page.link)
                     lstPages.add(page)
                 }
                 runOnUiThread {
                     myViewPager?.notifyDataSetChanged()
                 }
+
+
                 progressDialog.dialog.dismiss()
 
             } catch (e: Exception) {

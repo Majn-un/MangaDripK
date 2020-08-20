@@ -17,6 +17,4 @@
         android:id="@+id/nav_download"
         android:icon="@drawable/ic_baseline_vertical_align_bottom_24"
         android:title="Download"/>
-
-
 </menu>
