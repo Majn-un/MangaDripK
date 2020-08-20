@@ -23,7 +23,6 @@
                 android:drawableTop="@drawable/ic_baseline_arrow_back_24_2"
                 android:focusable="true"
                 android:gravity="center_horizontal|top">
-
             </Button>
 
             <Button
