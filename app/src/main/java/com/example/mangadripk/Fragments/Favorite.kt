@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,7 +35,8 @@ class Favorite : Fragment() {
         // Inflate the layout for this fragment
         val view : View = inflater.inflate(R.layout.fragment_favorite, container, false)
         activity?.let { progressDialog.show(it) }
-
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         mangaList = ArrayList<MangaModel>()
         myDB = FavoriteDB(activity)
         val data: Cursor = myDB!!.listContents

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +40,8 @@ class Recent : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_recent, container, false)
 
         activity?.let { progressDialog.show(it) }
-
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         lstRecent = ArrayList<Recent>()
         myDB = RecentDB(activity)
 

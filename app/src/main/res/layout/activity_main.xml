@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,28 +12,24 @@
         android:layout_above="@id/bottom_navigation"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+
+
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/colorPrimary">
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_navigation" >
 
-        </androidx.appcompat.widget.Toolbar>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:gravity="bottom|end"
-            android:text="\IG: ahas234"
-            android:textColor="#51FFFFFF"
-            android:textSize="20sp" />
-    </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:gravity="bottom|end"
+                android:text="\IG: ahas234"
+                android:textColor="#51FFFFFF"
+                android:textSize="20sp" />
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -42,12 +38,9 @@
         android:background="#222222"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation" />
 
-</RelativeLayout>
-
-
-
-
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
