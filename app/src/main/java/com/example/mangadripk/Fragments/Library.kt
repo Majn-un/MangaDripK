@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -19,11 +18,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
+
 class Library : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
     private val mangaList = mutableListOf<MangaModel>()
+
+    private val searchList = mutableListOf<MangaModel>()
     private val test = mutableListOf<MangaModel>()
     private val progressDialog = CustomProgressDialog()
+    private var pageNumber = 1
+    private val baseUrl = "https://www.mangahere.cc"
+    lateinit var gridlayoutManager : GridLayoutManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +45,8 @@ class Library : Fragment() {
 
         val myrv = view.findViewById(R.id.recyclerview_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-        myrv.layoutManager = GridLayoutManager(activity, 3)
+        gridlayoutManager = GridLayoutManager(activity, 3)
+        myrv.layoutManager = gridlayoutManager
         myrv.adapter = myAdapter
         progressDialog.dialog.dismiss()
 
@@ -58,8 +65,8 @@ class Library : Fragment() {
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(s: String): Boolean {
-                    val obj = Sources.MANGA_HERE.searchManga(s, 1, mangaList)
-                    println(obj)
+                    val list = Sources.MANGA_HERE.search(s)
+
                     return false
                 }
 
@@ -84,18 +91,21 @@ class Library : Fragment() {
     private fun loadNewManga() {
 
         GlobalScope.launch {
-            try {
-                val list = Sources.MANGA_HERE.getManga(1).toList()
-                mangaList.addAll(list)
-                println(list.size)
-                activity!!.runOnUiThread {
-                    myAdapter?.notifyDataSetChanged()
-                }
+                try {
+                    val list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
+                    println(pageNumber)
+                    mangaList.addAll(list)
+                    println(list.size)
+                    activity!!.runOnUiThread {
+                        myAdapter?.notifyDataSetChanged()
+                    }
 
-            } catch (e: Exception) {
-                e.printStackTrace()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
-        }
     }
+
+
 
 }

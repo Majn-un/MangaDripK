@@ -32,7 +32,8 @@
                 android:layout_marginLeft="275dp"
                 android:background="#2C2C2C"
                 android:drawableTop="@drawable/ic_baseline_settings_24"
-                android:gravity="center_horizontal|top">
+                android:gravity="center_horizontal|top"
+                android:onClick="showPopup">
 
             </Button>
 

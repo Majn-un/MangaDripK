@@ -1,11 +1,10 @@
 package com.example.mangadripk.Activity
 
-//import android.app.ProgressDialog
-
 import android.annotation.SuppressLint
 import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +18,7 @@ import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.ChapterModel
+import com.programmersbox.manga_sources.mangasources.PageModel
 import kotlinx.android.synthetic.main.activity_viewer.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ import java.util.*
 
 
 class Page_Activity : AppCompatActivity(),
-    PageImageCallback {
+    PageImageCallback, PopupMenu.OnMenuItemClickListener {
     lateinit var lstPages: MutableList<Page>
     lateinit var chapterList: MutableList<List<String>>
     private var myViewPager: PageViewAdapter? = null
@@ -98,10 +98,12 @@ class Page_Activity : AppCompatActivity(),
 
         lstPages = ArrayList()
         mangaPages()
+
         val myrv = findViewById<View>(R.id.view_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
         myViewPager!!.setPageImageCallback(this)
         myrv.adapter = myViewPager
+        println(lstPages)
 
         next.setOnClickListener(View.OnClickListener {
             println(chapterList[0])
@@ -153,7 +155,9 @@ class Page_Activity : AppCompatActivity(),
 
             }
         })
+
     }
+
 
 
     private fun updateRecent() {
@@ -163,7 +167,6 @@ class Page_Activity : AppCompatActivity(),
             if (data.getString(3) == OG_name) {
                 println("Already in recents")
                 myDB!!.deleteData(data.getString(3))
-
             }
         }
         myDB!!.addData(recent)
@@ -198,13 +201,13 @@ class Page_Activity : AppCompatActivity(),
                     myViewPager?.notifyDataSetChanged()
                 }
 
-
                 progressDialog.dialog.dismiss()
 
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+
     }
 
     override fun onClick() {
@@ -215,5 +218,30 @@ class Page_Activity : AppCompatActivity(),
             presenter.visibility = View.INVISIBLE
             presenter1.visibility = View.INVISIBLE
         }
+    }
+
+    override fun onMenuItemClick(p0: MenuItem?): Boolean {
+        return when (p0?.itemId) {
+            R.id.item1 -> {
+                Toast.makeText(this, "Item 1 clicked", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.item2 -> {
+                Toast.makeText(this, "Item 2 clicked", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.item3 -> {
+                Toast.makeText(this, "Item 3 clicked", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun showPopup(v: View?) {
+        val popup = PopupMenu(this, v)
+        popup.setOnMenuItemClickListener(this)
+        popup.inflate(R.menu.popup_menu)
+        popup.show()
     }
 }

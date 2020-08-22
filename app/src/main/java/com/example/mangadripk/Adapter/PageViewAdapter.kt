@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.viewpager.widget.PagerAdapter
+import com.bumptech.glide.Glide
 import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.R
@@ -46,29 +47,15 @@ class PageViewAdapter(
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val page_layout: View = inflater.inflate(R.layout.activity_viewer, container, false)
-        val presenter: Toolbar = page_layout.findViewById<View>(R.id.presenter) as Toolbar
-        val presenter1 = page_layout.findViewById<View>(R.id.presenter1) as Toolbar
-
-
         val image_layout: View = inflater.inflate(R.layout.view_pager_item, container, false)
         val page_image: PhotoView = image_layout.findViewById<View>(R.id.page_image) as PhotoView
-        Picasso.get().load(PageList[position].link).into(page_image)
+
+        Glide.with(image_layout).load(PageList[position].link).into(page_image)
+//        Picasso.get().load(PageList[position].link).into(page_image)
 
 
         page_image.setOnClickListener(View.OnClickListener {
-            println("clicked")
             pageImageCallback.onClick()
-//            if (presenter.visibility == View.INVISIBLE) {
-//                println("outside")
-//                presenter.visibility = View.VISIBLE
-//                presenter1.visibility = View.VISIBLE
-//            } else {
-//                println("inside")
-//                presenter.visibility = View.INVISIBLE
-//                presenter1.visibility = View.INVISIBLE
-//
-//            }
         })
         container.addView(image_layout)
         return image_layout

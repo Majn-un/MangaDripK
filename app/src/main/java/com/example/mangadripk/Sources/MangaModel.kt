@@ -13,8 +13,9 @@ interface MangaSource {
     fun toInfoModel(model: MangaModel): MangaInfoModel
     fun getMangaModelByUrl(url: String): MangaModel
     fun getPageInfo(chapterModel: ChapterModel): PageModel
-    fun searchManga(searchText: CharSequence, pageNumber: Int = 1, mangaList: List<MangaModel>): List<MangaModel> =
-        mangaList.filter { it.title.contains(searchText, true) }
+    fun search(string: String): List<MangaModel>
+
+//    fun searchManga(searchText: CharSequence): List<MangaModel>
 }
 
 data class MangaModel(
