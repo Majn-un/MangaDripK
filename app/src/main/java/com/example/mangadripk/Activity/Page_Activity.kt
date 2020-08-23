@@ -8,8 +8,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
+import com.example.mangadripk.Adapter.WebtoonViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.Classes.Recent
@@ -30,6 +32,8 @@ class Page_Activity : AppCompatActivity(),
     lateinit var lstPages: MutableList<Page>
     lateinit var chapterList: MutableList<List<String>>
     private var myViewPager: PageViewAdapter? = null
+    private var Webtoon: WebtoonViewAdapter? = null
+
     private var Page_Model: ChapterModel = ChapterModel("","","",Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var OG_name : String? = ""
@@ -223,12 +227,19 @@ class Page_Activity : AppCompatActivity(),
     override fun onMenuItemClick(p0: MenuItem?): Boolean {
         return when (p0?.itemId) {
             R.id.item1 -> {
-                Toast.makeText(this, "Item 1 clicked", Toast.LENGTH_SHORT).show()
-                true
+                    val myrv = findViewById<View>(R.id.view_page) as ViewPager
+                    myViewPager = PageViewAdapter(this, lstPages)
+                    myViewPager!!.setPageImageCallback(this)
+                    myrv.adapter = myViewPager
+                    true
+
             }
             R.id.item2 -> {
-                Toast.makeText(this, "Item 2 clicked", Toast.LENGTH_SHORT).show()
-                true
+                    val diff = findViewById<View>(R.id.recycler) as RecyclerView
+                    Webtoon = WebtoonViewAdapter(this, lstPages)
+                    myViewPager!!.setPageImageCallback(this)
+                    diff.adapter = Webtoon
+                    true
             }
             R.id.item3 -> {
                 Toast.makeText(this, "Item 3 clicked", Toast.LENGTH_SHORT).show()

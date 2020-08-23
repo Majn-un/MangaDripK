@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/item1" android:title="Setting 1"/>
-    <item android:id="@+id/item2" android:title="Setting 2"/>
-    <item android:id="@+id/item3" android:title="Setting 3"/>
+    <item android:id="@+id/item1" android:title="Manga"/>
+    <item android:id="@+id/item2" android:title="Webtoon"/>
+    <item android:id="@+id/item3" android:title="Right or Left"/>
 </menu>
