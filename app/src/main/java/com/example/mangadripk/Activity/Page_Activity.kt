@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
@@ -235,10 +236,12 @@ class Page_Activity : AppCompatActivity(),
 
             }
             R.id.item2 -> {
-                    val diff = findViewById<View>(R.id.recycler) as RecyclerView
+                setContentView(R.layout.activity_webtoon)
+                    val myrv = findViewById<View>(R.id.recycler) as RecyclerView
                     Webtoon = WebtoonViewAdapter(this, lstPages)
-                    myViewPager!!.setPageImageCallback(this)
-                    diff.adapter = Webtoon
+                    myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//                    myViewPager!!.setPageImageCallback(this)
+                    myrv.adapter = Webtoon
                     true
             }
             R.id.item3 -> {

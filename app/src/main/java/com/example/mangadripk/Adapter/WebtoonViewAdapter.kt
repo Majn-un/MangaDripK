@@ -40,6 +40,7 @@ class WebtoonViewAdapter(
 ////        params.height = 1700
 //
 //        holder.chapter_title.setLayoutParams(params);
+        println(Data[position].link)
         Glide.with(context).load(Data[position].link).into(holder.chapter_title);
 //        Picasso.get().load(Data[position].link).fit().centerInside().into(holder.chapter_title)
 
