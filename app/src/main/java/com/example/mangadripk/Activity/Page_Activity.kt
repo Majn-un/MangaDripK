@@ -2,6 +2,7 @@ package com.example.mangadripk.Activity
 
 import android.annotation.SuppressLint
 import android.database.Cursor
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -25,6 +26,7 @@ import com.programmersbox.manga_sources.mangasources.PageModel
 import kotlinx.android.synthetic.main.activity_viewer.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.net.URL
 import java.util.*
 
 
@@ -103,6 +105,10 @@ class Page_Activity : AppCompatActivity(),
 
         lstPages = ArrayList()
         mangaPages()
+
+
+
+
 
         val myrv = findViewById<View>(R.id.view_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
@@ -201,7 +207,9 @@ class Page_Activity : AppCompatActivity(),
                 for (i in 0 until mangaActivity.pages.size) {
                     val page = Page(mangaActivity.pages[i],(i+1).toString())
                     lstPages.add(page)
+
                 }
+
                 runOnUiThread {
                     myViewPager?.notifyDataSetChanged()
                 }

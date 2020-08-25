@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_gravity="center"
-    android:paddingBottom="10dp">
+    android:paddingBottom="1dp">
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/chapterPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

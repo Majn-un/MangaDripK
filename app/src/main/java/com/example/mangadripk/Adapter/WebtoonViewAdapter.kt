@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.R
+
 
 class WebtoonViewAdapter(
     private val context: Context,
@@ -25,22 +27,34 @@ class WebtoonViewAdapter(
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        val displayMetrics = DisplayMetrics()
-//        windowManager.defaultDisplay.getMetrics(displayMetrics)
-//        val height = displayMetrics.heightPixels
-//        val width = displayMetrics.
-//        holder.chapter_title.maxHeight = 199
-//        println(holder.chapter_title.height)
-//        println(holder.chapter_title.width)
-//        println("turn me up")
 
-//        val params: ViewGroup.LayoutParams = holder.chapter_title.getLayoutParams() as ViewGroup.LayoutParams
-//        params.width = 1400
-////        params.height = 1700
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+//        val display: DisplayMetrics = context.resources.displayMetrics
+//        var height: Int = 0
+//        val params = RecyclerView.LayoutParams(
+//            ViewGroup.LayoutParams.MATCH_PARENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT
+//        )
+//        holder.chapter_title.layoutParams = params
+        holder.chapter_title.scaleType = ImageView.ScaleType.FIT_CENTER
+        holder.chapter_title.adjustViewBounds = true
+//        Thread {
+//            try {
+//                val url_call : URL = URL(Data[position].link)
+//                val bmp = BitmapFactory.decodeStream(url_call.openConnection().getInputStream())
+//                height = bmp.height
+//            } catch (ignored: IOException) {
+//                Log.d("Yuh", "Something is not working")
+//            }
+//        }.start()
+//        println(height)
+//        val newHeight = 4000
+//        val newWidth = display.widthPixels
+//        holder.chapter_title.requestLayout()
+//        holder.chapter_title.getLayoutParams().height = newHeight
+//        holder.chapter_title.layoutParams.width = newWidth
 //
-//        holder.chapter_title.setLayoutParams(params);
-        println(Data[position].link)
+
         Glide.with(context).load(Data[position].link).into(holder.chapter_title);
 //        Picasso.get().load(Data[position].link).fit().centerInside().into(holder.chapter_title)
 
