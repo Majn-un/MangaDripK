@@ -1,6 +1,7 @@
 package com.example.mangadripk.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
@@ -38,8 +40,9 @@ class WebtoonViewAdapter(
         val newView: View = LayoutInflater.from(context).inflate(R.layout.webtoon_pager_item, null)
         val web_image: PhotoView = newView.findViewById<View>(R.id.chapterPage) as PhotoView
 
-        Glide.with(context).load(Data[position].link).dontTransform().into(holder.chapter_title);
-        web_image.setOnClickListener(View.OnClickListener {
+        Glide.with(context).load(Data[position].link).dontTransform().into(holder.chapter_title)
+        holder.chapter_title.setOnClickListener(View.OnClickListener {
+            println("yuh")
             pageImageCallback.onClick()
         })
 
@@ -52,10 +55,12 @@ class WebtoonViewAdapter(
 
     class MyViewHolder(itemView: View) : ViewHolder(itemView) {
         var chapter_title: ImageView
+
 //        var cardView: CardView
 
         init {
             chapter_title = itemView.findViewById<View>(R.id.chapterPage) as ImageView
+
         }
     }
 
