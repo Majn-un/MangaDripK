@@ -4,10 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Page_Activity">
+    tools:context=".Activity.Page_Activity"
+    android:id="@+id/web_viewer"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/manga_reader">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/presenter"
+            layout="@layout/presenter">
+        </include>
+        <include
+            android:id="@+id/presenter1"
+            layout="@layout/presenter1">
+        </include>
+
+    </FrameLayout>
+
+
 </LinearLayout>

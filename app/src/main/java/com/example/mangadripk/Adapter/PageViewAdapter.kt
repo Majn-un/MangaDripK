@@ -51,12 +51,12 @@ class PageViewAdapter(
         val page_image: PhotoView = image_layout.findViewById<View>(R.id.page_image) as PhotoView
 
         Glide.with(image_layout).load(PageList[position].link).into(page_image)
-//        Picasso.get().load(PageList[position].link).into(page_image)
 
 
         page_image.setOnClickListener(View.OnClickListener {
             pageImageCallback.onClick()
         })
+
         container.addView(image_layout)
         return image_layout
     }

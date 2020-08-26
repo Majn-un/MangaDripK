@@ -100,7 +100,15 @@ class Page_Activity : AppCompatActivity(),
             }
         }
 
-        recent = Recent(OG_name,name,OG_thumb,Page_Model.url,Chapter_List)
+
+        if (OG_name!!.contains("\'")) {
+            val name_without = OG_name!!.replace("\'","")
+            println(name_without)
+            recent = Recent(name_without,name,OG_thumb,Page_Model.url,Chapter_List)
+        } else {
+            recent = Recent(OG_name,name,OG_thumb,Page_Model.url,Chapter_List)
+        }
+
         updateRecent()
 
         lstPages = ArrayList()
@@ -173,6 +181,7 @@ class Page_Activity : AppCompatActivity(),
 
     private fun updateRecent() {
         myDB = RecentDB(this)
+        myDB!!.clearDatabase()
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
             if (data.getString(3) == OG_name) {
@@ -189,6 +198,7 @@ class Page_Activity : AppCompatActivity(),
         manga : Recent
     ) {
         myDB = RecentDB(this)
+
         val insertData = myDB!!.addData(manga)
 
         if (insertData == true) {
@@ -236,6 +246,7 @@ class Page_Activity : AppCompatActivity(),
     override fun onMenuItemClick(p0: MenuItem?): Boolean {
         return when (p0?.itemId) {
             R.id.item1 -> {
+                    setContentView(R.layout.activity_viewer)
                     val myrv = findViewById<View>(R.id.view_page) as ViewPager
                     myViewPager = PageViewAdapter(this, lstPages)
                     myViewPager!!.setPageImageCallback(this)
@@ -244,11 +255,11 @@ class Page_Activity : AppCompatActivity(),
 
             }
             R.id.item2 -> {
-                setContentView(R.layout.activity_webtoon)
+                    setContentView(R.layout.activity_webtoon)
                     val myrv = findViewById<View>(R.id.recycler) as RecyclerView
                     Webtoon = WebtoonViewAdapter(this, lstPages)
+                    Webtoon!!.setPageImageCallback(this)
                     myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//                    myViewPager!!.setPageImageCallback(this)
                     myrv.adapter = Webtoon
                     true
             }

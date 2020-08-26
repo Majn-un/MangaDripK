@@ -8,17 +8,16 @@
     tools:context=".Splash">
 
 
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
-        android:indeterminate="false"
-        android:theme="@style/ProgressBarStyle"
         android:layout_height="wrap_content"
         android:layout_marginStart="181dp"
         android:layout_marginEnd="182dp"
         android:layout_marginBottom="292dp"
+        android:indeterminate="false"
+        android:theme="@style/ProgressBarStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,20 +25,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="170dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        android:paddingBottom="100dp">
 
         <TextView
             android:layout_width="230dp"
-            android:layout_height="match_parent"
-            android:gravity="bottom|end"
+            android:layout_height="wrap_content"
+            android:gravity="center|end"
+            android:text="Manga"
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
             android:textColor="#039103"
-            android:textStyle="italic"
             android:textSize="65sp"
-            android:text="Manga" />
+            android:textStyle="italic" />
 
         <TextView
             android:layout_width="5dp"
@@ -47,14 +46,14 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:gravity="left|bottom"
+            android:gravity="left|center"
+            android:text="Drip"
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"
             android:textColor="#3FDC45"
             android:textSize="70sp"
-            android:textStyle="bold"
-            android:text="Drip" />
+            android:textStyle="bold" />
 
 
     </LinearLayout>

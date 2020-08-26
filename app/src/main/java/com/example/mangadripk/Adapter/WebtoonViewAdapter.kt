@@ -1,18 +1,17 @@
 package com.example.mangadripk.Adapter
 
 import android.content.Context
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DecodeFormat
 import com.example.mangadripk.Classes.Page
+import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
+import com.github.chrisbanes.photoview.PhotoView
 
 
 class WebtoonViewAdapter(
@@ -21,6 +20,12 @@ class WebtoonViewAdapter(
 ) :
     RecyclerView.Adapter<WebtoonViewAdapter.MyViewHolder>() {
     private val Data: List<Page>
+    private lateinit var pageImageCallback: PageImageCallback
+
+    fun setPageImageCallback(pageImageCallback: PageImageCallback) {
+        this.pageImageCallback = pageImageCallback
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view: View
         val mInflater = LayoutInflater.from(context)
@@ -30,38 +35,15 @@ class WebtoonViewAdapter(
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        val display: DisplayMetrics = context.resources.displayMetrics
-//        var height: Int = 0
-//        val params = RecyclerView.LayoutParams(
-//            ViewGroup.LayoutParams.MATCH_PARENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT
-//        )
-//        holder.chapter_title.layoutParams = params
-//        holder.chapter_title.scaleType = ImageView.ScaleType.FIT_CENTER
-//        holder.chapter_title.adjustViewBounds = true
-//        Thread {
-//            try {
-//                val url_call : URL = URL(Data[position].link)
-//                val bmp = BitmapFactory.decodeStream(url_call.openConnection().getInputStream())
-//                height = bmp.height
-//            } catch (ignored: IOException) {
-//                Log.d("Yuh", "Something is not working")
-//            }
-//        }.start()
-//        println(height)
-//        val newHeight = 4000
-//        val newWidth = display.widthPixels
-//        holder.chapter_title.requestLayout()
-//        holder.chapter_title.getLayoutParams().height = newHeight
-//        holder.chapter_title.layoutParams.width = newWidth
-//
+        val newView: View = LayoutInflater.from(context).inflate(R.layout.webtoon_pager_item, null)
+        val web_image: PhotoView = newView.findViewById<View>(R.id.chapterPage) as PhotoView
 
         Glide.with(context).load(Data[position].link).dontTransform().into(holder.chapter_title);
-//        Picasso.get().load(Data[position].link).fit().centerInside().into(holder.chapter_title)
+        web_image.setOnClickListener(View.OnClickListener {
+            pageImageCallback.onClick()
+        })
 
-//        holder.cardView.setOnClickListener {
-//            println("turn me up")
-//        }
+
     }
 
     override fun getItemCount(): Int {
@@ -74,8 +56,6 @@ class WebtoonViewAdapter(
 
         init {
             chapter_title = itemView.findViewById<View>(R.id.chapterPage) as ImageView
-
-//            cardView = itemView.findViewById<View>(R.id.pages) as CardView
         }
     }
 
