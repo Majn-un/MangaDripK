@@ -3,9 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+
+
     android:paddingBottom="1dp">
 
     <com.github.chrisbanes.photoview.PhotoView
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:id="@+id/chapterPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

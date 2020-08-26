@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.R
 
@@ -36,8 +37,8 @@ class WebtoonViewAdapter(
 //            ViewGroup.LayoutParams.WRAP_CONTENT
 //        )
 //        holder.chapter_title.layoutParams = params
-        holder.chapter_title.scaleType = ImageView.ScaleType.FIT_CENTER
-        holder.chapter_title.adjustViewBounds = true
+//        holder.chapter_title.scaleType = ImageView.ScaleType.FIT_CENTER
+//        holder.chapter_title.adjustViewBounds = true
 //        Thread {
 //            try {
 //                val url_call : URL = URL(Data[position].link)
@@ -55,7 +56,7 @@ class WebtoonViewAdapter(
 //        holder.chapter_title.layoutParams.width = newWidth
 //
 
-        Glide.with(context).load(Data[position].link).into(holder.chapter_title);
+        Glide.with(context).load(Data[position].link).dontTransform().into(holder.chapter_title);
 //        Picasso.get().load(Data[position].link).fit().centerInside().into(holder.chapter_title)
 
 //        holder.cardView.setOnClickListener {
