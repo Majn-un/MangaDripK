@@ -17,13 +17,30 @@
                     android:background="@color/green"
                     app:layout_scrollFlags="scroll|enterAlways" />
 
-                <TableLayout
-                    android:id="@+id/tabs"
+                <com.google.android.material.tabs.TabLayout
                     android:layout_width="match_parent"
-                    android:background="@color/green"
-                    android:layout_height="35dp"/>
+                    android:layout_height="wrap_content"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed"
+                    android:id="@+id/tablayout"
+                    android:background = "#345909">
+
+
+
+                </com.google.android.material.tabs.TabLayout>
+
+
+
+
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,5 +51,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

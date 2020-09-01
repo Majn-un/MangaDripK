@@ -34,6 +34,32 @@ object MangaHere : MangaSource {
                 source = Sources.MANGA_HERE
             )
         }.filter { it.title.isNotEmpty() }
+    override fun getMangaLatest(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/latest/$pageNumber")
+        .cookie("isAdult", "1").get()
+        .select(".manga-list-4-list li").map {
+            MangaModel(
+                title = it.select("a").first().attr("title"),
+                description = "",
+                mangaUrl = it.select("a").first().attr("abs:href"),
+                imageUrl = it.select("  img.manga-list-4-cover")?.first()?.attr("src") ?: "",
+                source = Sources.MANGA_HERE
+            )
+
+        }.filter { it.title.isNotEmpty() }
+
+    override fun getMangaRanked(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/ranked/")
+        .cookie("isAdult", "1").get()
+        .select(".manga-list-1-list li").map {
+            MangaModel(
+                title = it.select("a").first().attr("title"),
+                description = "",
+                mangaUrl = it.select("a").first().attr("abs:href"),
+                imageUrl = it.select("  img.manga-list-1-cover")?.first()?.attr("src") ?: "",
+                source = Sources.MANGA_HERE
+            )
+        }.filter { it.title.isNotEmpty() }
+
+
 
     override fun search(string: String): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/search?title=$string")
         .cookie("isAdult", "1").get()
