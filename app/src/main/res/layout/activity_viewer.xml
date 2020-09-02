@@ -19,9 +19,10 @@
 
 
         <androidx.viewpager.widget.ViewPager
+            android:layoutDirection="locale"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/view_page">
+            android:id="@+id/right_page">
         </androidx.viewpager.widget.ViewPager>
 
 
