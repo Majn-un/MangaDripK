@@ -4,9 +4,8 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,10 +16,9 @@ import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.google.android.material.tabs.TabLayout
 import com.programmersbox.manga_sources.mangasources.MangaModel
-import kotlinx.android.synthetic.main.fragment_all.*
-import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class FragAll : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
@@ -67,8 +65,11 @@ class FragAll : Fragment() {
 
 
 
+
         activity?.let { progressDialog.show(it) }
+
         loadNewManga()
+
 
         viewPager = view.findViewById(R.id.pager);
         tabLayout = view.findViewById(R.id.tablayout);
@@ -78,7 +79,16 @@ class FragAll : Fragment() {
         gridlayoutManager = GridLayoutManager(activity, 3)
         myrv.layoutManager = gridlayoutManager
         myrv.adapter = myAdapter
+        myrv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)) {
+                    loadNewManga()
+                }
+            }
+        })
         progressDialog.dialog.dismiss()
+
 
 
         return view
