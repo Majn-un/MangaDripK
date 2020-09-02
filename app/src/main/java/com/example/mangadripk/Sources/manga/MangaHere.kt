@@ -34,6 +34,7 @@ object MangaHere : MangaSource {
                 source = Sources.MANGA_HERE
             )
         }.filter { it.title.isNotEmpty() }
+
     override fun getMangaLatest(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/latest/$pageNumber")
         .cookie("isAdult", "1").get()
         .select(".manga-list-4-list li").map {
@@ -47,7 +48,7 @@ object MangaHere : MangaSource {
 
         }.filter { it.title.isNotEmpty() }
 
-    override fun getMangaRanked(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/ranked/")
+    override fun getMangaRanked(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://www.mangahere.cc/ranking/")
         .cookie("isAdult", "1").get()
         .select(".manga-list-1-list li").map {
             MangaModel(
