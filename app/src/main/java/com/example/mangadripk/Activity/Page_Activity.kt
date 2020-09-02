@@ -86,11 +86,12 @@ class Page_Activity : AppCompatActivity(),
         val myrv = findViewById<View>(R.id.right_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
         myrv.rotationY = reading_direction!!
+        myViewPager!!.setPageImageCallback(this)
+
         myrv.setPageTransformer(false,
             ViewPager.PageTransformer { page, position -> page.rotationY =
                 reading_direction as Float
             })
-        myViewPager!!.setPageImageCallback(this)
         myrv.adapter = myViewPager
 
         next.setOnClickListener(View.OnClickListener {
@@ -109,7 +110,7 @@ class Page_Activity : AppCompatActivity(),
                 mangaPages()
                 chapter!!.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
-//                myViewPager!!.setPageImageCallback(this)
+                myViewPager!!.setPageImageCallback(this)
                 myrv.adapter = myViewPager
             }
         })
@@ -130,7 +131,7 @@ class Page_Activity : AppCompatActivity(),
                 mangaPages()
                 chapter!!.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
-//                myViewPager!!.setPageImageCallback(this)
+                myViewPager!!.setPageImageCallback(this)
                 myrv.adapter = myViewPager
 
             }
@@ -293,11 +294,13 @@ class Page_Activity : AppCompatActivity(),
             R.id.left -> {
                 reading_direction = 0F
                 MangaView()
+
                 true
             }
             R.id.right -> {
                 reading_direction = 180F
                 MangaView()
+
                 true
             }
 
