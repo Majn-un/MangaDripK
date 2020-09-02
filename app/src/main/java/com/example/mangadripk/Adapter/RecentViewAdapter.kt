@@ -13,6 +13,9 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mangadripk.Activity.Page_Activity
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
@@ -62,7 +65,7 @@ class RecentViewAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.chapter_title.setText(Data[position].chapter)
         holder.manga_title.setText(Data[position].title)
-        Picasso.get().load(Data[position].thumbnail).into(holder.manga_thumb)
+        Glide.with(context).load(Data[position].thumbnail).placeholder(R.drawable.manga_drip_splash_theme).error(R.drawable.manga_drip_splash_theme).diskCacheStrategy(DiskCacheStrategy.ALL).priority(Priority.HIGH).into(holder.manga_thumb)
         holder.rmButton.setOnClickListener(View.OnClickListener {
             var myDB: RecentDB? = null
             myDB = RecentDB(context)

@@ -10,10 +10,12 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.R
 import com.programmersbox.manga_sources.mangasources.MangaModel
-import com.squareup.picasso.Picasso
 
 
 class RecyclerViewAdapter (
@@ -38,7 +40,14 @@ class RecyclerViewAdapter (
         position: Int
     ) {
         holder.manga_title.text = Data[position].title
-        Picasso.get().load(Data[position].imageUrl).into(holder.manga_img)
+        Glide.with(context)
+            .load(Data[position].imageUrl)
+            .placeholder(R.drawable.manga_drip_splash_theme)
+            .error(R.drawable.manga_drip_splash_theme)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .priority(Priority.HIGH)
+            .into(holder.manga_img)
+
         holder.cardView.setOnClickListener(View.OnClickListener {
             val model = Data[position]
             val mangaUrl : String = model.mangaUrl
