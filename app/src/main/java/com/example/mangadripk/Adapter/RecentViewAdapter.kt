@@ -72,6 +72,7 @@ class RecentViewAdapter(
 
         holder.cardView.setOnClickListener {
             val model = Data[position]
+
             val name : String? = model.chapter
             val url : String? = model.Link
 //            val uploadedtime : Long? = model.uploadedTime

@@ -41,8 +41,9 @@ class WebtoonViewAdapter(
         val web_image: PhotoView = newView.findViewById<View>(R.id.chapterPage) as PhotoView
 
         Glide.with(context).load(Data[position].link).dontTransform().into(holder.chapter_title)
+
+
         holder.chapter_title.setOnClickListener(View.OnClickListener {
-            println("yuh")
             pageImageCallback.onClick()
         })
 

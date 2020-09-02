@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
 import com.example.mangadripk.Adapter.WebtoonViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
@@ -56,26 +57,41 @@ class Page_Activity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
         progressDialog.show(this)
-        val next = findViewById<View>(R.id.next) as Button
-        val back = findViewById<View>(R.id.back) as Button
-        title = findViewById<View>(R.id.manga_name) as TextView
-        chapter = findViewById<View>(R.id.chapter_name) as TextView
+
+
+
         lstPages = ArrayList()
 
 
 
         getPrevData()
+
+
         updateRecent()
         mangaPages()
+        MangaView()
+
+
+
+    }
+
+    private fun MangaView() {
+        setContentView(R.layout.activity_viewer)
+        val next = findViewById<View>(R.id.next) as Button
+        val back = findViewById<View>(R.id.back) as Button
+        title = findViewById<View>(R.id.manga_name) as TextView
+        chapter = findViewById<View>(R.id.chapter_name) as TextView
+        title!!.text = OG_name
+        chapter!!.text = name
         val myrv = findViewById<View>(R.id.right_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
         myrv.rotationY = reading_direction!!
         myrv.setPageTransformer(false,
-            ViewPager.PageTransformer { page, position -> page.rotationY = 180f })
+            ViewPager.PageTransformer { page, position -> page.rotationY =
+                reading_direction as Float
+            })
         myViewPager!!.setPageImageCallback(this)
         myrv.adapter = myViewPager
-
-
 
         next.setOnClickListener(View.OnClickListener {
             if (index == 0) {
@@ -93,7 +109,7 @@ class Page_Activity : AppCompatActivity(),
                 mangaPages()
                 chapter!!.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
-                myViewPager!!.setPageImageCallback(this)
+//                myViewPager!!.setPageImageCallback(this)
                 myrv.adapter = myViewPager
             }
         })
@@ -114,24 +130,47 @@ class Page_Activity : AppCompatActivity(),
                 mangaPages()
                 chapter!!.text = chapterList[index][0]
                 myViewPager = PageViewAdapter(this@Page_Activity, lstPages)
-                myViewPager!!.setPageImageCallback(this)
+//                myViewPager!!.setPageImageCallback(this)
                 myrv.adapter = myViewPager
 
             }
         })
 
+
+
+
+    }
+
+    private fun WebToonView() {
+        setContentView(R.layout.activity_webtoon)
+        val next = findViewById<View>(R.id.next) as Button
+        val back = findViewById<View>(R.id.back) as Button
+        title = findViewById<View>(R.id.manga_name) as TextView
+        chapter = findViewById<View>(R.id.chapter_name) as TextView
+        title!!.text = OG_name
+        chapter!!.text = name
+        val myrv = findViewById<View>(R.id.recycler) as RecyclerView
+        Webtoon = WebtoonViewAdapter(this, lstPages)
+        Webtoon!!.setPageImageCallback(this)
+        myrv.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        myrv.adapter = Webtoon
+
     }
 
 
     private fun getPrevData() {
+        title = findViewById<View>(R.id.manga_name) as TextView
+        chapter = findViewById<View>(R.id.chapter_name) as TextView
         val intent = intent
         val url = intent.getStringExtra("url")
         OG_name = intent.getStringExtra("OGT")
-        title!!.text = OG_name
         val uploadedTime = intent.getStringExtra("uploadtime")
         val OG_thumb = intent.getStringExtra("OGN")
         name = intent.getStringExtra("name")
-        chapter!!.text = name
         val upload = intent.getStringExtra("upload")
         Chapter_List = intent.extras!!.getString("Chapter_List")
         val aList: ArrayList<*> = ArrayList<Any?>(
@@ -152,6 +191,15 @@ class Page_Activity : AppCompatActivity(),
             }
         }
 
+        val MangaYUH = name?.let {
+            if (url != null) {
+                if (upload != null) {
+                    Page_Model = ChapterModel(it, url, upload, Sources.MANGA_HERE)
+
+                }
+            }
+        }
+
         if (OG_name!!.contains("\'")) {
             val name_without = OG_name!!.replace("\'", "")
             println(name_without)
@@ -162,20 +210,11 @@ class Page_Activity : AppCompatActivity(),
 
 
 
-        val MangaYUH = name?.let {
-            if (url != null) {
-                if (upload != null) {
-                    Page_Model = ChapterModel(it, url, upload, Sources.MANGA_HERE)
-
-                }
-            }
-        }
     }
 
 
     private fun updateRecent() {
         myDB = RecentDB(this)
-        myDB!!.clearDatabase()
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
             if (data.getString(3) == OG_name) {
@@ -229,6 +268,7 @@ class Page_Activity : AppCompatActivity(),
 
     override fun onClick() {
         if (presenter.visibility == View.INVISIBLE) {
+            println("clicked")
             presenter.visibility = View.VISIBLE
             presenter1.visibility = View.VISIBLE
         } else {
@@ -240,49 +280,24 @@ class Page_Activity : AppCompatActivity(),
     override fun onMenuItemClick(p0: MenuItem?): Boolean {
         return when (p0?.itemId) {
             R.id.item1 -> {
-                setContentView(R.layout.activity_viewer)
-                val myrv = findViewById<View>(R.id.right_page) as ViewPager
-                myViewPager = PageViewAdapter(this, lstPages)
-                myViewPager!!.setPageImageCallback(this)
-                myrv.adapter = myViewPager
+                MangaView()
                 true
-
             }
             R.id.item2 -> {
-                setContentView(R.layout.activity_webtoon)
-                val myrv = findViewById<View>(R.id.recycler) as RecyclerView
-                Webtoon = WebtoonViewAdapter(this, lstPages)
-                Webtoon!!.setPageImageCallback(this)
-                myrv.layoutManager = LinearLayoutManager(
-                    this,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-                myrv.adapter = Webtoon
+                WebToonView()
                 true
             }
             R.id.item3 -> {
                 true
             }
             R.id.left -> {
-
                 reading_direction = 0F
-                val myrv = findViewById<View>(R.id.right_page) as ViewPager
-                myViewPager = PageViewAdapter(this, lstPages)
-                myrv.rotationY = reading_direction!!
-                myrv.setPageTransformer(false,
-                    ViewPager.PageTransformer { page, position -> page.rotationY = 0f })
-                myViewPager!!.setPageImageCallback(this)
+                MangaView()
                 true
             }
             R.id.right -> {
                 reading_direction = 180F
-                val myrv = findViewById<View>(R.id.right_page) as ViewPager
-                myViewPager = PageViewAdapter(this, lstPages)
-                myrv.rotationY = reading_direction!!
-                myrv.setPageTransformer(false,
-                    ViewPager.PageTransformer { page, position -> page.rotationY = 180f })
-                myViewPager!!.setPageImageCallback(this)
+                MangaView()
                 true
             }
 
