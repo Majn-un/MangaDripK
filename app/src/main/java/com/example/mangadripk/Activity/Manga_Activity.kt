@@ -72,9 +72,10 @@ class Manga_Activity : AppCompatActivity() {
         val intent = intent
         Manga_URL = intent.getStringExtra("mangaUrl")
         val imgUrl = intent.getStringExtra("imgUrl")
+
         val description = intent.getStringExtra("description")
         val title = intent.getStringExtra("title")
-
+        OG_Thumb = imgUrl
         master_name = title
 
         val MangaYUH = title?.let {
@@ -136,7 +137,7 @@ class Manga_Activity : AppCompatActivity() {
                 updateFavorite()
                 button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24)
             } else if (button_for_favorites!!.background.constantState == ResourcesCompat.getDrawable(resources,R.drawable.ic_baseline_favorite_green_24, null)?.constantState){
-                master_name?.let { it1 -> myDB!!.deleteData(it1) }
+                OG_Thumb?.let { it1 -> myDB!!.deleteData(it1) }
                 Toast.makeText(this, "Unfavorited", Toast.LENGTH_SHORT ).show()
                 button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
 
@@ -228,7 +229,7 @@ class Manga_Activity : AppCompatActivity() {
 //                    val Page_Model = ChapterModel(item.url, item.url, "upload", Sources.MANGA_HERE)
 //                    val image_link = Page_Model.getFirstImage().pages[0]
                     val read = ReadDate(item.name, master_name)
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_name, read))
+                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_Thumb, read))
                 }
 
                 runOnUiThread {
