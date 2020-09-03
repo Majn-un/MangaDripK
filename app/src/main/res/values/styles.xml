@@ -26,7 +26,7 @@
     </style>
     <style name="PageView" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:windowBackground">#101010</item>
     </style>
     <style name="Main">
         <item name="android:windowFullscreen">true</item>

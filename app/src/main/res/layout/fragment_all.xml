@@ -8,9 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_id"
         android:layout_width="match_parent"

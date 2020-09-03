@@ -107,21 +107,21 @@ class FragAll : Fragment() {
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(s: String): Boolean {
-                    val list = Sources.MANGA_HERE.search(s)
+//                    val list = Sources.MANGA_HERE.search(s)
 
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-                    var newText = newText
-                    newText = newText.toLowerCase()
-//                    println(obj)
+//                    Thread.sleep(500)
+                    println(newText)
+                    val list = Sources.MANGA_HERE.searchManga(newText, 1, mangaList)
+//                    newText = newText.toLowerCase()
+////                    println(obj)
                     val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
-                    for (manga in mangaList) {
-                        val title: String = manga.title.toLowerCase()
-                        if (title.contains(newText)) {
-                            newList.add(manga)
-                        }
+
+                    for (manga in list) {
+                        newList.add(manga)
                     }
                     myAdapter?.setFilter(newList)
                     return false

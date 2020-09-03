@@ -110,7 +110,7 @@ class FragLatest : Fragment() {
                         println(manga)
                     }
                 }
-                activity!!.runOnUiThread {
+                    activity!!.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
 

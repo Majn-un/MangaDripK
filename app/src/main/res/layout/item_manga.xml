@@ -21,15 +21,19 @@
             android:id="@+id/manga_cover_id"
             android:layout_width="match_parent"
             android:layout_height="210dp"
-            android:background="#2d2d2d"
+            android:background="#252525"
             android:scaleType="centerCrop"
             />
 
         <TextView
             android:id="@+id/manga_title_id"
+            android:paddingLeft="2dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#282828"
+            android:background="#232323"
+            android:fontFamily="sans-serif-medium"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:gravity="center"
             android:text="Manga Title"
             android:textColor="#FFFFFF"

@@ -4,29 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#101010"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="80dp">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/green"
+                    android:background="#303030"
                     app:layout_scrollFlags="scroll|enterAlways" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     app:tabGravity="fill"
                     app:tabMode="fixed"
                     android:id="@+id/tablayout"
-                    android:background = "#345909">
-
-
-
+                    android:background="#303030">
                 </com.google.android.material.tabs.TabLayout>
 
 
