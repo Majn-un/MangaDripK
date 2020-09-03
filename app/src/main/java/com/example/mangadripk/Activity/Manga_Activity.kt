@@ -20,11 +20,13 @@ import com.example.mangadripk.Classes.Chapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
+import com.example.mangadripk.Database.ReadDb
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.ChapterModel
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import kotlinx.android.synthetic.main.activity_manga.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.ArrayList
@@ -42,11 +44,12 @@ class Manga_Activity : AppCompatActivity() {
     private var button_for_resume: Button? = null
     private val progressDialog = CustomProgressDialog()
     var myDB: FavoriteDB? = null
+    var myREAD: ReadDb? = null
+
     private var manga_title: TextView? = null
     private var manga_description: TextView? = null
     private var manga_status: TextView? = null
     private var master_name: String? = null
-
     private var manga_author: TextView? = null
     private var img: ImageView? = null
     private var Manga_URL: String? = null
@@ -86,16 +89,6 @@ class Manga_Activity : AppCompatActivity() {
 
         MangaActivity()
 
-//        button_for_chapters = findViewById<View>(R.id.chapters_button) as Button
-//        button_for_chapters!!.setOnClickListener {
-//            val intent = Intent(this@Manga_Activity, Chapter_Activity::class.java)
-//            intent.putExtra("mangaUrl",Manga_URL)
-//            intent.putExtra("imgUrl",imgUrl)
-//            intent.putExtra("description",description)
-//            intent.putExtra("title",title)
-//            intent.putExtra("source",Sources.toString())
-//            startActivity(intent)
-//        }
 
         val myDB_recent = RecentDB(this)
         var found = false
@@ -174,8 +167,8 @@ class Manga_Activity : AppCompatActivity() {
 //            lstChapter.clear()
 //            ChapterActivity()
 //            myChapterAdapter = ChapterViewAdapter(this, lstChapter)
-//            myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//            myrv.adapter = myAdapter
+//            mycrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//            mycrv.adapter = myAdapter
 //            refreshLayout.isRefreshing = false
 //        }
 
@@ -219,7 +212,6 @@ class Manga_Activity : AppCompatActivity() {
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
-                progressDialog.dialog.dismiss()
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -235,20 +227,34 @@ class Manga_Activity : AppCompatActivity() {
                 for (item in mangaActivity.chapters) {
 //                    val Page_Model = ChapterModel(item.url, item.url, "upload", Sources.MANGA_HERE)
 //                    val image_link = Page_Model.getFirstImage().pages[0]
-                    println("master"+master_name)
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_name))
+                    val read = ReadDate(item.name, master_name)
+                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_name, read))
                 }
 
                 runOnUiThread {
                     myChapterAdapter?.notifyDataSetChanged()
                 }
-//                progressDialog.dialog.dismiss()
+                progressDialog.dialog.dismiss()
 
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
 
+    }
+
+    private fun ReadDate(name : String, og : String?): String? {
+        myREAD = ReadDb(this)
+        val data: Cursor = myREAD!!.listContents
+        while (data.moveToNext()) {
+            if (data.getString(2) == og) {
+                if (data.getString(1) == name) {
+                    return "0"
+                }
+            }
+        }
+        myREAD!!.close()
+        return "1"
     }
 
     private fun setValues(

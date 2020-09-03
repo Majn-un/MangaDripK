@@ -16,14 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
 import com.example.mangadripk.Adapter.WebtoonViewAdapter
-import com.example.mangadripk.Classes.CustomProgressDialog
-import com.example.mangadripk.Classes.Manga
-import com.example.mangadripk.Classes.Page
-import com.example.mangadripk.Classes.Recent
+import com.example.mangadripk.Classes.*
+import com.example.mangadripk.Database.ReadDb
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
+import com.example.mangadripk.Sources.manga.MangaHere
 import com.programmersbox.manga_sources.mangasources.ChapterModel
 import kotlinx.android.synthetic.main.activity_viewer.*
 import kotlinx.coroutines.GlobalScope
@@ -44,6 +43,8 @@ class Page_Activity : AppCompatActivity(),
 
     private var Page_Model: ChapterModel = ChapterModel("", "", "", Sources.MANGA_HERE)
     var myDB: RecentDB? = null
+    var myReadDB: ReadDb? = null
+
     var OG_name : String? = ""
     var name : String? = ""
 
@@ -65,7 +66,7 @@ class Page_Activity : AppCompatActivity(),
 
 
         getPrevData()
-        updateRecent()
+        updateDB()
         mangaPages()
         MangaView()
 
@@ -81,6 +82,7 @@ class Page_Activity : AppCompatActivity(),
         chapter = findViewById<View>(R.id.chapter_name) as TextView
         title!!.text = OG_name
         chapter!!.text = name
+
         val myrv = findViewById<View>(R.id.right_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
         myrv.rotationY = reading_direction!!
@@ -200,20 +202,20 @@ class Page_Activity : AppCompatActivity(),
         }
 
 
-//        if (OG_name!!.contains("\'")) {
-//            val name_without = OG_name!!.replace("\'", "")
-//            println(name_without)
-//            recent = Recent(name_without, name, OG_thumb, Page_Model.url, Chapter_List)
-//        } else {
-//            recent = Recent(OG_name, name, OG_thumb, Page_Model.url, Chapter_List)
-//        }
+        if (OG_name!!.contains("\'")) {
+            val name_without = OG_name!!.replace("\'", "")
+            println(name_without)
+            recent = Recent(name_without, name, OG_thumb, Page_Model.url, Chapter_List)
+        } else {
+            recent = Recent(OG_name, name, OG_thumb, Page_Model.url, Chapter_List)
+        }
 
 
 
     }
 
 
-    private fun updateRecent() {
+    private fun updateDB() {
         myDB = RecentDB(this)
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
@@ -225,6 +227,19 @@ class Page_Activity : AppCompatActivity(),
         myDB!!.addData(recent)
         myDB!!.close()
 
+        myReadDB = ReadDb(this)
+        val read: Cursor = myReadDB!!.listContents
+        while (read.moveToNext()) {
+            if (read.getString(1) == OG_name) {
+                if (read.getString(3) == name) {
+                    myReadDB!!.deleteData(read.getString(1))
+                }
+            }
+
+        }
+        val chapter = Chapter(name,"",Sources.MANGA_HERE,"",null,OG_name,"","0")
+        myReadDB!!.addData(chapter)
+        myReadDB!!.close()
     }
 
     private fun AddData(
@@ -234,7 +249,7 @@ class Page_Activity : AppCompatActivity(),
 
         val insertData = myDB!!.addData(manga)
 
-        if (insertData == true) {
+        if (insertData) {
             Toast.makeText(this@Page_Activity, "Successfully Entered Data!", Toast.LENGTH_LONG)
                 .show()
         } else {
@@ -247,7 +262,7 @@ class Page_Activity : AppCompatActivity(),
             try {
 
                 val mangaActivity = Page_Model.getPageInfo()
-                for (i in 0 until mangaActivity.pages.size) {
+                for (i in mangaActivity.pages.indices) {
                     val page = Page(mangaActivity.pages[i], (i + 1).toString())
                     lstPages.add(page)
 

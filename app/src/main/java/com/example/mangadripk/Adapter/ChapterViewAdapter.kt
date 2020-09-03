@@ -2,6 +2,7 @@ package com.example.mangadripk.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,8 +29,15 @@ class ChapterViewAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+//        println(Data[position].read)
+        if (Data[position].read == "0" ) {
+            holder.cardView.setBackgroundColor(Color.GRAY)
+        } else if (Data[position].read == "1") {
+            holder.cardView.setBackgroundColor(Color.BLACK)
+        }
         holder.chapter_title.setText(Data[position].name)
         holder.cardView.setOnClickListener {
+            holder.cardView.setBackgroundColor(Color.GRAY)
             val model = Data[position]
             val name : String? = model.name
             val url : String? = model.link

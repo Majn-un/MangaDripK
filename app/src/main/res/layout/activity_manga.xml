@@ -14,7 +14,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <androidx.core.widget.NestedScrollView
@@ -136,11 +136,16 @@
 <!--                    android:background="@drawable/ic_baseline_cloud_download_24"-->
 <!--                    />-->
             </LinearLayout>
-
+<!--            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:id="@+id/refreshLayout">-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chapter_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+<!--            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
 
         </LinearLayout>
 

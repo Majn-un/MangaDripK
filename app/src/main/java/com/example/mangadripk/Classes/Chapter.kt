@@ -12,6 +12,7 @@ class Chapter : Serializable {
     var uploaded: String? = null
     var OG_Name: String? = null
     var OG_Thumb: String? = null
+    var read: String? = null
 
     constructor(
         Chapter_Title: String?,
@@ -20,7 +21,8 @@ class Chapter : Serializable {
         Chapter_uploaded: String?,
         Chapter_upload: Long?,
         Chapter_OGN: String?,
-        Chapter_OGT: String?
+        Chapter_OGT: String?,
+        chapter_read: String?
 
     ) {
         name = Chapter_Title
@@ -30,6 +32,7 @@ class Chapter : Serializable {
         sources = Chapter_Sources
         OG_Name = Chapter_OGN
         OG_Thumb = Chapter_OGT
+        read = chapter_read
     }
 
 }

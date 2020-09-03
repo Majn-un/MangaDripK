@@ -33,7 +33,6 @@
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
 
-        <activity android:name=".Activity.Chapter_Activity" />
         <activity
             android:name=".Activity.Page_Activity"
             android:theme="@style/PageView"/>
