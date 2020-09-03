@@ -122,10 +122,7 @@ class FragRanked : Fragment() {
         GlobalScope.launch {
             try {
                 val list = Sources.MANGA_HERE.getMangaRanked(1).toList()
-                println(list)
-                println(pageNumber)
                 mangaList.addAll(list)
-                println(list.size)
                 activity!!.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }

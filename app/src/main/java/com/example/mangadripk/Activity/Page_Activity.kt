@@ -9,20 +9,22 @@ import android.view.View
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.PageViewAdapter
 import com.example.mangadripk.Adapter.WebtoonViewAdapter
-import com.example.mangadripk.Classes.*
+import com.example.mangadripk.Classes.Chapter
+import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.Classes.Page
+import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.ReadDb
 import com.example.mangadripk.Database.RecentDB
+import com.example.mangadripk.Dialogs.CopyrightDialog
 import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
-import com.example.mangadripk.Sources.manga.MangaHere
 import com.programmersbox.manga_sources.mangasources.ChapterModel
 import kotlinx.android.synthetic.main.activity_viewer.*
 import kotlinx.coroutines.GlobalScope
@@ -67,6 +69,7 @@ class Page_Activity : AppCompatActivity(),
 
         getPrevData()
         updateDB()
+        updateRead()
         mangaPages()
         MangaView()
 
@@ -89,8 +92,9 @@ class Page_Activity : AppCompatActivity(),
         myViewPager!!.setPageImageCallback(this)
 
         myrv.setPageTransformer(false,
-            ViewPager.PageTransformer { page, position -> page.rotationY =
-                reading_direction as Float
+            ViewPager.PageTransformer { page, position ->
+                page.rotationY =
+                    reading_direction as Float
             })
         myrv.adapter = myViewPager
 
@@ -201,7 +205,6 @@ class Page_Activity : AppCompatActivity(),
             }
         }
 
-         println(OG_thumb + "this is the thing for images")
         if (OG_name!!.contains("\'")) {
             val name_without = OG_name!!.replace("\'", "")
             println(name_without)
@@ -214,46 +217,39 @@ class Page_Activity : AppCompatActivity(),
 
     }
 
-
     private fun updateDB() {
-        myDB = RecentDB(this)
-        val data: Cursor = myDB!!.listContents
-        while (data.moveToNext()) {
-            if (data.getString(3) == OG_name) {
-                println("Already in recents")
-                myDB!!.deleteData(data.getString(3))
-            }
-        }
-        myDB!!.addData(recent)
-        myDB!!.close()
-
-        myReadDB = ReadDb(this)
-        val read: Cursor = myReadDB!!.listContents
-        while (read.moveToNext()) {
-            if (read.getString(1) == OG_name) {
-                if (read.getString(3) == name) {
-                    myReadDB!!.deleteData(read.getString(1))
+        try {
+            myDB = RecentDB(this)
+            val data: Cursor = myDB!!.listContents
+            while (data.moveToNext()) {
+                if (data.getString(3) == OG_name) {
+                    println("Already in recents")
+                    myDB!!.deleteData(data.getString(3))
                 }
             }
+            myDB!!.addData(recent)
+        } finally {
+            myDB!!.close()
 
         }
-        val chapter = Chapter(name,"",Sources.MANGA_HERE,"",null,OG_name,"","0")
-        myReadDB!!.addData(chapter)
-        myReadDB!!.close()
     }
 
-    private fun AddData(
-        manga: Recent
-    ) {
-        myDB = RecentDB(this)
+    private fun updateRead() {
+        try {
+            myReadDB = ReadDb(this)
+            val read: Cursor = myReadDB!!.listContents
+            while (read.moveToNext()) {
+                if (read.getString(1) == OG_name) {
+                    if (read.getString(3) == name) {
+                        myReadDB!!.deleteData(read.getString(1))
+                    }
+                }
 
-        val insertData = myDB!!.addData(manga)
-
-        if (insertData) {
-            Toast.makeText(this@Page_Activity, "Successfully Entered Data!", Toast.LENGTH_LONG)
-                .show()
-        } else {
-            Toast.makeText(this@Page_Activity, "Yuh it no work", Toast.LENGTH_LONG).show()
+            }
+            val chapter = Chapter(name, "", Sources.MANGA_HERE, "", null, OG_name, "", "0")
+            myReadDB!!.addData(chapter)
+        } finally {
+            myReadDB!!.close()
         }
     }
 
@@ -262,6 +258,10 @@ class Page_Activity : AppCompatActivity(),
             try {
 
                 val mangaActivity = Page_Model.getPageInfo()
+                if (mangaActivity.pages.isEmpty()) {
+                    openDialog()
+                }
+
                 for (i in mangaActivity.pages.indices) {
                     val page = Page(mangaActivity.pages[i], (i + 1).toString())
                     lstPages.add(page)
@@ -280,7 +280,10 @@ class Page_Activity : AppCompatActivity(),
         }
 
     }
-
+    private fun openDialog() {
+        val exampleDialog = CopyrightDialog()
+        exampleDialog.show(supportFragmentManager, "example dialog")
+    }
     override fun onClick() {
         if (presenter.visibility == View.INVISIBLE) {
             println("clicked")

@@ -108,7 +108,6 @@ class FragLatest : Fragment() {
                 for (manga in list) {
                     if (manga.imageUrl != "") {
                         mangaList.add(manga)
-                        println(manga)
                     }
                 }
                     activity!!.runOnUiThread {

@@ -38,21 +38,26 @@ class Favorite : Fragment() {
         val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         mangaList = ArrayList<MangaModel>()
-        myDB = FavoriteDB(activity)
-        val data: Cursor = myDB!!.listContents
-        if (data.count == 0) {
-            Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG).show()
-        } else {
-            while (data.moveToNext()) {
-                val manga = MangaModel(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
+        try {
+            myDB = FavoriteDB(activity)
+            val data: Cursor = myDB!!.listContents
+            if (data.count == 0) {
+                Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG).show()
+            } else {
+                while (data.moveToNext()) {
+                    val manga = MangaModel(data.getString(1), "", data.getString(2), data.getString(3), Sources.MANGA_HERE)
 
-                (mangaList as ArrayList<MangaModel>).add(manga)
+                    (mangaList as ArrayList<MangaModel>).add(manga)
 
+                }
             }
+
+        } finally {
+            myDB!!.close()
         }
+
         val lstMangaC = mangaList as List<MangaModel>
         val lstMangaRev = lstMangaC.asReversed()
-        myDB!!.close()
         val myrv: RecyclerView = view.findViewById(R.id.favorite_id)
         myAdapter = RecyclerViewAdapter(activity!!, lstMangaRev)
         myrv.layoutManager = GridLayoutManager(activity, 3)

@@ -59,7 +59,6 @@ class ChapterViewAdapter(
             intent.putExtra("uploadedtime",uploadedtime)
             intent.putExtra("upload",upload)
             intent.putExtra("source", source.toString())
-            println(ogN + "what the hell")
             intent.putExtra("OGN",ogN)
             intent.putExtra("OGT",ogT)
 

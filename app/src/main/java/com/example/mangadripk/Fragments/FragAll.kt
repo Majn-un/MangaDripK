@@ -115,12 +115,8 @@ class FragAll : Fragment() {
 
                 override fun onQueryTextChange(newText: String): Boolean {
 //                    Thread.sleep(500)
-                    println(newText)
                     val list = Sources.MANGA_HERE.searchManga(newText, 1, mangaList)
-//                    newText = newText.toLowerCase()
-////                    println(obj)
                     val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
-
                     for (manga in list) {
                         newList.add(manga)
                     }
@@ -135,9 +131,9 @@ class FragAll : Fragment() {
         GlobalScope.launch {
             try {
                 val list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
-                println(pageNumber)
                 mangaList.addAll(list)
-                println(list.size)
+                println(pageNumber)
+                println(mangaList.size)
                 activity!!.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }

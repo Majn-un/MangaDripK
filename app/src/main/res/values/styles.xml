@@ -37,4 +37,11 @@
     <style name="CustomDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">#000000</item>
+        <item name="android:colorAccent">#f3f3f3</item>
+        <item name="android:textColor">#01CA01</item>
+        <item name="android:textColorPrimary">#01CA01</item>
+    </style>
 </resources>
