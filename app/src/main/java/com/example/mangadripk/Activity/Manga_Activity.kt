@@ -71,6 +71,7 @@ class Manga_Activity : AppCompatActivity() {
         val imgUrl = intent.getStringExtra("imgUrl")
         val description = intent.getStringExtra("description")
         val title = intent.getStringExtra("title")
+
         master_name = title
 
         val MangaYUH = title?.let {
@@ -234,8 +235,8 @@ class Manga_Activity : AppCompatActivity() {
                 for (item in mangaActivity.chapters) {
 //                    val Page_Model = ChapterModel(item.url, item.url, "upload", Sources.MANGA_HERE)
 //                    val image_link = Page_Model.getFirstImage().pages[0]
-//                    println(image_link)
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, OG_Thumb,OG_name))
+                    println("master"+master_name)
+                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_name))
                 }
 
                 runOnUiThread {
