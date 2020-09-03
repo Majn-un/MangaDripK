@@ -18,14 +18,12 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:id="@+id/chapter_image"
-            android:background="#282828"/>
+            android:id="@+id/chapter_image" />
 
         <TextView
             android:id="@+id/chapter_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#282828"
             android:gravity="start|center"
             android:text="   Chapter Title"
             android:textColor="#FFFFFF"

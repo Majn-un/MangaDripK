@@ -18,7 +18,6 @@ import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
-import kotlinx.android.synthetic.main.activity_chapter.*
 import java.util.*
 
 
