@@ -65,8 +65,6 @@ class Page_Activity : AppCompatActivity(),
 
 
         getPrevData()
-
-
         updateRecent()
         mangaPages()
         MangaView()
@@ -201,13 +199,14 @@ class Page_Activity : AppCompatActivity(),
             }
         }
 
-        if (OG_name!!.contains("\'")) {
-            val name_without = OG_name!!.replace("\'", "")
-            println(name_without)
-            recent = Recent(name_without, name, OG_thumb, Page_Model.url, Chapter_List)
-        } else {
-            recent = Recent(OG_name, name, OG_thumb, Page_Model.url, Chapter_List)
-        }
+
+//        if (OG_name!!.contains("\'")) {
+//            val name_without = OG_name!!.replace("\'", "")
+//            println(name_without)
+//            recent = Recent(name_without, name, OG_thumb, Page_Model.url, Chapter_List)
+//        } else {
+//            recent = Recent(OG_name, name, OG_thumb, Page_Model.url, Chapter_List)
+//        }
 
 
 

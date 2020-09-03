@@ -3,8 +3,8 @@ package com.example.mangadripk.Fragments
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +16,7 @@ import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.google.android.material.tabs.TabLayout
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import com.programmersbox.mangaworld.views.Utility
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -76,7 +77,7 @@ class FragAll : Fragment() {
 
         val myrv = view.findViewById(R.id.all_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-        gridlayoutManager = GridLayoutManager(activity, 3)
+        gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
         myrv.layoutManager = gridlayoutManager
         myrv.adapter = myAdapter
         myrv.addOnScrollListener(object : RecyclerView.OnScrollListener() {

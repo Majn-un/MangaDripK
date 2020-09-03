@@ -29,7 +29,7 @@
         </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.Manga_Activity"
+        <activity android:name=".Activity.Manga_Activity"  android:theme="@style/NoAction_AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
 

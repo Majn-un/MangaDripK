@@ -36,8 +36,8 @@ class ChapterViewAdapter(
             val uploadedtime : Long? = model.uploadedTime
             val source : Sources? = model.sources
             val upload : String? = model.uploaded
-            val ogT : String? = model.OG_Thumb
-            val ogN : String? = model.OG_Name
+            val ogT : String? = model.OG_Name
+            val ogN : String? = model.OG_Thumb
             var list_string = ""
             for (i in Data.indices) {
                 list_string += Data[i].name + " - " + Data[i]
