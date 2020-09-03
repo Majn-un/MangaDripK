@@ -6,25 +6,30 @@
     android:foreground="?android:attr/selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_height="60dp"
     android:layout_margin="1dp"
-    cardview:cardCornerRadius="5dp">
+    xmlns:cardview="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:id="@+id/chapter_image"
+            android:background="#282828"/>
 
         <TextView
             android:id="@+id/chapter_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#282828"
-            android:gravity="center"
-            android:text="Chapter Title"
+            android:gravity="start|center"
+            android:text="   Chapter Title"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>

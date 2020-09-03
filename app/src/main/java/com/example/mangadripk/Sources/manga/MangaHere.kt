@@ -175,6 +175,10 @@ object MangaHere : MangaSource {
     override fun getPageInfo(chapterModel: ChapterModel): PageModel =
         pageListParse(Jsoup.connect(chapterModel.url).cookie("isAdult", "1").get())
 
+//    override fun getFirstImage(chapterModel: ChapterModel): PageModel =
+//        firstParse(Jsoup.connect(chapterModel.url).cookie("isAdult", "1").get())
+
+
     fun pageListParse(document: Document): PageModel {
 
 
@@ -277,6 +281,109 @@ object MangaHere : MangaSource {
                 .also { duktape.close() }
         )
     }
+
+//    fun firstParse(document: Document): PageModel {
+//
+//
+//
+//
+//        val bar = document.select("script[src*=chapter_bar]")
+//        val duktape = Duktape.create()
+//
+//        /*
+//            function to drop last imageUrl if it's broken/unneccesary, working imageUrls are incremental (e.g. t001, t002, etc); if the difference between
+//            the last two isn't 1 or doesn't have an Int at the end of the last imageUrl's filename, drop last Page
+//        */
+//        fun List<String>.dropLastIfBroken(): List<String> {
+//            val list = this.takeLast(2).map { page ->
+//                try {
+//                    page.substringBeforeLast(".").substringAfterLast("/").takeLast(2).toInt()
+//                } catch (_: NumberFormatException) {
+//                    return this.dropLast(1)
+//                }
+//            }
+//            return when {
+//                list[0] == 0 && 100 - list[1] == 1 -> this
+//                list[1] - list[0] == 1 -> this
+//                else -> this.dropLast(1)
+//            }
+//        }
+//
+//        // if-branch is for webtoon reader, else is for page-by-page
+//        return PageModel(
+//            if (bar.isNotEmpty()) {
+//                val script = document.select("script:containsData(function(p,a,c,k,e,d))").html().removePrefix("eval")
+//                val deobfuscatedScript = duktape.evaluate(script).toString()
+//                val urls = deobfuscatedScript.substringAfter("newImgs=['").substringBefore("'];").split("','")
+//                duktape.close()
+//
+//                urls.map { s -> "https:$s" }
+//            } else {
+//                val html = document.html()
+//                val link = document.location()
+//
+//                var secretKey = extractSecretKey(html, duktape)
+//
+//                val chapterIdStartLoc = html.indexOf("chapterid")
+//                val chapterId = html.substring(
+//                    chapterIdStartLoc + 11,
+//                    html.indexOf(";", chapterIdStartLoc)
+//                ).trim()
+//
+//                val chapterPagesElement = document.select(".pager-list-left > span").first()
+//
+//                if (chapterPagesElement == null) {
+//                    return(PageModel(ArrayList<String>()))
+//                }
+//                val pagesLinksElements = chapterPagesElement.select("a")
+//                val pagesNumber = pagesLinksElements[pagesLinksElements.size - 2].attr("data-page").toInt()
+//
+//                val pageBase = link.substring(0, link.lastIndexOf("/"))
+//
+//                IntRange(1, 2).map { i ->
+//
+//                    val pageLink = "$pageBase/chapterfun.ashx?cid=$chapterId&page=$i&key=$secretKey"
+//                    var responseText = ""
+//
+//                    for (tr in 1..3) {
+//
+//                        val request = Request.Builder()
+//                            .url(pageLink)
+//                            .addHeader("Referer", link)
+//                            .addHeader("Accept", "*/*")
+//                            .addHeader("Accept-Language", "en-US,en;q=0.9")
+//                            .addHeader("Connection", "keep-alive")
+//                            .addHeader("Host", "www.mangahere.cc")
+//                            .addHeader("User-Agent", System.getProperty("http.agent") ?: "")
+//                            .addHeader("X-Requested-With", "XMLHttpRequest")
+//                            .build()
+//
+//                        val response = OkHttpClient().newCall(request).execute()
+//                        responseText = response.body?.string().toString()
+//
+//                        if (responseText.isNotEmpty())
+//                            break
+//                        else
+//                            secretKey = ""
+//                    }
+//
+//                    val deobfuscatedScript = duktape.evaluate(responseText.removePrefix("eval")).toString()
+//
+//                    val baseLinkStartPos = deobfuscatedScript.indexOf("pix=") + 5
+//                    val baseLinkEndPos = deobfuscatedScript.indexOf(";", baseLinkStartPos) - 1
+//                    val baseLink = deobfuscatedScript.substring(baseLinkStartPos, baseLinkEndPos)
+//
+//                    val imageLinkStartPos = deobfuscatedScript.indexOf("pvalue=") + 9
+//                    val imageLinkEndPos = deobfuscatedScript.indexOf("\"", imageLinkStartPos)
+//                    val imageLink = deobfuscatedScript.substring(imageLinkStartPos, imageLinkEndPos)
+//
+//                    "https:$baseLink$imageLink"
+//                }
+//            }
+//                .dropLastIfBroken()
+//                .also { duktape.close() }
+//        )
+//    }
 
     fun extractSecretKey(html: String, duktape: Duktape): String {
 

@@ -16,6 +16,7 @@ interface MangaSource {
 //    fun search(string: String): List<MangaModel>
     fun getMangaRanked(pageNumber: Int = 1): List<MangaModel>
     fun getMangaLatest(pageNumber: Int = 1): List<MangaModel>
+//    fun getFirstImage(chapterModel: ChapterModel): PageModel
     fun searchManga(searchText: CharSequence, pageNumber: Int = 1, mangaList: List<MangaModel>): List<MangaModel> =
         mangaList.filter { it.title.contains(searchText, true) }}
 
@@ -50,6 +51,8 @@ data class ChapterModel(
 ) : ViewModel() {
     var uploadedTime: Long? = null
     fun getPageInfo() = sources.getPageInfo(this)
+//    fun getFirstImage() = sources.getFirstImage(this)
+
 }
 
 data class PageModel(val pages: List<String>)

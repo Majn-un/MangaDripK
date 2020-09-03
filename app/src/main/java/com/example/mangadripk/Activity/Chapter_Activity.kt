@@ -1,25 +1,22 @@
 package com.example.mangadripk.Activity
 
-import com.example.mangadripk.R
+
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-
 import com.example.mangadripk.Adapter.ChapterViewAdapter
 import com.example.mangadripk.Classes.Chapter
 import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import kotlinx.android.synthetic.main.activity_chapter.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-
 import java.util.*
-
 
 
 class Chapter_Activity : AppCompatActivity() {
@@ -30,7 +27,7 @@ class Chapter_Activity : AppCompatActivity() {
     private var OG_Thumb: String? = null
     private val progressDialog = CustomProgressDialog()
 
-    private var ChapterManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
+    private var ChapterManga: MangaModel = MangaModel("", "", "", "", Sources.MANGA_HERE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +47,13 @@ class Chapter_Activity : AppCompatActivity() {
             if (description != null) {
                 if (mangaUrl != null) {
                     if (imgUrl != null) {
-                        ChapterManga = MangaModel(it,description,mangaUrl,imgUrl, Sources.MANGA_HERE)
+                        ChapterManga = MangaModel(
+                            it,
+                            description,
+                            mangaUrl,
+                            imgUrl,
+                            Sources.MANGA_HERE
+                        )
                     }
                 }
             }
@@ -80,7 +83,16 @@ class Chapter_Activity : AppCompatActivity() {
             try {
                 val mangaActivity = ChapterManga.toInfoModel()
                 for (item in mangaActivity.chapters) {
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, OG_Thumb,OG_name))
+                    lstChapter.add(
+                        Chapter(
+                            item.name,
+                            item.url,
+                            item.sources,
+                            "2", item.uploadedTime,
+                            OG_Thumb,
+                            OG_name
+                        )
+                    )
                 }
 
                 runOnUiThread {
@@ -94,5 +106,4 @@ class Chapter_Activity : AppCompatActivity() {
         }
 
     }
-
 }

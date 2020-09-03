@@ -65,8 +65,6 @@ class Page_Activity : AppCompatActivity(),
 
 
         getPrevData()
-
-
         updateRecent()
         mangaPages()
         MangaView()

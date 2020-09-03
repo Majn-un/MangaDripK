@@ -10,24 +10,33 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.mangadripk.Adapter.ChapterViewAdapter
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
+import com.example.mangadripk.Classes.Chapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
 import com.example.mangadripk.Database.RecentDB
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
-import com.programmersbox.manga_sources.mangasources.MangaContext.context
+import com.programmersbox.manga_sources.mangasources.ChapterModel
 import com.programmersbox.manga_sources.mangasources.MangaModel
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 
 class Manga_Activity : AppCompatActivity() {
     private val myAdapter: RecyclerViewAdapter? = null
+    private var myChapterAdapter: ChapterViewAdapter? = null
+    private var chapter_title: TextView? = null
+    lateinit var lstChapter: MutableList<Chapter>
+    private var OG_name: String? = null
+    private var OG_Thumb: String? = null
     private var button_for_chapters: Button? = null
     private var button_for_favorites: Button? = null
     private var button_for_resume: Button? = null
@@ -42,6 +51,8 @@ class Manga_Activity : AppCompatActivity() {
     private var img: ImageView? = null
     private var Manga_URL: String? = null
     private var ShineManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
+    private var ChapterManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
+
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -74,17 +85,16 @@ class Manga_Activity : AppCompatActivity() {
 
         MangaActivity()
 
-        button_for_chapters = findViewById<View>(R.id.chapters_button) as Button
-        button_for_chapters!!.setOnClickListener {
-
-            val intent = Intent(this@Manga_Activity, Chapter_Activity::class.java)
-            intent.putExtra("mangaUrl",Manga_URL)
-            intent.putExtra("imgUrl",imgUrl)
-            intent.putExtra("description",description)
-            intent.putExtra("title",title)
-            intent.putExtra("source",Sources.toString())
-            startActivity(intent)
-        }
+//        button_for_chapters = findViewById<View>(R.id.chapters_button) as Button
+//        button_for_chapters!!.setOnClickListener {
+//            val intent = Intent(this@Manga_Activity, Chapter_Activity::class.java)
+//            intent.putExtra("mangaUrl",Manga_URL)
+//            intent.putExtra("imgUrl",imgUrl)
+//            intent.putExtra("description",description)
+//            intent.putExtra("title",title)
+//            intent.putExtra("source",Sources.toString())
+//            startActivity(intent)
+//        }
 
         val myDB_recent = RecentDB(this)
         var found = false
@@ -140,7 +150,36 @@ class Manga_Activity : AppCompatActivity() {
 
         }
 
+        val MangaYer = title?.let {
+            if (description != null) {
+                if (Manga_URL != null) {
+                    if (imgUrl != null) {
+                        ChapterManga = MangaModel(it,description, Manga_URL!!,imgUrl, Sources.MANGA_HERE)
+                    }
+                }
+            }
+        }
+
+
+        ChapterActivity()
+        lstChapter = ArrayList()
+        val mycrv = findViewById<View>(R.id.chapter_recycler) as RecyclerView
+        myChapterAdapter = ChapterViewAdapter(this, lstChapter)
+        mycrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mycrv.adapter = myChapterAdapter
+
+//        refreshLayout.setOnRefreshListener {
+//            progressDialog.show(this)
+//            lstChapter.clear()
+//            ChapterActivity()
+//            myChapterAdapter = ChapterViewAdapter(this, lstChapter)
+//            myrv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//            myrv.adapter = myAdapter
+//            refreshLayout.isRefreshing = false
+//        }
+
     }
+
 
     private fun updateFavorite() {
         myDB = FavoriteDB(this)
@@ -187,6 +226,30 @@ class Manga_Activity : AppCompatActivity() {
         }
     }
 
+    private fun ChapterActivity() {
+        GlobalScope.launch {
+            try {
+                val mangaActivity = ChapterManga.toInfoModel()
+
+                for (item in mangaActivity.chapters) {
+//                    val Page_Model = ChapterModel(item.url, item.url, "upload", Sources.MANGA_HERE)
+//                    val image_link = Page_Model.getFirstImage().pages[0]
+//                    println(image_link)
+                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, OG_Thumb,OG_name))
+                }
+
+                runOnUiThread {
+                    myChapterAdapter?.notifyDataSetChanged()
+                }
+//                progressDialog.dialog.dismiss()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+    }
+
     private fun setValues(
         description: String,
         author: String,
@@ -199,7 +262,7 @@ class Manga_Activity : AppCompatActivity() {
             manga_author!!.text = author
             manga_status!!.text = "Status: $status"
             manga_title!!.text = title
-            Picasso.get().load(img_URL).into(img)
+            img?.let { Glide.with(this).load(img_URL).dontTransform().into(it) }
 
         }
     }

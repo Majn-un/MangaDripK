@@ -15,6 +15,7 @@ import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.google.android.material.tabs.TabLayout
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import com.programmersbox.mangaworld.views.Utility
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -71,7 +72,7 @@ class FragRanked : Fragment() {
 
         val myrv = view.findViewById(R.id.all_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-        gridlayoutManager = GridLayoutManager(activity, 3)
+        gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
         myrv.layoutManager = gridlayoutManager
         myrv.adapter = myAdapter
         progressDialog.dialog.dismiss()
