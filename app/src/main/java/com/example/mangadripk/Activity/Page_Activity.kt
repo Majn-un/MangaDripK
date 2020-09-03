@@ -201,7 +201,7 @@ class Page_Activity : AppCompatActivity(),
             }
         }
 
-
+         println(OG_thumb + "this is the thing for images")
         if (OG_name!!.contains("\'")) {
             val name_without = OG_name!!.replace("\'", "")
             println(name_without)

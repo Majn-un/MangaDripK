@@ -65,10 +65,10 @@ class FavoriteDB(context: Context?) :
         return(NoOfRows)
 
     }
-    fun deleteData( name:String){
+    fun deleteData( link:String){
         val db = this.writableDatabase
         val query = ("DELETE FROM " + TABLE_NAME + " WHERE "
-                + KEY_NAME + "= '" + name+"'")
+                + KEY_THUMB + "= '" + link+"'")
         db.execSQL(query)
     }
 
