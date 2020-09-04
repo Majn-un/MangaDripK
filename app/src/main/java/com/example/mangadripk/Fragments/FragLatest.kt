@@ -74,6 +74,7 @@ class FragLatest : Fragment() {
         myrv.layoutManager = gridlayoutManager
         myrv.adapter = myAdapter
         refreshLayout.setOnRefreshListener(OnRefreshListener {
+            activity?.let { progressDialog.show(it) }
             mangaList = mutableListOf<MangaModel>()
             pageNumber = 1
             loadNewManga()
@@ -88,11 +89,11 @@ class FragLatest : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
+                    activity?.let { progressDialog.show(it) }
                     loadNewManga()
                 }
             }
         })
-        progressDialog.dialog.dismiss()
 
         return view
     }
@@ -110,7 +111,9 @@ class FragLatest : Fragment() {
                         mangaList.add(manga)
                     }
                 }
-                    activity!!.runOnUiThread {
+                progressDialog.dialog.dismiss()
+
+                activity!!.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
 

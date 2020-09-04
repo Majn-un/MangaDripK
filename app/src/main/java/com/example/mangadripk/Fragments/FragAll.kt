@@ -86,11 +86,11 @@ class FragAll : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
+                    activity?.let { progressDialog.show(it) }
                     loadNewManga()
                 }
             }
         })
-        progressDialog.dialog.dismiss()
 
 
 
@@ -169,6 +169,7 @@ class FragAll : Fragment() {
                 activity!!.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
+                progressDialog.dialog.dismiss()
 
             } catch (e: Exception) {
                 e.printStackTrace()
