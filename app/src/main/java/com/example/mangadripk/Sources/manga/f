@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="keywords"
+          content="manga,read manga,manga online,magna scans,manga volume,manga chapter,online manga,read free manga,read free manga online,manga Genre.">
+    <meta name="description"
+          content="Read your favorite mangas online! Hundreds of high-quality free manga for you, with a list being updated daily. Naruto manga, Bleach manga, One Piece manga, Air Gear manga, Claymore manga, Fairy Tail manga, Inuyasha manga, and many more…">
+    <meta name="og:title" content="Read Manga Online">
+    <meta name="og:site_name" content="Manga Here">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="http://www.mangahere.co/">
+    <meta name="og:image" content="http://www.mangahere.cc/media/images/logotn.png">
+    <meta name="og:description"
+          content="Read your favorite manga online! Hundreds of high-quality free manga for you, with a list being updated daily. Naruto manga, Bleach manga, One Piece manga, Air Gear manga, Claymore manga, Fairy Tail manga, Inuyasha manga, and many more…">
+    <meta name="fb:admins" content="100001376095179">
+    <meta property="fb:app_id" content="250769461611065">
+    <meta name="google-site-verification" content="nYL050P9BCH5N_tE2hN4RuZXvCCAYkAr5pEQbApF6UU">
+    <title>kenichi Search Results at MangaHere </title>
+    <link rel="stylesheet" type="text/css"
+          href="//static.mangahere.cc/v201906282/mangahere/css/reset.css">
+    <link rel="stylesheet" type="text/css"
+          href="//static.mangahere.cc/v201906282/mangahere/css/style.css">
+    <link rel="Shortcut Icon" href="https://www.mangahere.cc/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://www.mangahere.cc/apple-touch-icon.png">
+</head>
+<body class="bg-gary">
+<div class="top-bar">
+    <div class="container"><a href="/"> <img class="top-bar-logo"
+                                             src="//static.mangahere.cc/v201906282/mangahere/images/logo.png">
+    </a>
+        <div class="top-bar-list"><a class="active" href="/">Home</a> <a href="/latest/">Latest
+            Updates</a> <a href="/ranking/">Ranking</a> <a href="/directory/">Browse</a> <a
+                href="/spoilers/">Manga Spoilers &amp; News</a>
+        </div>
+        <div class="top-bar-avatar-con"><a
+                href="/login/?from=%2fsearch%3ftitle%3dkenichi%26genres%3d%26nogenres%3d%26sort%3d%26stype%3d1%26name%3d%26type%3d0%26author_method%3dcw%26author%3d%26artist_method%3dcw%26artist%3d%26rating_method%3deq%26rating%3d%26released_method%3deq%26released%3d%26st%3d0">
+            <img class="top-bar-avatar-img"
+                 src="//static.mangahere.cc/v201906282/mangahere/images/top-bar-avatar-img.png ">
+        </a>
+        </div>
+        <div class="top-bar-right-list">
+            <input class="person-main-right-sortBar-input" type="text" id="fastsearch2"
+                   value="kenichi" placeholder="Search Manga"> <a href="javascript:void(0);"
+                                                                  class="fastsearchbt2"
+                                                                  style="margin-left: -50px;padding-bottom: 5px;"></a>
+            <a class="top-bar-right-list-2" target="_blank" href="http://www.mangazoneapp.com/">Get
+                the App</a> <span class="top-bar-right-list-3-con"> <a class="top-bar-right-list-3"
+                                                                       href="/comichistory/">History</a> </span>
+        </div>
+    </div>
+</div>
+<form action="/search" id="searchform" name="searchform" method="get">
+    <input type="hidden" id="title" name="title" value="kenichi">
+    <input type="hidden" name="genres" id="genres">
+    <input type="hidden" name="nogenres" id="nogenres">
+    I/System.out: <input type="hidden" name="sort" id="sort">
+    <input type="hidden" name="stype" id="stype" value="1">
+    <div class="search-bar">
+        <div class="container"><a id="searchlt" name="searchlt"></a>
+            <p class="search-bar-title"> SEARCH NAME <select class="search-bar-select">
+                <option value="cw">contain</option>
+                <option value="bw">begin</option>
+                <option value="ew">end</option>
+            </select> <input type="text" name="name" id="name" value="" class="search-bar-input"> <a
+                    class="search-bar-right-btn researchbt" href="javascript:void(0);">SEARCH</a> <a
+                    class="search-bar-option-right" href="javascript:void(0);"
+                    onclick="$('.browse-bar-filter-list').slideToggle();">Option</a></p>
+        </div>
+    </div>
+    <div class="browse-bar-filter-list">
+        <div class="container">
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    TYPE
+                </div>
+                <div class="browse-bar-filter-list-line-content">
+                    <input id="type_1" class="radio typerd" value="1" type="radio" name="type">
+                    <label for="type_1">Japanese Manga</label>
+                    <input id="type_2" class="radio typerd" value="2" type="radio" name="type">
+                    <label for="type_2">Korean Manhwa</label>
+                    <input id="type_3" class="radio typerd" value="3" type="radio" name="type">
+                    <label for="type_3">Chinese Manhua</label>
+                    <input id="type_4" class="radio typerd" value="4" type="radio" name="type">
+                    <label for="type_4">European Manga</label>
+                    <input id="type_5" class="radio typerd" value="5" type="radio" name="type">
+                    <label for="type_5">American Manga</label>
+                    <input id="type_6" class="radio typerd" value="6" type="radio" name="type">
+                    <label for="type_6">HongKong Manga</label>
+                    <input id="type_7" class="radio typerd" value="7" type="radio" name="type">
+                    <label for="type_7">Other Manga</label>
+                    <input id="type_0" class="radio typerd" value="0" type="radio" name="type"
+                           checked> <label for="radio4">Any</label>
+                </div>
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    AUTHOR NAME
+                </div>
+                <div class="browse-bar-filter-list-line-content"><select id="author_method"
+                                                                         name="author_method">
+                    <option selected value="cw">contain</option>
+                    <option value="bw">begin</option>
+                    <option value="ew">end</option>
+                </select>
+                    <input type="text" name="author" id="author" value="">
+                </div>
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    ARTIST NAME
+                </div>
+                <div class="browse-bar-filter-list-line-content"><select name="artist_method"
+                                                                         id="artist_method">
+                    <option selected value="cw">contain</option>
+                    <option value="bw">begin</option>
+                    <option value="ew">end</option>
+                </select>
+                    <input type="text" name="artist" id="artist" value="">
+                </div>
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    GENRES
+                </div>
+                <div class="browse-bar-filter-list-line-content">
+                    <p class="browse-bar-filter-list-line-tip">Click to include genre, or double
+                        clicks to exclude genre</p>
+                    <div class="tag-box"><a data-val="1" href="javascript:void(0)" title="Action">Action</a>
+                        <a data-val="2" href="javascript:void(0)" title="Adventure">Adventure</a> <a
+                                data-val="3" href="javascript:void(0)" title="Comedy">Comedy</a> <a
+                                data-val="4" href="javascript:void(0)" title="Fantasy">Fantasy</a>
+                        <a data-val="5" href="javascript:void(0)" title="Historical">Historical</a>
+                        <a data-val="6" href="javascript:void(0)" title="Horror">Horror</a> <a
+                                data-val="7" href="javascript:void(0)" title="Martial Arts">Martial
+                            Arts</a> <a data-val="8" href="javascript:void(0)" title="Mystery">Mystery</a>
+                        <a data-val="9" href="javascript:void(0)" title="Romance">Romance</a> <a
+                                data-val="10" href="javascript:void(0)" title="Shounen Ai">Shounen
+                            Ai</a> <a data-val="11" href="javascript:void(0)" title="Supernatural">Supernatural</a>
+                        <a data-val="12" href="javascript:void(0)" title="Drama">Drama</a> <a
+                                data-val="13" href="javascript:void(0)" title="Shounen">Shounen</a>
+                        <a data-val="14" href="javascript:void(0)" title="School Life">School
+                            Life</a> <a data-val="15" href="javascript:void(0)" title="Shoujo">Shoujo</a>
+                        <a data-val="16" href="javascript:void(0)" title="Gender Bender">Gender
+                            Bender</a> <a data-val="17" href="javascript:void(0)" title="Josei">Josei</a>
+                        <a data-val="18" href="javascript:void(0)" title="Psychological">Psychological</a>
+                        <a data-val="19" href="javascript:void(0)" title="Seinen">Seinen</a> <a
+                                data-val="20" href="javascript:void(0)" title="Slice of Life">Slice
+                            of Life</a> <a data-val="21" href="javascript:void(0)" title="Sci-fi">Sci-fi</a>
+                        <a data-val="22" href="javascript:void(0)" title="Ecchi">Ecchi</a> <a
+                                data-val="23" href="javascript:void(0)" title="Harem">Harem</a> <a
+                                data-val="24" href="javascript:void(0)" title="Shoujo Ai">Shoujo
+                            Ai</a> <a data-val="25" href="javascript:void(0)" title="Yuri">Yuri</a>
+                        <a data-val="26" href="javascript:void(0)" title="Mature">Mature</a> <a
+                                data-val="27" href="javascript:void(0)" title="Tragedy">Tragedy</a>
+                        <a data-val="28" href="javascript:void(0)" title="Yaoi">Yaoi</a> <a
+                                data-val="29" href="javascript:void(0)"
+                                title="Doujinshi">Doujinshi</a> <a data-val="30"
+                                                                   href="javascript:void(0)"
+                                                                   title="Sports">Sports</a> <a
+                                data-val="31" href="javascript:void(0)" title="Adult">Adult</a> <a
+                                data-val="32" href="javascript:void(0)" title="One Shot">One
+                            Shot</a> <a data-val="33" href="javascript:void(0)"
+                                        title="Smut">Smut</a> <a data-val="34"
+                                                                 href="javascript:void(0)"
+                                                                 title="Mecha">Mecha</a> <a
+                                data-val="35" href="javascript:void(0)"
+                                title="Shotacon">Shotacon</a> <a data-val="36"
+                                                                 href="javascript:void(0)"
+                                                                 title="Lolicon">Lolicon</a> <a
+                                data-val="37" href="javascript:void(0)"
+                                title="Webtoons">Webtoons</a>
+                    </div>
+                </div>
+                I/System.out:
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    RATING
+                </div>
+                <div class="browse-bar-filter-list-line-content"><select id="rating_method"
+                                                                         name="rating_method">
+                    <option selected value="eq">is</option>
+                    <option value="lt">less than</option>
+                    <option value="gt">more than</option>
+                </select> <select id="rating" name="rating">
+                    <option selected value="">any star</option>
+                    <option value="0">no star</option>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
+                </select>
+                </div>
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    YEAR OF RELEASED
+                </div>
+                <div class="browse-bar-filter-list-line-content"><select id="released_method"
+                                                                         name="released_method">
+                    <option selected value="eq">on</option>
+                    <option value="lt">before</option>
+                    <option value="gt">after</option>
+                </select>
+                    <input type="text" name="released" id="released" value="">
+                </div>
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title">
+                    COMPLETED SERIES
+                </div>
+                <div class="browse-bar-filter-list-line-content">
+                    <input id="st_2" class="radio rdstatus" type="radio" name="st" value="2"> <label
+                        for="radio5">Yes</label>
+                    <input id="st_1" class="radio rdstatus" type="radio" name="st" value="1"> <label
+                        for="radio6">No</label>
+                    <input id="st_0" class="radio rdstatus" type="radio" name="st" value="0"
+                           checked> <label for="radio7">Either</label>
+                </div>
+            </div>
+            <div class="browse-bar-filter-list-line">
+                <div class="browse-bar-filter-list-line-title"></div>
+                <div class="browse-bar-filter-list-line-content"><a href="javascript:void(0);"
+                                                                    class="browse-bar-filter-block-btn-1 green">SEARCH</a>
+                    <a href="javascript:void(0);" class="browse-bar-filter-block-btn-2 resetbt">RESET</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="container">
+    I/System.out:
+    <div class="line-list">
+        <div class="manga-list-4 mt15">
+            <ul class="manga-list-4-list line">
+                <li><a href="/manga/historys_strongest_disciple_kenichi/"
+                       title="Historys Strongest Disciple Kenichi"><img class="manga-list-4-cover"
+                                                                        src="http://fmcdn.mangahere.com/store/manga/107/cover.jpg?token=47cd57059b36e4d05871ecac3cb93ef171b87421&amp;ttl=1599271200&amp;v=1558596943"
+                                                                        alt="Historys Strongest Disciple Kenichi"
+                                                                        onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a
+                            href="/manga/historys_strongest_disciple_kenichi/"
+                            title="Historys Strongest Disciple Kenichi">Historys Strongest Disciple
+                        Kenichi</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a
+                            href="/manga/historys_strongest_disciple_kenichi/"
+                            title="Historys Strongest Disciple Kenichi">Completed</a></p>
+                    <p class="manga-list-4-item-tip">Author:<a class="blue" title="MATSUENA Syun"
+                                                               href="/search/author/MATSUENA+Syun/"
+                                                               target="_blank">MATSUENA Syun</a></p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/historys_strongest_disciple_kenichi/v61/c583.5/1.html"
+                            title="Historys Strongest Disciple Kenichi Vol.61 Ch.583.5">Vol.61
+                        Ch.583.5</a></p>
+                    <p class="manga-list-4-item-tip">The story focuses on Kenichi Shirahama, an
+                        average 16-year-old high school student who has been picked on his ...</p>
+                </li>
+                <li><a href="/manga/history_s_strongest_disciple_kenichi/"
+                       title="History S Strongest Disciple Kenichi"><img class="manga-list-4-cover"
+                                                                         src="http://fmcdn.mangahere.com/store/manga/8551/cover.jpg?token=7e68664b6aca2bff200b1a6f128abb5dd0207f9c&amp;ttl=1599271200&amp;v=1293602298"
+                                                                         alt="History S Strongest Disciple Kenichi"
+                                                                         onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a
+                            href="/manga/history_s_strongest_disciple_kenichi/"
+                            title="History S Strongest Disciple Kenichi">History S Strongest
+                        Disciple Kenichi</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a
+                            href="/manga/history_s_strongest_disciple_kenichi/"
+                            title="History S Strongest Disciple Kenichi">Ongoing</a></p>
+                    <p class="manga-list-4-item-tip">Author:</p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/history_s_strongest_disciple_kenichi/c411/1.html"
+                            title="History S Strongest Disciple Kenichi Ch.411">Ch.411</a></p>
+                    <p class="manga-list-4-item-tip"></p></li>
+                <li><a href="/manga/shijou_saikyou_no_deshi_kenichi/"
+                       title="Shijou Saikyou no Deshi Kenichi"><img class="manga-list-4-cover"
+                                                                    src="http://fmcdn.mangahere.com/store/manga/29281/cover.jpg?token=6780c86a1f5750e8c63fdf9610b5354bc5dafb75&amp;ttl=1599271200&amp;v=1518398148"
+                                                                    alt="Shijou Saikyou no Deshi Kenichi"
+                                                                    onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a
+                            href="/manga/shijou_saikyou_no_deshi_kenichi/"
+                            title="Shijou Saikyou no Deshi Kenichi">Shijou Saikyou no Deshi
+                        Kenichi</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a
+                            href="/manga/shijou_saikyou_no_deshi_kenichi/"
+                            title="Shijou Saikyou no Deshi Kenichi">Ongoing</a></p>
+                    <p class="manga-list-4-item-tip">Author:</p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/shijou_saikyou_no_deshi_kenichi/c052/1.html"
+                            title="Shijou Saikyou no Deshi Kenichi Ch.052">Ch.052</a></p>
+                    <p class="manga-list-4-item-tip"></p></li>
+                <li><a href="/manga/desire_kotani_kenichi/" title="Desire (KOTANI Kenichi)"><img
+                        class="manga-list-4-cover"
+                        src="http://fmcdn.mangahere.com/store/manga/6062/cover.jpg?token=9f1309602552650a0bc487814d559332a0b1c9d9&amp;ttl=1599271200&amp;v=1338780213"
+                        alt="Desire (KOTANI Kenichi)"
+                        onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a href="/manga/desire_kotani_kenichi/"
+                                                          title="Desire (KOTANI Kenichi)">Desire
+                        (KOTANI Kenichi)</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a href="/manga/desire_kotani_kenichi/"
+                                                               title="Desire (KOTANI Kenichi)">Ongoing</a>
+                    </p>
+                    <p class="manga-list-4-item-tip">Author:<a class="blue" title="KOTANI Kenichi"
+                                                               href="/search/author/KOTANI+Kenichi/"
+                                                               target="_blank">KOTANI Kenichi</a>
+                    </p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/desire_kotani_kenichi/v05/c040/1.html"
+                            title="Desire (KOTANI Kenichi) Vol.05 Ch.040">Vol.05 Ch.040</a></p>
+                    <p class="manga-list-4-item-tip">Takashi Fujii is an elite salaryman who had
+                        graduated from a high class university. One day he meets a mysteri...</p>
+                </li>
+                <li><a href="/manga/himawari_kenichi_legend/" title="Himawari - Kenichi Legend"><img
+                        class="manga-list-4-cover"
+                        src="http://fmcdn.mangahere.com/store/manga/23431/cover.jpg?token=c6942c4e76968449c9b3f64c28cf47823a189dd6&amp;ttl=1599271200&amp;v=1470303421"
+                        alt="Himawari - Kenichi Legend"
+                        onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a href="/manga/himawari_kenichi_legend/"
+                                                          title="Himawari - Kenichi Legend">Himawari
+                        - Kenichi Legend</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a
+                            href="/manga/himawari_kenichi_legend/"
+                            title="Himawari - Kenichi Legend">Ongoing</a></p>
+                    <p class="manga-list-4-item-tip">Author:<a class="blue"
+                                                               title="HIGASHIMURA Akiko"
+                                                               href="/search/author/HIGASHIMURA+Akiko/"
+                                                               target="_blank">HIGASHIMURA Akiko</a>
+                    </p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/himawari_kenichi_legend/c001/1.html"
+                            title="Himawari - Kenichi Legend Ch.001">Ch.001</a></p>
+                    <p class="manga-list-4-item-tip">Himawari ~ Kenichi Legend is a gag manga based
+                        on the manga author’s real life story. Himawari is about an...</p></li>
+                <li><a href="/manga/historys_strongest_disciple_kenichi_2/"
+                       title="Historys Strongest Disciple Kenichi 2"><img class="manga-list-4-cover"
+                                                                          src="http://fmcdn.mangahere.com/store/manga/8433/cover.jpg?token=4822b5479094eb2b6bc4c3236da22dc1f5992c72&amp;ttl=1599271200&amp;v=1558678784"
+                                                                          alt="Historys Strongest Disciple Kenichi 2"
+                                                                          onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a
+                            href="/manga/historys_strongest_disciple_kenichi_2/"
+                            title="Historys Strongest Disciple Kenichi 2">Historys Strongest
+                        Disciple Kenichi 2</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a
+                            href="/manga/historys_strongest_disciple_kenichi_2/"
+                            title="Historys Strongest Disciple Kenichi 2">Ongoing</a></p>
+                    <p class="manga-list-4-item-tip">Author:</p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/historys_strongest_disciple_kenichi_2/c405/1.html"
+                            title="Historys Strongest Disciple Kenichi 2 Ch.405">Ch.405</a></p>
+                    <p class="manga-list-4-item-tip"></p></li>
+                <li><a href="/manga/shijou_saikyou_no_gaiden/" title="Shijou Saikyou no Gaiden"><img
+                        class="manga-list-4-cover"
+                        src="http://fmcdn.mangahere.com/store/manga/4976/cover.jpg?token=6e75738c325ee8d8193ca89c011404e7924e80c9&amp;ttl=1599271200&amp;v=1293681009"
+                        alt="Shijou Saikyou no Gaiden"
+                        onerror="this.src = '//static.mangahere.cc/v201906282/mangahere/images/nopicture.jpg'">
+                </a>
+                    <p class="manga-list-4-item-title"><a href="/manga/shijou_saikyou_no_gaiden/"
+                                                          title="Shijou Saikyou no Gaiden">Shijou
+                        Saikyou no Gaiden</a></p>
+                    <p class="manga-list-4-show-tag-list-2"><a
+                            href="/manga/shijou_saikyou_no_gaiden/"
+                            title="Shijou Saikyou no Gaiden">Ongoing</a></p>
+                    <p class="manga-list-4-item-tip">Author:<a class="blue" title="MATSUENA Syun"
+                                                               href="/search/author/MATSUENA+Syun/"
+                                                               target="_blank">MATSUENA Syun</a></p>
+                    <p class="manga-list-4-item-tip">Latest Chapter:<a
+                            href="/manga/shijou_saikyou_no_gaiden/v01/c001/1.html"
+                            title="Shijou Saikyou no Gaiden Vol.01 Ch.001">Vol.01 Ch.001</a></p>
+                    <p class="manga-list-4-item-tip">The Gaiden of History’s Strongest Disciple
+                        Kenichi</p></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer-bar">
+    <p class="footer-bar-line-1"><a href="https://z6.com/" title="Z6 Shop" target="_blank">Z6
+        Shop</a> <a
+            href="http://mangazoneapp.com/?utm_source=mh&amp;utm_medium=referrer&amp;utm_campaign=af"
+            title="Manga App " target="_blank">Manga App</a> <a href="http://www.mangatown.com/"
+                                                                title="Free Manga" target="_blank">Free
+        Manga</a> <a href="http://www.mangahome.com/shoujo" title="Shojo Manga" target="_blank">Shojo
+        Manga</a> <a href="https://z6.com/" title="Anime Products" target="_blank">Anime
+        Products</a></p>
+    <p class="footer-bar-line-2">Copyrights and trademarks for the manga, and other promotional
+        materials are held by their respective owners and their use is allowed under the fair use
+        clause of the Copyright Law. © 2018 MangaHere. Current Time is GMT 02:44 AM. <br>Our Email:
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+           data-cfemail="14677166627d77715479757a73757c7166713a7777">[email&nbsp;protected]</a></p>
+    <p class="footer-bar-line-3"><a href="/privacypolicy/">Privacy Policy</a> <a href="/disclamer/">Legal
+        Disclaimer</a> <a href="/teams/">Terms of Service</a> <a href="/feedback/">Contact Us</a> <a
+            href="http://m.mangahere.cc">Mobile Version</a> <a href="/faq/">FAQ</a> <a
+            href="javascript:void(0)"
+            onclick="$('html,body').stop().animate({ scrollTop: 0 }, 500);">Top</a></p>
+</div>
+<div class="side-code">
+    <img class="side-code-img"
+         src="//static.mangahere.cc/v201906282/mangahere/images/1530780123.png">
+</div>
+<a href="javascript:void(0);" onclick="$('html,body').stop().animate({ scrollTop:0},500);"><img
+        class="side-top" src="//static.mangahere.cc/v201906282/mangahere/images/top.png"></a>
+<script data-cfasync="false"
+        src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script type="text/javascript"
+        src="//static.mangahere.cc/v201906282/mangahere/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="//static.mangahere.cc/v201906282/mangahere/js/comm.js"></script>
+I/System.out:
+<script type="text/javascript"
+        src="//static.mangahere.cc/v201906282/mangahere/js/search.js"></script>
+<script type="text/javascript">        var currentroot = "/search";    </script>
+<div style="display:none">
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-122690295-8']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <script type="text/javascript">
+     (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src =('https:' == document.location.protocol ? 'https://' : 'http://') + "w.cnzz.com/c.php?id=1278094032";
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+    </script>
+    <script type="text/javascript">
+    window.fbAsyncInit = function() {
+    	FB.init({
+    		appId      : '250769461611065',
+    		xfbml      : true,
+    		version    : 'v2.10'
+    	});
+    	FB.AppEvents.logPageView();
+    };
+    (function(d, s, id){
+    	var js, fjs = d.getElementsByTagName(s)[0];
+    	if (d.getElementById(id)) {return;}
+    	js = d.createElement(s); js.id = id;
+    	js.src = "https://connect.facebook.net/en_US/sdk.js";
+    	fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+    <script type="text/javascript">
+            (function () {
+I/System.out:             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src =('https:' == document.location.protocol ? 'https://' : 'http://') + "w.cnzz.com/c.php?id=1278094041";
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+    </script>
+</div>
+</body>
+</html>
+W/System: A resource failed to call release.
+I/chatty: uid=10151(com.example.mangadripk) FinalizerDaemon identical 2 lines
+W/System: A resource failed to call release.
