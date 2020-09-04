@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit
 
 
 class FragAll : Fragment() {
+    private var response: List<MangaModel>? = null
     private var myAdapter: RecyclerViewAdapter? = null
     private val mangaList = mutableListOf<MangaModel>()
     private val searchList = mutableListOf<MangaModel>()
@@ -106,50 +107,40 @@ class FragAll : Fragment() {
         searchView.queryHint = "Search..."
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
         searchView.setIconifiedByDefault(false)
+
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(s: String): Boolean {
-//                    val list = Sources.MANGA_HERE.search(s)
 
+                override fun onQueryTextSubmit(s: String): Boolean {
+                    val list = SearchMangaHere(s + " ")
+                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
+                    if (list != null) {
+                        for (manga in list) {
+                            newList.add(manga)
+                        }
+                    }
+                    myAdapter?.setFilter(newList)
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-//                    Thread.sleep(500)
-                    val list = Sources.MANGA_HERE.searchManga(newText, 1, mangaList)
-                    val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
-                    for (manga in list) {
-                        newList.add(manga)
-                    }
-                    myAdapter?.setFilter(newList)
-                    if (newList.isEmpty()) {
-//                        activity?.let { progressDialog.show(it) }
-                        SearchMangaHere(newText)
-                        myAdapter?.setFilter(newList)
 
-                    }
+                    val list = SearchMangaHere(newText)
+
                     return false
                 }
             }
         searchView.setOnQueryTextListener(queryTextListener)
     }
 
-    private fun SearchMangaHere(search_item: String) {
-        val closeActivity = Thread {
-            try {
-                Thread.sleep(3000)
-                // Do some stuff
-            } catch (e: java.lang.Exception) {
-                e.localizedMessage
-            }
-        }
+    private fun SearchMangaHere(search_item: String): List<MangaModel>? {
         GlobalScope.launch {
             try {
                 delay(500)
                 val desiredManga = search_item.replace(" ", "+")
                 val url =
                     "https://www.mangahere.cc/search?title=$desiredManga&genres=&nogenres=&sort=&stype=1&name=&type=0&author_method=cw&author=&artist_method=cw&artist=&rating_method=eq&rating=&released_method=eq&released=&st=0"
-                val response = Jsoup.connect(url).get().select(".manga-list-4-list > li")
+                response = Jsoup.connect(url).get().select(".manga-list-4-list > li")
                     .map {
                         MangaModel(
                             title = it.select("a").first().attr("title"),
@@ -162,16 +153,12 @@ class FragAll : Fragment() {
                             source = Sources.MANGA_HERE
                         )
                     }
-
-                for (item in response) {
-                    mangaList.add(item)
-                }
-
-
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+        return response
+
     }
 
     private fun loadNewManga() {
@@ -179,8 +166,6 @@ class FragAll : Fragment() {
             try {
                 val list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
                 mangaList.addAll(list)
-                println(pageNumber)
-                println(mangaList.size)
                 activity!!.runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
