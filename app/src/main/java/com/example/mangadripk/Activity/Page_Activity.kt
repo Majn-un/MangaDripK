@@ -42,14 +42,11 @@ class Page_Activity : AppCompatActivity(),
     private lateinit var myrv: ViewPager
     private var chapter: TextView? = null
     private var title: TextView? = null
-
     private var Page_Model: ChapterModel = ChapterModel("", "", "", Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var myReadDB: ReadDb? = null
-
     var OG_name : String? = ""
     var name : String? = ""
-
     var recent : Recent = Recent("", "", "", "", "")
     private val progressDialog = CustomProgressDialog()
     var Chapter_List: String? = ""
@@ -265,7 +262,6 @@ class Page_Activity : AppCompatActivity(),
                 for (i in mangaActivity.pages.indices) {
                     val page = Page(mangaActivity.pages[i], (i + 1).toString())
                     lstPages.add(page)
-
                 }
 
                 runOnUiThread {

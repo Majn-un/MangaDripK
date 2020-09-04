@@ -133,6 +133,8 @@ class FragAll : Fragment() {
         searchView.setOnQueryTextListener(queryTextListener)
     }
 
+
+
     private fun SearchMangaHere(search_item: String): List<MangaModel>? {
         GlobalScope.launch {
             try {
