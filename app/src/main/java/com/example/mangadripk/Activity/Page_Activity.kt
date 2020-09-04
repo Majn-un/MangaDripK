@@ -1,6 +1,7 @@
 package com.example.mangadripk.Activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +43,6 @@ class Page_Activity : AppCompatActivity(),
     private lateinit var myrv: ViewPager
     private var chapter: TextView? = null
     private var title: TextView? = null
-
     private var Page_Model: ChapterModel = ChapterModel("", "", "", Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var myReadDB: ReadDb? = null
@@ -60,6 +60,7 @@ class Page_Activity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewer)
         progressDialog.show(this)
+
 
 
 
@@ -81,6 +82,19 @@ class Page_Activity : AppCompatActivity(),
         setContentView(R.layout.activity_viewer)
         val next = findViewById<View>(R.id.next) as Button
         val back = findViewById<View>(R.id.back) as Button
+        val toChapters = findViewById<View>(R.id.to_chapters) as Button
+        toChapters.setOnClickListener(View.OnClickListener {
+            println("CLicked")
+//            val intent = Intent(this, Manga_Activity::class.java)
+//            val url = intent.getStringExtra("url")
+//            OG_name = intent.getStringExtra("OGT")
+//            val uploadedTime = intent.getStringExtra("uploadtime")
+//            val OG_thumb = intent.getStringExtra("OGN")
+//            name = intent.getStringExtra("name")
+//            val upload = intent.getStringExtra("upload")
+//            Chapter_List = intent.extras!!.getString("Chapter_List")
+            startActivity(intent)
+        })
         title = findViewById<View>(R.id.manga_name) as TextView
         chapter = findViewById<View>(R.id.chapter_name) as TextView
         title!!.text = OG_name

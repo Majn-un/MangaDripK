@@ -2,14 +2,17 @@ package com.example.mangadripk.Fragments
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
+import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.R
@@ -33,6 +36,7 @@ class FragAll : Fragment() {
     lateinit var gridlayoutManager : GridLayoutManager
 
 
+
     var myFragment: View? = null
 
     var viewPager: ViewPager? = null
@@ -53,6 +57,8 @@ class FragAll : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+
 
 
 
@@ -88,6 +94,8 @@ class FragAll : Fragment() {
                 }
             }
         })
+
+
         progressDialog.dialog.dismiss()
 
 
