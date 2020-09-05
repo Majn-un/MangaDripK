@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.google.android.material.tabs.TabLayout
@@ -23,21 +24,18 @@ import org.jsoup.Jsoup
 
 
 class FragAll : Fragment() {
-    private var response: List<MangaModel>? = null
     private var myAdapter: RecyclerViewAdapter? = null
     private val mangaList = mutableListOf<MangaModel>()
+    private val response = mutableListOf<MangaModel>()
+    private var res = mutableListOf<MangaModel>()
     private val searchList = mutableListOf<MangaModel>()
     private val test = mutableListOf<MangaModel>()
     private val progressDialog = CustomProgressDialog()
     private var pageNumber = 1
     private var searchNumber = 1
-
     private val baseUrl = "https://www.mangahere.cc"
     lateinit var gridlayoutManager: GridLayoutManager
-
-
     var myFragment: View? = null
-
     var viewPager: ViewPager? = null
     var tabLayout: TabLayout? = null
 
@@ -110,7 +108,6 @@ class FragAll : Fragment() {
 
                 override fun onQueryTextSubmit(s: String): Boolean {
                     Thread.sleep(500)
-
                     val list = SearchMangaHere(s + " ")
                     val newList: ArrayList<MangaModel> = ArrayList<MangaModel>()
                     if (list != null) {
@@ -118,13 +115,14 @@ class FragAll : Fragment() {
                             newList.add(manga)
                         }
                     }
+                    response.clear()
                     myAdapter?.setFilter(newList)
 
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-                    val list = SearchMangaHere(newText)
+//                    val list = SearchMangaHere(newText)
                     return false
                 }
             }
@@ -144,12 +142,17 @@ class FragAll : Fragment() {
 
 
     private fun SearchMangaHere(search_item: String): List<MangaModel>? {
+
         GlobalScope.launch {
             try {
+                var i = 1
+                var check = true
+                while (check == true) {
                     val desiredManga = search_item.replace(" ", "+")
                     val url =
-                        "https://www.mangahere.cc/search?title=$desiredManga&genres=&nogenres=&sort=&stype=1&name=&type=0&author_method=cw&author=&artist_method=cw&artist=&rating_method=eq&rating=&released_method=eq&released=&st=0"
-                    response = Jsoup.connect(url).get().select(".manga-list-4-list > li")
+                        "https://www.mangahere.cc/search?page=$i&title=$desiredManga&genres=&nogenres=&sort=&stype=1&name=&type=0&author_method=cw&author=&artist_method=cw&artist=&rating_method=eq&rating=&released_method=eq&released=&st=0"
+                    println(url)
+                    val res = Jsoup.connect(url).get().select(".manga-list-4-list > li")
                         .map {
                             MangaModel(
                                 title = it.select("a").first().attr("title"),
@@ -163,6 +166,18 @@ class FragAll : Fragment() {
                                 source = Sources.MANGA_HERE
                             )
                         }
+
+
+                    for (item in res) {
+                        println(item)
+                        response.add(item)
+                    }
+                    if (res.isEmpty()) {
+                        check = false
+                        break
+                    }
+                    i++
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
