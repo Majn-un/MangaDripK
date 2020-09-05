@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.Classes.Page
 import com.example.mangadripk.R
@@ -50,7 +52,7 @@ class PageViewAdapter(
         val image_layout: View = inflater.inflate(R.layout.view_pager_item, container, false)
         val page_image: PhotoView = image_layout.findViewById<View>(R.id.page_image) as PhotoView
 
-        Glide.with(image_layout).load(PageList[position].link).into(page_image)
+        Glide.with(image_layout).load(PageList[position].link).placeholder(R.drawable.manga_drip_splash_theme).error(R.drawable.manga_drip_splash_theme).diskCacheStrategy(DiskCacheStrategy.ALL).priority(Priority.HIGH).into(page_image)
 
 
         page_image.setOnClickListener(View.OnClickListener {
