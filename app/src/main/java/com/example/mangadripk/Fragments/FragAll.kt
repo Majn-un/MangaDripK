@@ -2,13 +2,16 @@ package com.example.mangadripk.Fragments
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Classes.Manga
@@ -35,6 +38,7 @@ class FragAll : Fragment() {
     private var searchNumber = 1
     private val baseUrl = "https://www.mangahere.cc"
     lateinit var gridlayoutManager: GridLayoutManager
+
     var myFragment: View? = null
     var viewPager: ViewPager? = null
     var tabLayout: TabLayout? = null
@@ -54,7 +58,6 @@ class FragAll : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
 
         setHasOptionsMenu(true)
         val view: View = inflater.inflate(R.layout.fragment_all, container, false)
@@ -86,9 +89,6 @@ class FragAll : Fragment() {
                 }
             }
         })
-
-
-
         return view
     }
 

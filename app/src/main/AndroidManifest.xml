@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activity.MainActivity" android:theme="@style/NoAction_AppTheme"
             android:windowSoftInputMode="adjustPan">
         <intent-filter>
@@ -30,9 +31,11 @@
         </activity>
 
         <activity android:name=".Activity.Manga_Activity"  android:theme="@style/NoAction_AppTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:parentActivityName=".Activity.MainActivity">
         </activity>
 
+    
         <activity
             android:name=".Activity.Page_Activity"
             android:hardwareAccelerated="false"
