@@ -99,6 +99,7 @@ class FragAll : Fragment() {
         val searchViewItem = menu.findItem(R.id.action_search)
         val searchManager = activity!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = searchViewItem.actionView as SearchView
+
         searchView.queryHint = "Search..."
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
         searchView.setIconifiedByDefault(false)
