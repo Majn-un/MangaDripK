@@ -109,6 +109,9 @@ class RecyclerViewAdapter (
 
     fun setFilter(newList: ArrayList<MangaModel>) {
         Data = ArrayList()
+//        for (item in newList) {
+//            println(item)
+//        }
         (Data as ArrayList<MangaModel>).addAll(newList)
         notifyDataSetChanged()
     }
