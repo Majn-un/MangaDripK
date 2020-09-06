@@ -42,7 +42,7 @@ class Library : Fragment() {
             (activity as AppCompatActivity).setSupportActionBar(mtoolbar)
         }
 
-        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar) as Toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         viewPager = view.findViewById(R.id.pager);
         tabLayout = view.findViewById(R.id.tablayout);
@@ -50,6 +50,7 @@ class Library : Fragment() {
 
         return view
     }
+
 
     override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
