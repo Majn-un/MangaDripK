@@ -27,14 +27,27 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
+            <Button
+                android:id="@+id/backbutton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="start"
+                android:background="@drawable/ic_baseline_arrow_back_24"
+                />
+
+
 
             <ImageView
                 android:id="@+id/manga_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:layout_marginTop="-50dp"
                 android:adjustViewBounds="true"
                 android:foreground="@drawable/my_custom_drawable"
                 android:scaleType="centerCrop" />
+
+
+
 
             <TextView
                 android:id="@+id/depth_title"

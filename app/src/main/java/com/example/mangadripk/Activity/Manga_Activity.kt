@@ -23,6 +23,7 @@ import com.example.mangadripk.Classes.Recent
 import com.example.mangadripk.Database.FavoriteDB
 import com.example.mangadripk.Database.ReadDb
 import com.example.mangadripk.Database.RecentDB
+import com.example.mangadripk.Fragments.FragAll
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.ChapterModel
@@ -46,6 +47,7 @@ class Manga_Activity : AppCompatActivity() {
     private val progressDialog = CustomProgressDialog()
     var myDB: FavoriteDB? = null
     var myREAD: ReadDb? = null
+    private var backbutton: Button? = null
 
     private var manga_title: TextView? = null
     private var manga_description: TextView? = null
@@ -124,6 +126,11 @@ class Manga_Activity : AppCompatActivity() {
                 Toast.makeText(this, "You haven't started it bruv", Toast.LENGTH_SHORT).show()
             }
         }
+        backbutton = findViewById<View>(R.id.backbutton) as Button
+        backbutton!!.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        })
 
         button_for_favorites = findViewById<View>(R.id.favorite_button) as Button
         myDB = FavoriteDB(this)
