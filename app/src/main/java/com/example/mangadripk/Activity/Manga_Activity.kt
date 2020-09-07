@@ -1,6 +1,7 @@
 package com.example.mangadripk.Activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -31,6 +32,7 @@ import kotlinx.android.synthetic.main.activity_manga.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.ArrayList
+import androidx.navigation.NavController
 
 
 class Manga_Activity : AppCompatActivity() {
@@ -57,7 +59,6 @@ class Manga_Activity : AppCompatActivity() {
     private var Manga_URL: String? = null
     private var ShineManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
     private var ChapterManga: MangaModel = MangaModel("","","","",Sources.MANGA_HERE)
-
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -127,8 +128,13 @@ class Manga_Activity : AppCompatActivity() {
         }
         backbutton = findViewById<View>(R.id.backbutton) as Button
         backbutton!!.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+            if (!NavController(this).popBackStack()) {
+                // Call finish() on your Activity
+                finish()
+            }
+
         })
 
         button_for_favorites = findViewById<View>(R.id.favorite_button) as Button
