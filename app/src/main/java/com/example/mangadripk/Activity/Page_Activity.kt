@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -82,16 +83,11 @@ class Page_Activity : AppCompatActivity(),
         val back = findViewById<View>(R.id.back) as Button
         val toChapters = findViewById<View>(R.id.to_chapters) as Button
         toChapters.setOnClickListener(View.OnClickListener {
-            println("CLicked")
-//            val intent = Intent(this, Manga_Activity::class.java)
-//            val url = intent.getStringExtra("url")
-//            OG_name = intent.getStringExtra("OGT")
-//            val uploadedTime = intent.getStringExtra("uploadtime")
-//            val OG_thumb = intent.getStringExtra("OGN")
-//            name = intent.getStringExtra("name")
-//            val upload = intent.getStringExtra("upload")
-//            Chapter_List = intent.extras!!.getString("Chapter_List")
-            startActivity(intent)
+            if (!NavController(this).popBackStack()) {
+                // Call finish() on your Activity
+                finish()
+            }
+
         })
         title = findViewById<View>(R.id.manga_name) as TextView
         chapter = findViewById<View>(R.id.chapter_name) as TextView
