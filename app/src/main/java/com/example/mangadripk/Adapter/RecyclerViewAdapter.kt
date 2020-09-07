@@ -2,6 +2,7 @@ package com.example.mangadripk.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.R
 import com.programmersbox.manga_sources.mangasources.MangaModel
@@ -40,13 +45,34 @@ class RecyclerViewAdapter (
         position: Int
     ) {
         holder.manga_title.text = Data[position].title
-        Glide.with(context)
-            .load(Data[position].imageUrl)
-            .placeholder(R.drawable.manga_drip_splash_theme)
-            .error(R.drawable.manga_drip_splash_theme)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .priority(Priority.HIGH)
-            .into(holder.manga_img)
+            Glide.with(context)
+                .load(Data[position].imageUrl).listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        println("No cover detected for `" + Data[position].title+"`")
+                        return true
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+
+                })
+                .placeholder(R.drawable.manga_drip_splash_theme)
+                .error(R.drawable.manga_drip_splash_theme)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
+                .into(holder.manga_img)
 
         holder.cardView.setOnClickListener(View.OnClickListener {
             val model = Data[position]
@@ -83,6 +109,9 @@ class RecyclerViewAdapter (
 
     fun setFilter(newList: ArrayList<MangaModel>) {
         Data = ArrayList()
+//        for (item in newList) {
+//            println(item)
+//        }
         (Data as ArrayList<MangaModel>).addAll(newList)
         notifyDataSetChanged()
     }
