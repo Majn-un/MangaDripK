@@ -21,11 +21,11 @@
         android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/presenter"
+            android:id="@+id/presenterHorizontal"
             layout="@layout/presenter">
         </include>
         <include
-            android:id="@+id/presenter1"
+            android:id="@+id/presenter1Horizontal"
             layout="@layout/presenter1">
         </include>
 

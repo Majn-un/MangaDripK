@@ -28,11 +28,11 @@
 
 
         <include
-            android:id="@+id/presenter"
+            android:id="@+id/presenterVertical"
             layout="@layout/presenter">
         </include>
         <include
-            android:id="@+id/presenter1"
+            android:id="@+id/presenter1Vertical"
             layout="@layout/presenter1">
         </include>
 

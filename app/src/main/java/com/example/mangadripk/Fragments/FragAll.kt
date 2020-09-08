@@ -97,7 +97,7 @@ class FragAll : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        activity!!.menuInflater.inflate(R.menu.menu, menu)
+        requireActivity().menuInflater.inflate(R.menu.menu, menu)
 
 //
 //        activity!!.menuInflater.inflate(R.menu.search_menu, menu)
@@ -166,7 +166,7 @@ class FragAll : Fragment() {
             try {
                 val list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
                 mangaList.addAll(list)
-                activity!!.runOnUiThread {
+                requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
 
