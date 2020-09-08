@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +29,18 @@ import com.example.mangadripk.Interface.PageImageCallback
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.ChapterModel
+import kotlinx.android.synthetic.main.activity_viewer.presenterVertical
+import kotlinx.android.synthetic.main.activity_viewer.presenter1Vertical
+import kotlinx.android.synthetic.main.activity_webtoon.presenterHorizontal
+import kotlinx.android.synthetic.main.activity_webtoon.presenter1Horizontal
+
+
 import kotlinx.android.synthetic.main.activity_viewer.*
+import kotlinx.android.synthetic.main.activity_webtoon.*
+//import kotlinx.android.synthetic.main.presenter
+//import kotlinx.android.synthetic.main.presenter1
+
+
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -43,7 +55,13 @@ class Page_Activity : AppCompatActivity(),
     private var reading_direction: Float? = 180F
     private lateinit var myrv: ViewPager
     private var chapter: TextView? = null
+//    private var presenter1Horizontal: Toolbar? = null
+//    private var presenterHorizontal: Toolbar? = null
+//    private var presenterVertical: Toolbar? = null
+//    private var presenter1Vertical: Toolbar? = null
+
     private var title: TextView? = null
+    private var view: Int = 1
     private var Page_Model: ChapterModel = ChapterModel("", "", "", Sources.MANGA_HERE)
     var myDB: RecentDB? = null
     var myReadDB: ReadDb? = null
@@ -65,8 +83,6 @@ class Page_Activity : AppCompatActivity(),
 
         lstPages = ArrayList()
 
-
-
         getPrevData()
         updateDB()
         updateRead()
@@ -84,7 +100,6 @@ class Page_Activity : AppCompatActivity(),
         val toChapters = findViewById<View>(R.id.to_chapters) as Button
         toChapters.setOnClickListener(View.OnClickListener {
             if (!NavController(this).popBackStack()) {
-                // Call finish() on your Activity
                 finish()
             }
 
@@ -97,13 +112,14 @@ class Page_Activity : AppCompatActivity(),
         val myrv = findViewById<View>(R.id.right_page) as ViewPager
         myViewPager = PageViewAdapter(this, lstPages)
         myrv.rotationY = reading_direction!!
-        myViewPager!!.setPageImageCallback(this)
 
         myrv.setPageTransformer(false,
             ViewPager.PageTransformer { page, position ->
                 page.rotationY =
                     reading_direction as Float
             })
+        myViewPager!!.setPageImageCallback(this)
+
         myrv.adapter = myViewPager
 
         next.setOnClickListener(View.OnClickListener {
@@ -116,7 +132,6 @@ class Page_Activity : AppCompatActivity(),
                     "",
                     Sources.MANGA_HERE
                 )
-                //                    Log.d("Chapter Link Previous",Chapter_URL );
                 index -= 1
                 lstPages = ArrayList()
                 mangaPages()
@@ -148,10 +163,6 @@ class Page_Activity : AppCompatActivity(),
 
             }
         })
-
-
-
-
     }
 
     private fun WebToonView() {
@@ -215,7 +226,6 @@ class Page_Activity : AppCompatActivity(),
 
         if (OG_name!!.contains("\'")) {
             val name_without = OG_name!!.replace("\'", "")
-            println(name_without)
             recent = Recent(name_without, name, OG_thumb, Page_Model.url, Chapter_List)
         } else {
             recent = Recent(OG_name, name, OG_thumb, Page_Model.url, Chapter_List)
@@ -272,6 +282,7 @@ class Page_Activity : AppCompatActivity(),
 
                 for (i in mangaActivity.pages.indices) {
                     val page = Page(mangaActivity.pages[i], (i + 1).toString())
+                    println(page.link)
                     lstPages.add(page)
                 }
 
@@ -292,23 +303,43 @@ class Page_Activity : AppCompatActivity(),
         exampleDialog.show(supportFragmentManager, "example dialog")
     }
     override fun onClick() {
-        if (presenter.visibility == View.INVISIBLE) {
-            println("clicked")
-            presenter.visibility = View.VISIBLE
-            presenter1.visibility = View.VISIBLE
-        } else {
-            presenter.visibility = View.INVISIBLE
-            presenter1.visibility = View.INVISIBLE
+        val presenterHorizontal11 = findViewById<Toolbar>(R.id.presenterHorizontal)
+        val presenter11Horizontal = findViewById<Toolbar>(R.id.presenter1Horizontal)
+        val presenterVertical22 = findViewById<Toolbar>(R.id.presenterVertical)
+        val presenter11Vertical = findViewById<Toolbar>(R.id.presenter1Vertical)
+
+        if (view == 1) {
+            if (presenterVertical22.visibility == View.INVISIBLE) {
+                presenterVertical22.visibility = View.VISIBLE
+                presenter11Vertical.visibility = View.VISIBLE
+            } else {
+                presenterVertical22.visibility = View.INVISIBLE
+                presenter11Vertical.visibility = View.INVISIBLE
+            }
         }
+
+        if (view == 2) {
+            if (presenterHorizontal11.visibility == View.INVISIBLE) {
+                println("webtoon visible")
+                presenterHorizontal11.visibility = View.VISIBLE
+                presenter11Horizontal.visibility = View.VISIBLE
+            } else {
+                presenterHorizontal11.visibility = View.INVISIBLE
+                presenter11Horizontal.visibility = View.INVISIBLE
+            }
+        }
+
     }
 
     override fun onMenuItemClick(p0: MenuItem?): Boolean {
         return when (p0?.itemId) {
             R.id.item1 -> {
+                view = 1
                 MangaView()
                 true
             }
             R.id.item2 -> {
+                view = 2
                 WebToonView()
                 true
             }
@@ -316,15 +347,16 @@ class Page_Activity : AppCompatActivity(),
                 true
             }
             R.id.left -> {
+                view = 1
                 reading_direction = 0F
                 MangaView()
 
                 true
             }
             R.id.right -> {
+                view = 1
                 reading_direction = 180F
                 MangaView()
-
                 true
             }
 

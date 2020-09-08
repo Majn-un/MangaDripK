@@ -42,7 +42,6 @@ class WebtoonViewAdapter(
 
         Glide.with(context).load(Data[position].link).dontTransform().into(holder.chapter_title)
 
-
         holder.chapter_title.setOnClickListener(View.OnClickListener {
             pageImageCallback.onClick()
         })

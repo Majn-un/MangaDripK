@@ -109,7 +109,7 @@ class SearchActivity : AppCompatActivity() {
                         }
 
                     filterGayShit(res)
-                    i++
+                i++
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
