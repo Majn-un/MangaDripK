@@ -309,27 +309,21 @@ class Page_Activity : AppCompatActivity(),
         val presenter11Vertical = findViewById<Toolbar>(R.id.presenter1Vertical)
 
         if (view == 1) {
-            println("In manga view")
             if (presenterVertical22.visibility == View.INVISIBLE) {
-                println("manga visible")
                 presenterVertical22.visibility = View.VISIBLE
                 presenter11Vertical.visibility = View.VISIBLE
             } else {
-                println("manga invisible")
                 presenterVertical22.visibility = View.INVISIBLE
                 presenter11Vertical.visibility = View.INVISIBLE
             }
         }
 
         if (view == 2) {
-            println("In webtoon view")
-
             if (presenterHorizontal11.visibility == View.INVISIBLE) {
                 println("webtoon visible")
                 presenterHorizontal11.visibility = View.VISIBLE
                 presenter11Horizontal.visibility = View.VISIBLE
             } else {
-                println("webtoon invisible")
                 presenterHorizontal11.visibility = View.INVISIBLE
                 presenter11Horizontal.visibility = View.INVISIBLE
             }
