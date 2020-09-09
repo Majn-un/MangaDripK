@@ -136,7 +136,7 @@ object MangaHere : MangaSource {
         )
     }
 
-    private fun parseChapterDate(date: String): Long {
+    fun parseChapterDate(date: String): Long {
         return if ("Today" in date || " ago" in date) {
             Calendar.getInstance().apply {
                 set(Calendar.HOUR_OF_DAY, 0)

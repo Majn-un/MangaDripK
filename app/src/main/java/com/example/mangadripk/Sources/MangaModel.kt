@@ -55,6 +55,17 @@ data class ChapterModel(
 
 }
 
+data class UpdateModel(
+    val name: String,
+    val url: String,
+    val uploaded: String,
+    val new: Boolean?,
+    val sources: Sources
+) : ViewModel() {
+    var uploadedTime: Long? = null
+//    fun getFirstImage() = sources.getFirstImage(this)
+}
+
 data class PageModel(val pages: List<String>)
 
 object MangaContext {

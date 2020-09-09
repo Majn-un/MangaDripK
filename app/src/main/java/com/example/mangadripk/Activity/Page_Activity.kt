@@ -298,10 +298,12 @@ class Page_Activity : AppCompatActivity(),
         }
 
     }
+
     private fun openDialog() {
         val exampleDialog = CopyrightDialog()
         exampleDialog.show(supportFragmentManager, "example dialog")
     }
+
     override fun onClick() {
         val presenterHorizontal11 = findViewById<Toolbar>(R.id.presenterHorizontal)
         val presenter11Horizontal = findViewById<Toolbar>(R.id.presenter1Horizontal)
