@@ -17,15 +17,18 @@ import com.example.mangadripk.Activity.UpdateActivity
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.Database.FavoriteDB
+import com.example.mangadripk.Database.ReadDb
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.programmersbox.manga_sources.mangasources.MangaModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Favorite : Fragment() {
@@ -35,6 +38,7 @@ class Favorite : Fragment() {
     private var newList = mutableListOf<MangaModel>()
     private lateinit var update_layout: View
     var myDB: FavoriteDB? = null
+    var myReadDB: ReadDb? = null
 
 
     override fun onCreateView(
@@ -45,6 +49,7 @@ class Favorite : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_favorite, container, false)
         update_layout = view.findViewById<View>(R.id.update) as View
+        update_layout.visibility = View.GONE
 
         activity?.let { progressDialog.show(it) }
         val toolbar =
@@ -80,27 +85,29 @@ class Favorite : Fragment() {
 //        println("1"+lstMangaRev)
         GlobalScope.launch {
             val updateList = checkForUpates(lstMangaRev)
-            if (updateList?.size != 0) {
-                update_layout.visibility = View.VISIBLE
-            } else {
-                update_layout.visibility = View.GONE
-            }
 
-            if (update_layout.visibility == View.VISIBLE) {
-                val updateButton = view.findViewById<View>(R.id.update_button) as Button
+            GlobalScope.launch(Dispatchers.Main) {
+                if (updateList?.size != 0) {
+                    update_layout.visibility = View.VISIBLE
+                } else {
+                    update_layout.visibility = View.GONE
+                }
 
-                updateButton.setOnClickListener {
-                    var list_string = ""
-                    for (i in updateList!!.indices) {
-                        list_string += updateList[i].title + " - " + updateList[i]
-                            .imageUrl + " - " + updateList[i].mangaUrl + " , "
+                if (update_layout.visibility == View.VISIBLE) {
+                    val updateButton = view.findViewById<View>(R.id.update_button) as Button
+
+                    updateButton.setOnClickListener {
+                        var list_string = ""
+                        for (i in updateList!!.indices) {
+                            list_string += updateList[i].title + " - " + updateList[i]
+                                .imageUrl + " - " + updateList[i].mangaUrl + " , "
+                        }
+                        val update = Intent(context, UpdateActivity::class.java)
+                        update.putExtra("list", list_string)
+                        startActivity(update)
                     }
-                    val update = Intent(context, UpdateActivity::class.java)
-                    update.putExtra("list", list_string)
-                    startActivity(update)
                 }
             }
-//            println("3"+updateList)
 
         }
 
@@ -146,22 +153,34 @@ class Favorite : Fragment() {
     }
 
     private fun checkForUpates(list: List<MangaModel>): MutableList<MangaModel>? {
-        val light = LinkedList<MangaModel>()
+        val light = ArrayList<MangaModel>()
             try {
                 for (item in list) {
-                    println("item"+item)
                     val doc = Jsoup.connect(item.mangaUrl).cookie("isAdult", "1").get()
                     val chapters = doc.select("div[id=chapterlist]").select("ul.detail-main-list").select(
                         "li"
                     ).eq(0)
                     val newPic = chapters.select("a").select("img.new-pic").isNotEmpty()
+                    var found = false
+                    myReadDB = ReadDb(activity)
+                    val read: Cursor = myReadDB!!.listContents
                     if (newPic) {
-                        light.add(item)
-                        println("added to list" + item + " " + light.size)
+                        while (read.moveToNext()) {
+                            if (read.getString(2) == item.title) {
+                                if (read.getString(1) == chapters.select("p.title3").text()) {
+                                    found = true
+                                }
+                            }
+//
+                        }
+                        if (found == false) {
+                            light.add(item)
+                        }
                     }
 
                 }
-                println("2" + light.size)
+                myReadDB!!.close()
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }

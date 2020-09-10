@@ -241,7 +241,6 @@ class Page_Activity : AppCompatActivity(),
             val data: Cursor = myDB!!.listContents
             while (data.moveToNext()) {
                 if (data.getString(3) == OG_name) {
-                    println("Already in recents")
                     myDB!!.deleteData(data.getString(3))
                 }
             }

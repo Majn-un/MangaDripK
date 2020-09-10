@@ -28,13 +28,13 @@ class UpdateActivity : AppCompatActivity() {
                 *Chapter_List!!.split(",".toRegex()).toTypedArray()
             )
         )
-        for (i in aList.indices-1) {
+        for (i in aList.indices) {
             val beta = aList[i].toString().split("-")
-            println(beta)
-            val image = beta[1].replace("\\s+".toRegex(), "")
-            val alpha = MangaModel(beta[0],"",beta[1],image, Sources.MANGA_HERE)
-            chapterList.add(alpha)
-
+            if (beta.size != 1) {
+                val image = beta[1].replace("\\s+".toRegex(), "")
+                val alpha = MangaModel(beta[0],"",beta[1],image, Sources.MANGA_HERE)
+                chapterList.add(alpha)
+            }
         }
 
 
