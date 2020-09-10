@@ -128,6 +128,7 @@ object MangaHere : MangaSource {
                     name = it.select("a").select("p.title3").text(),
                     url = it.select("a").attr("abs:href"),
                     uploaded = it.select("a").select("p.title2").text(),
+                    new = it.select("a").select("img.new-pic").isNotEmpty(),
                     sources = Sources.MANGA_HERE
                 ).apply { uploadedTime = parseChapterDate(uploaded) }
             },

@@ -1,13 +1,16 @@
 package com.example.mangadripk.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mangadripk.Activity.Page_Activity
@@ -30,14 +33,25 @@ class ChapterViewAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 //        println(Data[position].read)
+        println(Data[position].read)
         if (Data[position].read == "0" ) {
-            holder.cardView.setBackgroundColor(Color.GRAY)
+            println("This chapter " + Data[position].name + " should be black" + Data[position].read)
+            holder.chapter_title.text = Data[position].name
+            holder.chapter_title.setTextColor(ContextCompat.getColor(context, R.color.gray));
         } else if (Data[position].read == "1") {
-            holder.cardView.setBackgroundColor(Color.BLACK)
+            holder.chapter_title.text = Data[position].name
+            holder.chapter_title.setTextColor(ContextCompat.getColor(context, R.color.white));
         }
-        holder.chapter_title.setText(Data[position].name)
+
+        if (Data[position].new == false) {
+            holder.new_icon.visibility = View.INVISIBLE
+        } else {
+            holder.new_icon.visibility = View.VISIBLE
+        }
         holder.cardView.setOnClickListener {
-            holder.cardView.setBackgroundColor(Color.GRAY)
+            holder.new_icon.visibility = View.INVISIBLE
+            holder.chapter_title.setTextColor(ContextCompat.getColor(context, R.color.gray));
+
             val model = Data[position]
             val name : String? = model.name
             val url : String? = model.link
@@ -74,10 +88,12 @@ class ChapterViewAdapter(
     class MyViewHolder(itemView: View) : ViewHolder(itemView) {
         var chapter_title: TextView
         var cardView: CardView
+        var new_icon: ImageView
 
         init {
             chapter_title = itemView.findViewById<View>(R.id.chapter_title) as TextView
             cardView = itemView.findViewById<View>(R.id.chapter) as CardView
+            new_icon = itemView.findViewById<View>(R.id.new_icon) as ImageView
         }
     }
 

@@ -62,7 +62,7 @@ class Page_Activity : AppCompatActivity(),
 
     private var title: TextView? = null
     private var view: Int = 1
-    private var Page_Model: ChapterModel = ChapterModel("", "", "", Sources.MANGA_HERE)
+    private var Page_Model: ChapterModel = ChapterModel("", "", "", Sources.MANGA_HERE, false)
     var myDB: RecentDB? = null
     var myReadDB: ReadDb? = null
     var OG_name : String? = ""
@@ -130,7 +130,8 @@ class Page_Activity : AppCompatActivity(),
                     chapterList[index - 1][0] as String,
                     chapterList[index - 1][1] as String,
                     "",
-                    Sources.MANGA_HERE
+                    Sources.MANGA_HERE,
+                    false
                 )
                 index -= 1
                 lstPages = ArrayList()
@@ -151,7 +152,8 @@ class Page_Activity : AppCompatActivity(),
                     chapterList[index + 1][0],
                     chapterList[index + 1][1],
                     "",
-                    Sources.MANGA_HERE
+                    Sources.MANGA_HERE,
+                    false
                 )
                 index += 1
                 lstPages = ArrayList()
@@ -218,7 +220,7 @@ class Page_Activity : AppCompatActivity(),
         val MangaYUH = name?.let {
             if (url != null) {
                 if (upload != null) {
-                    Page_Model = ChapterModel(it, url, upload, Sources.MANGA_HERE)
+                    Page_Model = ChapterModel(it, url, upload, Sources.MANGA_HERE,false)
 
                 }
             }
@@ -263,7 +265,7 @@ class Page_Activity : AppCompatActivity(),
                 }
 
             }
-            val chapter = Chapter(name, "", Sources.MANGA_HERE, "", null, OG_name, "", "0")
+            val chapter = Chapter(name, "", Sources.MANGA_HERE, "", null, OG_name, "", "0",false)
             myReadDB!!.addData(chapter)
         } finally {
             myReadDB!!.close()
