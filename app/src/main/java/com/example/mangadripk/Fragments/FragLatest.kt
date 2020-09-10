@@ -70,8 +70,8 @@ class FragLatest : Fragment() {
 
         val myrv = view.findViewById(R.id.latest_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-        gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
-        myrv.layoutManager = gridlayoutManager
+//        gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
+        myrv.layoutManager = GridLayoutManager(context, 3)
         myrv.adapter = myAdapter
         refreshLayout.setOnRefreshListener(OnRefreshListener {
             activity?.let { progressDialog.show(it) }
@@ -79,8 +79,10 @@ class FragLatest : Fragment() {
             pageNumber = 1
             loadNewManga()
             myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-            gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
-            myrv.layoutManager = gridlayoutManager
+            myrv.layoutManager = GridLayoutManager(context, 3)
+
+//            gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
+//            myrv.layoutManager = gridlayoutManager
             myrv.adapter = myAdapter
             refreshLayout.isRefreshing = false
 
@@ -113,7 +115,7 @@ class FragLatest : Fragment() {
                 }
                 progressDialog.dialog.dismiss()
 
-                activity!!.runOnUiThread {
+                requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
 

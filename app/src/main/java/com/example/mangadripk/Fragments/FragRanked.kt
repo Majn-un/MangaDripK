@@ -72,8 +72,10 @@ class FragRanked : Fragment() {
 
         val myrv = view.findViewById(R.id.all_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-        gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
-        myrv.layoutManager = gridlayoutManager
+//        gridlayoutManager = Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
+//        myrv.layoutManager = gridlayoutManager
+        myrv.layoutManager = GridLayoutManager(context, 3)
+
         myrv.adapter = myAdapter
         progressDialog.dialog.dismiss()
 

@@ -55,8 +55,10 @@ class UpdateActivity : AppCompatActivity() {
 
         val myrv = findViewById<RecyclerView>(R.id.update_id)
         myAdapter = RecyclerViewAdapter(this, chapterList)
-        gridlayoutManager = Utility(this, 400).apply { orientation = GridLayoutManager.VERTICAL }
-        myrv.layoutManager = gridlayoutManager
+        myrv.layoutManager = GridLayoutManager(this, 3)
+
+//        gridlayoutManager = Utility(this, 400).apply { orientation = GridLayoutManager.VERTICAL }
+//        myrv.layoutManager = gridlayoutManager
         myrv.adapter = myAdapter
 
     }

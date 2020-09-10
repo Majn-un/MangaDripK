@@ -38,9 +38,5 @@
             android:text="Chapter Title"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
-
-
-
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

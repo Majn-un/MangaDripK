@@ -76,9 +76,9 @@ class FragAll : Fragment() {
 
         val myrv = view.findViewById(R.id.all_id) as RecyclerView
         myAdapter = activity?.let { RecyclerViewAdapter(it, mangaList) }
-        gridlayoutManager =
-            Utility(activity, 400).apply { orientation = GridLayoutManager.VERTICAL }
-        myrv.layoutManager = gridlayoutManager
+//        gridlayoutManager = Utility(activity, 360).apply { orientation = GridLayoutManager.VERTICAL }
+
+        myrv.layoutManager = GridLayoutManager(context, 3)
         myrv.adapter = myAdapter
         myrv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
