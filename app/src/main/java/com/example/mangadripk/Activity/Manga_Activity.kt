@@ -220,7 +220,6 @@ class Manga_Activity : AppCompatActivity() {
             try {
                 val mangaActivity = ShineManga.toInfoModel()
                 setValues(mangaActivity.description,mangaActivity.author,mangaActivity.status,ShineManga.title,ShineManga.imageUrl)
-                println(mangaActivity.status)
                 runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
@@ -237,10 +236,14 @@ class Manga_Activity : AppCompatActivity() {
                 val mangaActivity = ChapterManga.toInfoModel()
 
                 for (item in mangaActivity.chapters) {
-//                    val Page_Model = ChapterModel(item.url, item.url, "upload", Sources.MANGA_HERE)
-//                    val image_link = Page_Model.getFirstImage().pages[0]
                     val read = ReadDate(item.name, master_name)
-                    lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_Thumb, read))
+                    var new = item.new
+                    if (read == "0") {
+                        new = false
+                        lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_Thumb, read,new))
+                    } else if (read == "1") {
+                        lstChapter.add(Chapter(item.name,item.url,item.sources,"2",item.uploadedTime, master_name,OG_Thumb, read,new))
+                    }
                 }
 
                 runOnUiThread {

@@ -19,6 +19,7 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,14 +29,18 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Activity.SearchActivity"
             android:parentActivityName=".Activity.MainActivity"
-            android:theme="@style/NoAction_AppTheme">
-        </activity>
+            android:theme="@style/NoAction_AppTheme" />
+        <activity android:name=".Activity.UpdateActivity"
+            android:parentActivityName=".Activity.MainActivity"
+            android:theme="@style/NoAction_AppTheme"
+            />
         <activity
             android:name=".Activity.Manga_Activity"
             android:theme="@style/NoAction_AppTheme"

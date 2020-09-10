@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chapter"
     android:clickable="true"
     android:focusable="false"
     android:foreground="?android:attr/selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_margin="1dp"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto">
+    android:layout_height="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/windowBackground"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
+
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:id="@+id/chapter_image" />
+            android:layout_width="11dp"
+            android:id="@+id/new_icon"
+            android:layout_height="11dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_baseline_brightness_1_24"
+            android:visibility="visible" />
+
 
         <TextView
             android:id="@+id/chapter_title"
             android:layout_width="match_parent"
+            android:layout_marginStart="5dp"
             android:layout_height="match_parent"
             android:gravity="start|center"
-            android:text="   Chapter Title"
+            android:text="Chapter Title"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
+
+
 
 
     </LinearLayout>

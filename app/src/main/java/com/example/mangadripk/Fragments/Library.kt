@@ -57,7 +57,6 @@ class Library : Fragment() {
         viewPager?.let { setUpViewPager(it) }
         tabLayout!!.setupWithViewPager(viewPager)
         tabLayout!!.setSelectedTabIndicatorColor(Color.parseColor("#00B300"));
-//        tabLayout!!.setSelectedTabIndicatorHeight((int) (5 * resources.displayMetrics.density));
         tabLayout!!.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#00B300"));
         tabLayout!!.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {}

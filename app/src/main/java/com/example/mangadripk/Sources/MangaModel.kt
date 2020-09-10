@@ -47,12 +47,24 @@ data class ChapterModel(
     val name: String,
     val url: String,
     val uploaded: String,
-    val sources: Sources
+    val sources: Sources,
+    val new: Boolean
 ) : ViewModel() {
     var uploadedTime: Long? = null
     fun getPageInfo() = sources.getPageInfo(this)
 //    fun getFirstImage() = sources.getFirstImage(this)
 
+}
+
+data class UpdateModel(
+    val name: String,
+    val url: String,
+    val uploaded: String,
+    val new: Boolean?,
+    val sources: Sources
+) : ViewModel() {
+    var uploadedTime: Long? = null
+//    fun getFirstImage() = sources.getFirstImage(this)
 }
 
 data class PageModel(val pages: List<String>)
