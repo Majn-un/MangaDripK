@@ -4,57 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#191919"
+    android:background="#1E1E1E"
+    android:foreground="@drawable/my_custom_drawable1"
     tools:context=".Splash">
 
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="181dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="292dp"
-        android:indeterminate="false"
-        android:theme="@style/ProgressBarStyle"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="274dp"
+        android:layout_height="276dp"
+        android:background="@drawable/manga_drip_splash_theme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.361" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
-        android:paddingBottom="100dp">
+        android:text="By @Ahas232"
+        android:textColor="#5C5C5C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.859" />
 
-        <TextView
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:gravity="center|end"
-            android:text="Manga"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textColor="#039103"
-            android:textSize="65sp"
-            android:textStyle="italic" />
+    <!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/progressBar"-->
+<!--        android:paddingBottom="100dp">-->
 
-        <TextView
-            android:layout_width="5dp"
-            android:layout_height="match_parent" />
+<!--        <TextView-->
+<!--            android:layout_width="230dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center|end"-->
+<!--            android:text="Manga"-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Display3"-->
+<!--            android:textColor="#039103"-->
+<!--            android:textSize="65sp"-->
+<!--            android:textStyle="italic" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:gravity="left|center"
-            android:text="Drip"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textColor="#3FDC45"
-            android:textSize="70sp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:layout_width="5dp"-->
+<!--            android:layout_height="match_parent" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:gravity="left|center"-->
+<!--            android:text="Drip"-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Display3"-->
+<!--            android:textColor="#3FDC45"-->
+<!--            android:textSize="70sp"-->
+<!--            android:textStyle="bold" />-->
 
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

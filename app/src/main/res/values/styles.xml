@@ -35,7 +35,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
     <style name="ProgressBarStyle">
-        <item name="colorAccent">#01CA01</item>
+        <item name="colorAccent">#2B7E2B</item>
     </style>
     <style name="CustomDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
