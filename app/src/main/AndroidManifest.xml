@@ -36,7 +36,7 @@
         <activity
             android:name=".Activity.SearchActivity"
             android:parentActivityName=".Activity.MainActivity"
-            android:theme="@style/NoAction_AppTheme"></activity>
+            android:theme="@style/NoAction_AppTheme" />
         <activity
             android:name=".Activity.Manga_Activity"
             android:theme="@style/NoAction_AppTheme"

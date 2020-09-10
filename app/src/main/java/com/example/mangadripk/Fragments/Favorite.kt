@@ -32,9 +32,10 @@ class Favorite : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
     private val progressDialog = CustomProgressDialog()
     private var mangaList = mutableListOf<MangaModel>()
-    private val updateList = mutableListOf<MangaModel>()
+    private var newList = mutableListOf<MangaModel>()
     private lateinit var update_layout: View
     var myDB: FavoriteDB? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,18 +43,20 @@ class Favorite : Fragment() {
     ): View? {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
-        val view : View = inflater.inflate(R.layout.fragment_favorite, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_favorite, container, false)
         update_layout = view.findViewById<View>(R.id.update) as View
 
         activity?.let { progressDialog.show(it) }
-        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+        val toolbar =
+            view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         mangaList = ArrayList<MangaModel>()
         try {
             myDB = FavoriteDB(activity)
             val data: Cursor = myDB!!.listContents
             if (data.count == 0) {
-                Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_LONG)
+                    .show()
             } else {
                 while (data.moveToNext()) {
                     val manga = MangaModel(
@@ -74,29 +77,34 @@ class Favorite : Fragment() {
         val lstMangaC = mangaList as List<MangaModel>
         val lstMangaRev = lstMangaC.asReversed()
 
-        checkForUpates(lstMangaRev)
-        println("outside " + updateList)
-        if (updateList.size != 0) {
-            println(updateList[0])
-            update_layout.visibility = View.VISIBLE
-        } else {
-            update_layout.visibility = View.GONE
-        }
-
-        if (update_layout.visibility == View.VISIBLE) {
-            val updateButton = view.findViewById<View>(R.id.update_button) as Button
-
-            updateButton.setOnClickListener {
-                var list_string = ""
-                for (i in updateList.indices) {
-                    list_string += updateList[i].title + " - " + updateList[i]
-                        .imageUrl + " - " + updateList[i].mangaUrl + " , "
-                }
-                val update = Intent(context, UpdateActivity::class.java)
-                update.putExtra("list",list_string)
-                startActivity(update)
+//        println("1"+lstMangaRev)
+        GlobalScope.launch {
+            val updateList = checkForUpates(lstMangaRev)
+            if (updateList?.size != 0) {
+                update_layout.visibility = View.VISIBLE
+            } else {
+                update_layout.visibility = View.GONE
             }
+
+            if (update_layout.visibility == View.VISIBLE) {
+                val updateButton = view.findViewById<View>(R.id.update_button) as Button
+
+                updateButton.setOnClickListener {
+                    var list_string = ""
+                    for (i in updateList!!.indices) {
+                        list_string += updateList[i].title + " - " + updateList[i]
+                            .imageUrl + " - " + updateList[i].mangaUrl + " , "
+                    }
+                    val update = Intent(context, UpdateActivity::class.java)
+                    update.putExtra("list", list_string)
+                    startActivity(update)
+                }
+            }
+//            println("3"+updateList)
+
         }
+
+
         val myrv: RecyclerView = view.findViewById(R.id.favorite_id)
         myAdapter = RecyclerViewAdapter(requireActivity(), lstMangaRev)
         myrv.layoutManager = GridLayoutManager(activity, 3)
@@ -108,7 +116,8 @@ class Favorite : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         requireActivity().menuInflater.inflate(R.menu.search_menu, menu)
         val searchViewItem = menu.findItem(R.id.action_search)
-        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = searchViewItem.actionView as SearchView
         searchView.queryHint = "Search..."
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
@@ -136,26 +145,27 @@ class Favorite : Fragment() {
         searchView.setOnQueryTextListener(queryTextListener)
     }
 
-
-    private fun checkForUpates(list: List<MangaModel>){
-        GlobalScope.launch {
+    private fun checkForUpates(list: List<MangaModel>): MutableList<MangaModel>? {
+        val light = LinkedList<MangaModel>()
             try {
                 for (item in list) {
+                    println("item"+item)
                     val doc = Jsoup.connect(item.mangaUrl).cookie("isAdult", "1").get()
                     val chapters = doc.select("div[id=chapterlist]").select("ul.detail-main-list").select(
                         "li"
                     ).eq(0)
                     val newPic = chapters.select("a").select("img.new-pic").isNotEmpty()
                     if (newPic) {
-                        updateList.add(item)
+                        light.add(item)
+                        println("added to list" + item + " " + light.size)
                     }
 
                 }
-                println(updateList.size)
+                println("2" + light.size)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }
+        return light
     }
 
     private fun parseChapterDate(date: String): Long {

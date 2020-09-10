@@ -1,4 +1,4 @@
-package com.example.mangadripk.Activity
+package com.example.mangadripk.Adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
