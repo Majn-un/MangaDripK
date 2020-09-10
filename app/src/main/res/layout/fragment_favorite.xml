@@ -3,8 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingBottom="56dp"
-
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -13,11 +11,14 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_favorite"
+            app:titleTextColor="@color/green"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@color/green"
+            android:layout_height="50dp"
+            app:iconifiedByDefault="true"
+            android:background="#303030"
             app:layout_scrollFlags="scroll|enterAlways" />
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/update"
+            app:layout_scrollFlags="scroll"
             android:layout_marginTop="10dp"
             android:background="#FFFFFF"
             android:orientation="horizontal">
@@ -52,14 +54,13 @@
                 android:background="@color/green"
                 android:text="View">
             </Button>
-
-
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorite_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     </LinearLayout>
 

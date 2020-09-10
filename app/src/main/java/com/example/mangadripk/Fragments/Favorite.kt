@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,10 +52,12 @@ class Favorite : Fragment() {
         update_layout = view.findViewById<View>(R.id.update) as View
         update_layout.visibility = View.GONE
 
+
         activity?.let { progressDialog.show(it) }
-        val toolbar =
-            view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_favorite) as androidx.appcompat.widget.Toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).supportActionBar?.title = "Favorites"
+
         mangaList = ArrayList<MangaModel>()
         try {
             myDB = FavoriteDB(activity)
@@ -82,7 +85,6 @@ class Favorite : Fragment() {
         val lstMangaC = mangaList as List<MangaModel>
         val lstMangaRev = lstMangaC.asReversed()
 
-//        println("1"+lstMangaRev)
         GlobalScope.launch {
             val updateList = checkForUpates(lstMangaRev)
 
@@ -123,12 +125,11 @@ class Favorite : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         requireActivity().menuInflater.inflate(R.menu.search_menu, menu)
         val searchViewItem = menu.findItem(R.id.action_search)
-        val searchManager =
-            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = searchViewItem.actionView as SearchView
+
         searchView.queryHint = "Search..."
         searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-        searchView.setIconifiedByDefault(false)
         val queryTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(s: String): Boolean {

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.UpdateActivity"></activity>
+
         <activity
             android:name=".Splash"
             android:theme="@style/SplashTheme">
@@ -37,6 +37,10 @@
             android:name=".Activity.SearchActivity"
             android:parentActivityName=".Activity.MainActivity"
             android:theme="@style/NoAction_AppTheme" />
+        <activity android:name=".Activity.UpdateActivity"
+            android:parentActivityName=".Activity.MainActivity"
+            android:theme="@style/NoAction_AppTheme"
+            />
         <activity
             android:name=".Activity.Manga_Activity"
             android:theme="@style/NoAction_AppTheme"
