@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:iconifiedByDefault="true"
-            android:background="#303030"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            android:background="#303030" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -32,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/update"
-            app:layout_scrollFlags="scroll"
             android:layout_marginTop="10dp"
             android:background="#FFFFFF"
             android:orientation="horizontal">

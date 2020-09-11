@@ -21,23 +21,16 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/bottom_navigation" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:gravity="bottom|end"
-                android:text="\IG: ahas234"
-                android:textColor="#51FFFFFF"
-                android:textSize="20sp" />
         </FrameLayout>
 
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        android:background="#1B1A1A"
+        android:background="@color/windowBackground"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        app:itemTextColor="#515151"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
