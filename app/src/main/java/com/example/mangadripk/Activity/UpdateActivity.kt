@@ -47,7 +47,9 @@ class UpdateActivity : AppCompatActivity() {
             val beta = aList[i].toString().split("-")
             if (beta.size != 1) {
                 val image = beta[1].replace("\\s+".toRegex(), "")
-                val alpha = MangaModel(beta[0], "", beta[2], image, Sources.MANGA_HERE)
+                val new = beta[2].replace("\\s+".toRegex(), "")
+                val alpha = MangaModel(beta[0], "", new, image, Sources.MANGA_HERE)
+                println("yerr" + alpha)
                 chapterList.add(alpha)
             }
         }

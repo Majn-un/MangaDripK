@@ -140,6 +140,8 @@ class Manga_Activity : AppCompatActivity() {
         myDB = FavoriteDB(this)
         val data: Cursor = myDB!!.listContents
         while (data.moveToNext()) {
+            println("yes" + data.getString(2))
+            println("yes" + Manga_URL)
             if (data.getString(2) == Manga_URL) {
                 button_for_favorites!!.setBackgroundResource(R.drawable.ic_baseline_favorite_green_24)
             }

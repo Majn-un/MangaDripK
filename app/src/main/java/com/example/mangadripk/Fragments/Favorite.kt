@@ -87,13 +87,13 @@ class Favorite : Fragment() {
 
         GlobalScope.launch {
             val updateList = checkForUpates(lstMangaRev)
-
             GlobalScope.launch(Dispatchers.Main) {
                 if (updateList?.size != 0) {
                     update_layout.visibility = View.VISIBLE
                 } else {
                     update_layout.visibility = View.GONE
                 }
+                println("yer" + updateList)
 
                 if (update_layout.visibility == View.VISIBLE) {
                     val updateButton = view.findViewById<View>(R.id.update_button) as Button
