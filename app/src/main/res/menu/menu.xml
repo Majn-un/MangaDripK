@@ -5,6 +5,8 @@
         android:id="@+id/Search1"
         android:title="Search"
         android:icon="@drawable/ic_baseline_search_24"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/sources"
+        android:title="Sources"/>
 </menu>

@@ -5,4 +5,8 @@
     <string name="all">All</string>
     <string name="latest">Latest</string>
     <string name="ranked">Ranked</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="title">Title</string>
+
 </resources>

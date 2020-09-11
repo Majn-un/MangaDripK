@@ -1,29 +1,22 @@
 package com.example.mangadripk.Fragments
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.example.mangadripk.Activity.Manga_Activity
 import com.example.mangadripk.Activity.SearchActivity
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.programmersbox.manga_sources.mangasources.MangaModel
-import com.programmersbox.mangaworld.views.Utility
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jsoup.Jsoup
 
 
 class FragAll : Fragment() {
@@ -148,13 +141,28 @@ class FragAll : Fragment() {
 //        searchView.setOnQueryTextListener(queryTextListener)
     }
 
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-
+        val singleItems = arrayOf("MangaHere", "MangaDex", "Mangasee")
+        val checkedItem = 1
         if (id == R.id.Search1) {
             val intent = Intent(activity, SearchActivity::class.java)
             activity?.startActivity(intent)
-        }
+        } else if (id == R.id.sources) {
+            activity?.let {
+                MaterialAlertDialogBuilder(it)
+                    .setTitle(resources.getString(R.string.title))
+                    .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                    }
+                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
+                    }
+                    .setSingleChoiceItems(singleItems, checkedItem) { dialog, which -> }
+                    .show()
+            }
+            }
+
         return true
     }
 
