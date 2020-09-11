@@ -10,6 +10,9 @@ enum class Sources(
     val source: MangaSource
 ) : MangaSource by source {
 
+    MANGA_4_LIFE(domain = "manga4life", source = MangaFourLife),
+    NINE_ANIME(domain = "nineanime", source = NineAnime),
+    MANGA_PARK(domain = "mangapark", source = MangaPark, filterOutOfUpdate = true),
     MANGA_HERE(domain = "mangahere", source = MangaHere);
 
 

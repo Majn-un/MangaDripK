@@ -59,5 +59,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:2.0.1'
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+    implementation "com.github.salomonbrys.kotson:kotson:2.5.0"
+    implementation "com.github.jakepurple13.HelpfulTools:gsonutils:10.2.2"
 
 }

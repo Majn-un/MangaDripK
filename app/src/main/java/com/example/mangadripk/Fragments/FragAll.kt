@@ -49,20 +49,11 @@ class FragAll : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
 
         setHasOptionsMenu(true)
         val view: View = inflater.inflate(R.layout.fragment_all, container, false)
 
-
-
-
-
-//        activity?.let { progressDialog.show(it) }
-
         loadNewManga()
-
 
         viewPager = view.findViewById(R.id.pager);
         tabLayout = view.findViewById(R.id.tablayout);
@@ -146,7 +137,8 @@ class FragAll : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         val singleItems = arrayOf("MangaHere", "MangaDex", "Mangasee")
-        val checkedItem = 1
+        var checkedItem = 1
+        println(checkedItem)
         if (id == R.id.Search1) {
             val intent = Intent(activity, SearchActivity::class.java)
             activity?.startActivity(intent)
@@ -154,11 +146,10 @@ class FragAll : Fragment() {
             activity?.let {
                 MaterialAlertDialogBuilder(it)
                     .setTitle(resources.getString(R.string.title))
-                    .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
-                    }
-                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
-                    }
-                    .setSingleChoiceItems(singleItems, checkedItem) { dialog, which -> }
+                    .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which -> }
+                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, which -> checkedItem = which}
+                    .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+                        checkedItem = which}
                     .show()
             }
             }
