@@ -44,6 +44,8 @@ class RecyclerViewAdapter (
         holder: MyViewHolder,
         position: Int
     ) {
+        println(Data[position].imageUrl)
+        println(Data[position].mangaUrl)
         holder.manga_title.text = Data[position].title
             Glide.with(context)
                 .load(Data[position].imageUrl).listener(object : RequestListener<Drawable> {
