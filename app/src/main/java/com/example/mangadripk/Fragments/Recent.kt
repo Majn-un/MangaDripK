@@ -42,9 +42,12 @@ class Recent : Fragment() {
         val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar) as androidx.appcompat.widget.Toolbar
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         lstRecent = ArrayList<Recent>()
+
+
         myDB = RecentDB(activity)
 
         val data: Cursor = myDB!!.listContents
+
         if (data.count == 0) {
             Toast.makeText(activity, "There are no contents in this list!", Toast.LENGTH_SHORT)
                 .show()

@@ -58,6 +58,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:textColor="@color/white"
                 android:text="Title"
                 android:textSize="20sp" />
 
@@ -66,6 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:textColor="@color/white"
+
                 android:layout_marginLeft="35dp"
                 android:text="Author"
                 android:fontFamily="sans-serif-medium"
@@ -76,6 +79,7 @@
                 android:text="Status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_gravity="start"
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="10dp"
@@ -89,6 +93,7 @@
                 android:layout_gravity="start"
                 android:layout_marginLeft="35dp"
                 android:layout_width="match_parent"
+                android:textColor="@color/white"
                 android:layout_marginRight="10dp"
                 android:layout_height="40dp">
 
@@ -98,6 +103,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:textColor="@color/white"
                     android:maxLines="2"
                     android:layout_marginTop="10dp"
                     android:textSize="10sp" />
