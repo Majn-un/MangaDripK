@@ -13,7 +13,6 @@ interface MangaSource {
     fun toInfoModel(model: MangaModel): MangaInfoModel
     fun getMangaModelByUrl(url: String): MangaModel
     fun getPageInfo(chapterModel: ChapterModel): PageModel
-//    fun search(string: String): List<MangaModel>
     fun getMangaRanked(pageNumber: Int = 1): List<MangaModel>
     fun getMangaLatest(pageNumber: Int = 1): List<MangaModel>
 //    fun getFirstImage(chapterModel: ChapterModel): PageModel
