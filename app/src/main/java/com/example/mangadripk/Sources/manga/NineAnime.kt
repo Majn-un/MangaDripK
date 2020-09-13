@@ -92,11 +92,11 @@ object NineAnime : MangaSource {
     }
 
     override fun getMangaRanked(pageNumber: Int): List<MangaModel> {
-        TODO("Not yet implemented")
+        return emptyList()
     }
 
     override fun getMangaLatest(pageNumber: Int): List<MangaModel> {
-        TODO("Not yet implemented")
+        return emptyList()
     }
 
     override val hasMorePages: Boolean = true

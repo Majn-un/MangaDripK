@@ -106,7 +106,6 @@ class Library : Fragment() {
             myDB!!.close()
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.fragment_container, Library())?.commit()
-
         }
         dialog = builder.create()
         dialog.show()

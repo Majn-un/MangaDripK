@@ -113,6 +113,7 @@ class FragAll : Fragment() {
                 } else if (source == "MangaPark") {
                     list = Sources.MANGA_PARK.getManga(pageNumber++).toList()
                 }
+                println(list)
                 mangaList.addAll(list)
                 requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()

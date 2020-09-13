@@ -46,8 +46,9 @@ object MangaPark : MangaSource {
             )
         }
 
+
     override fun toInfoModel(model: MangaModel): MangaInfoModel {
-        val doc = cloudflare(model.mangaUrl).execute().asJsoup()//Jsoup.connect(model.mangaUrl).get()
+        val doc = cloudflare(model.mangaUrl).execute().asJsoup()
         val genres = mutableListOf<String>()
         val alternateNames = mutableListOf<String>()
         doc.select(".attr > tbody > tr").forEach {
@@ -230,11 +231,11 @@ object MangaPark : MangaSource {
     )
 
     override fun getMangaRanked(pageNumber: Int): List<MangaModel> {
-        TODO("Not yet implemented")
+        return emptyList()
     }
 
     override fun getMangaLatest(pageNumber: Int): List<MangaModel> {
-        TODO("Not yet implemented")
+        return emptyList()
     }
 
     private data class Pages(val n: Number?, val w: String?, val h: String?, val u: String?)
