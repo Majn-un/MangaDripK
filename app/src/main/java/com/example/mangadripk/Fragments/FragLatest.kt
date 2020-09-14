@@ -1,5 +1,6 @@
 package com.example.mangadripk.Fragments
 
+import android.database.Cursor
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.Database.Source
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.google.android.material.tabs.TabLayout
@@ -35,6 +37,10 @@ class FragLatest : Fragment() {
     var myFragment: View? = null
     var viewPager: ViewPager? = null
     var tabLayout: TabLayout? = null
+    private var list : List<MangaModel> = listOf()
+    private var source: String? = null
+    var myDB: Source? = null
+
 
 
     fun HomeFragment() {
@@ -54,7 +60,14 @@ class FragLatest : Fragment() {
 
 
 
+        myDB = Source(activity)
 
+        val data: Cursor = myDB!!.listContents
+        while (data.moveToNext()) {
+            source = data.getString(1)
+        }
+
+        myDB!!.close()
 
 
 
@@ -107,7 +120,15 @@ class FragLatest : Fragment() {
 
         GlobalScope.launch {
             try {
-                val list = Sources.MANGA_HERE.getMangaLatest(pageNumber++).toList()
+                if (source == "MangaFourLife") {
+                    list = Sources.MANGA_4_LIFE.getMangaLatest(pageNumber++).toList()
+                } else if (source == "MangaHere") {
+                    list = Sources.MANGA_HERE.getMangaLatest(pageNumber++).toList()
+                } else if (source == "NineAnime") {
+                    list = Sources.NINE_ANIME.getMangaLatest(pageNumber++).toList()
+                } else if (source == "MangaPark") {
+                    list = Sources.MANGA_PARK.getMangaLatest(pageNumber++).toList()
+                }
                 for (manga in list) {
                     if (manga.imageUrl != "") {
                         mangaList.add(manga)

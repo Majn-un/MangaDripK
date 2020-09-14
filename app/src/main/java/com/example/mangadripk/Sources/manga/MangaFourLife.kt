@@ -26,11 +26,11 @@ object MangaFourLife : MangaSource {
         if (mangaList.isEmpty()) {
             mangaList.addAll(
                 "vm\\.Directory = (.*?.*;)".toRegex()
-                    .find(Jsoup.connect("https://manga4life.com/search/?sort=lt&desc=true").get().html())
+                    .find(Jsoup.connect("https://manga4life.com/directory/").get().html())
                     ?.groupValues?.get(1)?.dropLast(1)
                     ?.fromJson<List<LifeBase>>()
                     ?.sortedByDescending { m -> m.lt?.let { 1000 * it.toDouble() } }
-                    ?.map(toMangaModel)
+                    ?.map(toAllModel)
                     .orEmpty()
             )
         }
@@ -57,6 +57,17 @@ object MangaFourLife : MangaSource {
             source = Sources.MANGA_4_LIFE
         )
     }
+
+    private val toAllModel: (LifeBase) -> MangaModel = {
+        MangaModel(
+            title = it.s.toString(),
+            description = "Last updated: ${it.ls}",
+            mangaUrl = "https://manga4life.com/manga/${it.i}",
+            imageUrl = "https://cover.mangabeast01.com/cover/${it.i}.jpg",
+            source = Sources.MANGA_4_LIFE
+        )
+    }
+
 
     @SuppressLint("ConstantLocale")
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -148,13 +159,56 @@ object MangaFourLife : MangaSource {
         })
     }
 
-    override fun getMangaRanked(pageNumber: Int): List<MangaModel> {
-        return emptyList()
-    }
+    override fun getMangaRanked(pageNumber: Int): List<MangaModel> = try {
+        if (mangaList.isEmpty()) {
+            mangaList.addAll(
+                "vm\\.Directory = (.*?.*;)".toRegex().find(Jsoup.connect("https://manga4life.com/search/?sort=vm&desc=true").get().html())
+                    ?.groupValues?.get(1)?.dropLast(1)
+                    ?.fromJson<List<LifeBase>>()
+                    ?.sortedBy { m -> m.vm?.let { 1000 * it.toDouble() } }
+                    ?.map(toMangaModel)
+                    .orEmpty()
+            )
+        }
+        val endRange = ((pageNumber * 24) - 1).let { if (it <= mangaList.lastIndex) it else mangaList.lastIndex }
+        mangaList.subList((pageNumber - 1) * 24, endRange)
+    } catch (e: Exception) {
+        getJsonApi<List<Life>>("https://manga4life.com/_search.php")?.map {
+            MangaModel(
+                title = it.s.toString(),
+                description = "",
+                mangaUrl = "https://manga4life.com/manga/${it.i}",
+                imageUrl = "https://static.mangaboss.net/cover/${it.i}.jpg",
+                source = Sources.MANGA_4_LIFE
+            )
+        }
+    }.orEmpty()
 
-    override fun getMangaLatest(pageNumber: Int): List<MangaModel> {
-        return emptyList()
-    }
+    override fun getMangaLatest(pageNumber: Int): List<MangaModel> = try {
+        if (mangaList.isEmpty()) {
+            mangaList.addAll(
+                "vm\\.Directory = (.*?.*;)".toRegex()
+                    .find(Jsoup.connect("https://manga4life.com/search/?sort=lt&desc=true").get().html())
+                    ?.groupValues?.get(1)?.dropLast(1)
+                    ?.fromJson<List<LifeBase>>()
+                    ?.sortedByDescending { m -> m.lt?.let { 1000 * it.toDouble() } }
+                    ?.map(toMangaModel)
+                    .orEmpty()
+            )
+        }
+        val endRange = ((pageNumber * 24) - 1).let { if (it <= mangaList.lastIndex) it else mangaList.lastIndex }
+        mangaList.subList((pageNumber - 1) * 24, endRange)
+    } catch (e: Exception) {
+        getJsonApi<List<Life>>("https://manga4life.com/_search.php")?.map {
+            MangaModel(
+                title = it.s.toString(),
+                description = "",
+                mangaUrl = "https://manga4life.com/manga/${it.i}",
+                imageUrl = "https://static.mangaboss.net/cover/${it.i}.jpg",
+                source = Sources.MANGA_4_LIFE
+            )
+        }
+    }.orEmpty()
 
     override val hasMorePages: Boolean = true
 

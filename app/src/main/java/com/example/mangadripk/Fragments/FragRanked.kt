@@ -2,15 +2,18 @@ package com.example.mangadripk.Fragments
 
 import android.app.SearchManager
 import android.content.Context
+import android.database.Cursor
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mangadripk.Adapter.RecyclerViewAdapter
 import com.example.mangadripk.Classes.CustomProgressDialog
+import com.example.mangadripk.Database.Source
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.google.android.material.tabs.TabLayout
@@ -22,17 +25,16 @@ import kotlinx.coroutines.launch
 class FragRanked : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
     private val mangaList = mutableListOf<MangaModel>()
-
     private val searchList = mutableListOf<MangaModel>()
     private val test = mutableListOf<MangaModel>()
     private val progressDialog = CustomProgressDialog()
     private var pageNumber = 1
     private val baseUrl = "https://www.mangahere.cc"
     lateinit var gridlayoutManager : GridLayoutManager
-
-
+    private var list : List<MangaModel> = listOf()
+    private var source: String? = null
+    var myDB: Source? = null
     var myFragment: View? = null
-
     var viewPager: ViewPager? = null
     var tabLayout: TabLayout? = null
 
@@ -55,6 +57,14 @@ class FragRanked : Fragment() {
 
 
 
+        myDB = Source(activity)
+
+        val data: Cursor = myDB!!.listContents
+        while (data.moveToNext()) {
+            source = data.getString(1)
+        }
+
+        myDB!!.close()
 
 
 
@@ -123,9 +133,19 @@ class FragRanked : Fragment() {
 
         GlobalScope.launch {
             try {
-                val list = Sources.MANGA_HERE.getMangaRanked(1).toList()
+                if (source == "MangaFourLife") {
+//                    list = Sources.MANGA_4_LIFE.getMangaRanked(pageNumber++).toList()
+                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+                } else if (source == "MangaHere") {
+                    list = Sources.MANGA_HERE.getMangaRanked(pageNumber++).toList()
+                } else if (source == "NineAnime") {
+                    list = Sources.NINE_ANIME.getMangaRanked(pageNumber++).toList()
+                } else if (source == "MangaPark") {
+                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+//                    list = Sources.MANGA_PARK.getMangaRanked(pageNumber++).toList()
+                }
                 mangaList.addAll(list)
-                activity!!.runOnUiThread {
+                requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
 

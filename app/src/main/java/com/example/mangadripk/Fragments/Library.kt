@@ -87,10 +87,11 @@ class Library : Fragment() {
         lateinit var dialog: AlertDialog
         lateinit var choice: String
 
-        val listItems = arrayOf("MangaHere", "MangaFourLife", "MangaPark", "NineAnime")
+        val listItems = arrayOf("MangaHere", "MangaFourLife", "MangaPark", "NineAnime", "MangaMutiny")
         val builder = AlertDialog.Builder(activity)
+        val checkInt = listItems.indexOf(source!!.text)
         builder.setTitle("Select Source")
-        builder.setSingleChoiceItems(listItems, -1) { _, i ->
+        builder.setSingleChoiceItems(listItems, checkInt) { _, i ->
             choice = listItems[i]
         }
 

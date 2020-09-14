@@ -1,4 +1,3 @@
-package com.example.mangadripk.Sources.utilites
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -21,11 +20,7 @@ class CloudflareInterceptor(private val context: Context) : Interceptor {
 
     private val handler = Handler(Looper.getMainLooper())
 
-    private val networkHelper: NetworkHelper by lazy {
-        NetworkHelper(
-            context
-        )
-    }//by injectLazy()
+    private val networkHelper: NetworkHelper by lazy { NetworkHelper(context) }//by injectLazy()
 
     /**
      * When this is called, it initializes the WebView if it wasn't already. We use this to avoid
@@ -50,8 +45,7 @@ class CloudflareInterceptor(private val context: Context) : Interceptor {
 
         try {
             response.close()
-            networkHelper.cookieManager.remove(originalRequest.url,
-                COOKIE_NAMES, 0)
+            networkHelper.cookieManager.remove(originalRequest.url, COOKIE_NAMES, 0)
             val oldCookie = networkHelper.cookieManager.get(originalRequest.url)
                 .firstOrNull { it.name == "cf_clearance" }
             resolveWithWebView(originalRequest, oldCookie)
@@ -260,8 +254,7 @@ class NetworkHelper(context: Context) {
 
     private val cacheSize = 5L * 1024 * 1024 // 5 MiB
 
-    val cookieManager =
-        AndroidCookieJar()
+    val cookieManager = AndroidCookieJar()
 
     val client by lazy {
         val builder = OkHttpClient.Builder()
@@ -304,11 +297,7 @@ class NetworkHelper(context: Context) {
 
     val cloudflareClient by lazy {
         client.newBuilder()
-            .addInterceptor(
-                CloudflareInterceptor(
-                    context
-                )
-            )
+            .addInterceptor(CloudflareInterceptor(context))
             .build()
     }
 }

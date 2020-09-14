@@ -3,6 +3,7 @@ package com.example.mangadripk.Fragments
 import android.database.Cursor
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +14,13 @@ import com.example.mangadripk.Classes.Manga
 import com.example.mangadripk.Database.Source
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
+import com.example.mangadripk.Sources.manga.MangaFourLife
 import com.google.android.material.tabs.TabLayout
+import com.programmersbox.gsonutils.fromJson
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.jsoup.Jsoup
 
 
 class FragAll : Fragment() {
@@ -105,15 +109,23 @@ class FragAll : Fragment() {
         GlobalScope.launch {
             try {
                 if (source == "MangaFourLife") {
-                    list = Sources.MANGA_4_LIFE.getManga(pageNumber++).toList()
+                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+//                    list = Sources.MANGA_4_LIFE.getManga(pageNumber++).toList()
                 } else if (source == "MangaHere") {
                     list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
                 } else if (source == "NineAnime") {
                     list = Sources.NINE_ANIME.getManga(pageNumber++).toList()
                 } else if (source == "MangaPark") {
-                    list = Sources.MANGA_PARK.getManga(pageNumber++).toList()
+                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+//                    list = Sources.MANGA_PARK.getManga(pageNumber++).toList()
+                } else if (source == "MangaMutiny") {
+                    list = Sources.MANGAMUTINY.getManga(pageNumber++).toList()
                 }
-                println(list)
+//                } else if (source == "Manganelo") {
+//                    list = Sources.MANGANELO.getManga(pageNumber++).toList()
+//                }
+
+
                 mangaList.addAll(list)
                 requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
@@ -123,5 +135,4 @@ class FragAll : Fragment() {
             }
         }
     }
-
 }

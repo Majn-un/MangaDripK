@@ -13,6 +13,8 @@ enum class Sources(
     MANGA_4_LIFE(domain = "manga4life", source = MangaFourLife),
     NINE_ANIME(domain = "nineanime", source = NineAnime),
     MANGA_PARK(domain = "mangapark", source = MangaPark),
+    MANGAMUTINY(domain = "mangamutiny", source = Mangamutiny),
+    //    MANGANELO(domain = "manganelo", source = Manganelo),
     MANGA_HERE(domain = "mangahere", source = MangaHere);
 
 

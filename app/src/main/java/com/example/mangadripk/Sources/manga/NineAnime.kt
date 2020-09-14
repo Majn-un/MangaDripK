@@ -37,7 +37,7 @@ object NineAnime : MangaSource {
     }
 
     override fun getManga(pageNumber: Int): List<MangaModel> =
-        Jsoup.connect("$url/category/index_$pageNumber.html?sort=updated").followRedirects(true).get()
+        Jsoup.connect("$url/category/index_$pageNumber.html?sort=name").followRedirects(true).get()
             .select("div.post").map {
                 MangaModel(
                     title = it.select("p.title a").text(),
@@ -91,13 +91,31 @@ object NineAnime : MangaSource {
         return PageModel(Regex(""""(http.*)",""").findAll(script).map { it.groupValues[1] }.toList())
     }
 
-    override fun getMangaRanked(pageNumber: Int): List<MangaModel> {
-        return emptyList()
-    }
+    override fun getMangaRanked(pageNumber: Int): List<MangaModel> =
+        Jsoup.connect("$url/category/index_$pageNumber.html?sort=views").followRedirects(true).get()
+            .select("div.post").map {
+                MangaModel(
+                    title = it.select("p.title a").text(),
+                    description = "",
+                    mangaUrl = it.select("p.title a").attr("href"),
+                    imageUrl = it.select("img").attr("abs:src"),
+                    source = Sources.NINE_ANIME
+                )
+            }
 
-    override fun getMangaLatest(pageNumber: Int): List<MangaModel> {
-        return emptyList()
-    }
+    override fun getMangaLatest(pageNumber: Int): List<MangaModel> =
+        Jsoup.connect("$url/category/index_$pageNumber.html?sort=updated").followRedirects(true).get()
+            .select("div.post").map {
+                MangaModel(
+                    title = it.select("p.title a").text(),
+                    description = "",
+                    mangaUrl = it.select("p.title a").attr("href"),
+                    imageUrl = it.select("img").attr("abs:src"),
+                    source = Sources.NINE_ANIME
+                )
+            }
+
+
 
     override val hasMorePages: Boolean = true
 
