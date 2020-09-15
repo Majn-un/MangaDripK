@@ -16,6 +16,11 @@ object MangaFourLife : MangaSource {
 
     private val mangaList = mutableListOf<MangaModel>()
 
+    private val AllList = mutableListOf<MangaModel>()
+
+    private val RankedList = mutableListOf<MangaModel>()
+
+
     override val websiteUrl: String = "https://manga4life.com"
 
     override val headers: List<Pair<String, String>> = listOf(
@@ -23,19 +28,27 @@ object MangaFourLife : MangaSource {
     )
 
     override fun getManga(pageNumber: Int): List<MangaModel> = try {
-        if (mangaList.isEmpty()) {
-            mangaList.addAll(
+        if (AllList.isEmpty()) {
+            AllList.addAll(
                 "vm\\.Directory = (.*?.*;)".toRegex()
                     .find(Jsoup.connect("https://manga4life.com/directory/").get().html())
                     ?.groupValues?.get(1)?.dropLast(1)
                     ?.fromJson<List<LifeBase>>()
                     ?.sortedByDescending { m -> m.lt?.let { 1000 * it.toDouble() } }
-                    ?.map(toAllModel)
+                    ?.map{
+                        MangaModel(
+                            title = it.s.toString(),
+                            description = it.lt.toString(),
+                            mangaUrl = "https://manga4life.com/manga/${it.i}",
+                            imageUrl = it.toString().replace("static.mangaboss.net", "cover.mangabeast.com"),
+                            source = Sources.MANGA_4_LIFE
+                        )
+                    }
                     .orEmpty()
             )
         }
-        val endRange = ((pageNumber * 24) - 1).let { if (it <= mangaList.lastIndex) it else mangaList.lastIndex }
-        mangaList.subList((pageNumber - 1) * 24, endRange)
+        val endRange = ((pageNumber * 24) - 1).let { if (it <= AllList.lastIndex) it else AllList.lastIndex }
+        AllList.subList((pageNumber - 1) * 24, endRange)
     } catch (e: Exception) {
         getJsonApi<List<Life>>("https://manga4life.com/_search.php")?.map {
             MangaModel(
@@ -160,18 +173,26 @@ object MangaFourLife : MangaSource {
     }
 
     override fun getMangaRanked(pageNumber: Int): List<MangaModel> = try {
-        if (mangaList.isEmpty()) {
-            mangaList.addAll(
-                "vm\\.Directory = (.*?.*;)".toRegex().find(Jsoup.connect("https://manga4life.com/search/?sort=vm&desc=true").get().html())
+        if (RankedList.isEmpty()) {
+            RankedList.addAll(
+                "vm\\.Directory = (.*?.*;)".toRegex()
+                    .find(Jsoup.connect("https://manga4life.com/search/").get().html())
                     ?.groupValues?.get(1)?.dropLast(1)
                     ?.fromJson<List<LifeBase>>()
-                    ?.sortedBy { m -> m.vm?.let { 1000 * it.toDouble() } }
-                    ?.map(toMangaModel)
+                    ?.map{
+                        MangaModel(
+                            title = it.s.toString(),
+                            description = it.v.toString(),
+                            mangaUrl = "https://manga4life.com/manga/${it.i}",
+                            imageUrl = it.toString().replace("static.mangaboss.net", "cover.mangabeast.com"),
+                            source = Sources.MANGA_4_LIFE
+                        )
+                    }
                     .orEmpty()
             )
         }
-        val endRange = ((pageNumber * 24) - 1).let { if (it <= mangaList.lastIndex) it else mangaList.lastIndex }
-        mangaList.subList((pageNumber - 1) * 24, endRange)
+
+        RankedList
     } catch (e: Exception) {
         getJsonApi<List<Life>>("https://manga4life.com/_search.php")?.map {
             MangaModel(
@@ -183,6 +204,7 @@ object MangaFourLife : MangaSource {
             )
         }
     }.orEmpty()
+
 
     override fun getMangaLatest(pageNumber: Int): List<MangaModel> = try {
         if (mangaList.isEmpty()) {

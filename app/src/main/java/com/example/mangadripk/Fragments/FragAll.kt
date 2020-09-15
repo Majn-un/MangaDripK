@@ -109,8 +109,10 @@ class FragAll : Fragment() {
         GlobalScope.launch {
             try {
                 if (source == "MangaFourLife") {
-                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
-//                    list = Sources.MANGA_4_LIFE.getManga(pageNumber++).toList()
+                    list = Sources.MANGA_4_LIFE.getManga(pageNumber++).toList()
+                    for (item in list) {
+                        item.imageUrl = item.imageUrl.replace("static.mangaboss.net", "cover.mangabeast.com")
+                    }
                 } else if (source == "MangaHere") {
                     list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
                 } else if (source == "NineAnime") {

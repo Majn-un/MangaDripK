@@ -23,7 +23,7 @@ data class MangaModel(
     val title: String,
     val description: String,
     val mangaUrl: String,
-    val imageUrl: String,
+    var imageUrl: String,
     val source: Sources
 ) : ViewModel() {
     internal val extras = mutableMapOf<String, Any>()

@@ -21,6 +21,7 @@ import com.programmersbox.manga_sources.mangasources.MangaModel
 import com.programmersbox.mangaworld.views.Utility
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.jsoup.Jsoup
 
 class FragRanked : Fragment() {
     private var myAdapter: RecyclerViewAdapter? = null
@@ -134,8 +135,9 @@ class FragRanked : Fragment() {
         GlobalScope.launch {
             try {
                 if (source == "MangaFourLife") {
-//                    list = Sources.MANGA_4_LIFE.getMangaRanked(pageNumber++).toList()
-                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+                    list = Sources.MANGA_4_LIFE.getMangaRanked(pageNumber++).toList()
+//                    SearchMangaHere()
+//                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
                 } else if (source == "MangaHere") {
                     list = Sources.MANGA_HERE.getMangaRanked(pageNumber++).toList()
                 } else if (source == "NineAnime") {
@@ -146,6 +148,14 @@ class FragRanked : Fragment() {
 ////                    list = Sources.MANGA_PARK.getMangaRanked(pageNumber++).toList()
 //                }
                 mangaList.addAll(list)
+
+                if (source == "MangaFourLife") {
+                    mangaList.sortByDescending { it.description }
+                }
+
+                println(mangaList[0].title + mangaList[0].description)
+                println(mangaList[1].title + mangaList[1].description)
+
                 requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
                 }
@@ -155,5 +165,14 @@ class FragRanked : Fragment() {
             }
         }
     }
+//
+//
+//    private fun SearchMangaHere() {
+//        GlobalScope.launch {
+//            val url = "https://manga4life.com/search/?sort=v&desc=true"
+//            val res = Jsoup.connect(url).get()
+//            println(res)
+//        }
+//        }
 
 }
