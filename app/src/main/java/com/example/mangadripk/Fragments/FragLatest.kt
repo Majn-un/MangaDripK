@@ -126,9 +126,10 @@ class FragLatest : Fragment() {
                     list = Sources.MANGA_HERE.getMangaLatest(pageNumber++).toList()
                 } else if (source == "NineAnime") {
                     list = Sources.NINE_ANIME.getMangaLatest(pageNumber++).toList()
-                } else if (source == "MangaPark") {
-                    list = Sources.MANGA_PARK.getMangaLatest(pageNumber++).toList()
                 }
+//                else if (source == "MangaPark") {
+//                    list = Sources.MANGA_PARK.getMangaLatest(pageNumber++).toList()
+//                }
                 for (manga in list) {
                     if (manga.imageUrl != "") {
                         mangaList.add(manga)

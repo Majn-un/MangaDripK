@@ -4,6 +4,7 @@ import com.programmersbox.gsonutils.getJsonApi
 import com.programmersbox.gsonutils.header
 import com.programmersbox.manga_sources.mangasources.*
 import okhttp3.Request
+import org.jsoup.Jsoup
 
 object Mangamutiny : MangaSource {
 
@@ -40,20 +41,17 @@ object Mangamutiny : MangaSource {
     } catch (e: Exception) {
         super.searchManga(searchText, pageNumber, mangaList)
     }
-    override fun getManga(pageNumber: Int): List<MangaModel> = getJsonApi<Munity>(
-        "$baseUrl$mangaApiPath?sort=-lastReleasedAt&limit=20${if (pageNumber != 1) "&skip=${pageNumber * 20}" else ""}",
-        header
-    )
-        ?.items
-        ?.map {
+    override fun getManga(pageNumber: Int): List<MangaModel> = Jsoup.connect("https://mangamutiny.org/titles?sort=3")
+        .cookie("isAdult", "1").get()
+        .select(".manga-list-1-list li").map {
             MangaModel(
-                title = it.title.orEmpty(),
+                title = it.select("a").first().attr("title"),
                 description = "",
-                mangaUrl = "$baseUrl$mangaApiPath/${it.slug}",
-                imageUrl = it.thumbnail.orEmpty(),
-                source = Sources.MANGAMUTINY
+                mangaUrl = it.select("a").first().attr("abs:href"),
+                imageUrl = it.select("  img.manga-list-1-cover")?.first()?.attr("src") ?: "",
+                source = Sources.MANGA_HERE
             )
-        }.orEmpty()
+        }.filter { it.title.isNotEmpty() }
 
     override fun toInfoModel(model: MangaModel): MangaInfoModel = getJsonApi<MangaInfoMunity>(model.mangaUrl, header).let {
         MangaInfoModel(
@@ -117,9 +115,20 @@ object Mangamutiny : MangaSource {
         TODO("Not yet implemented")
     }
 
-    override fun getMangaLatest(pageNumber: Int): List<MangaModel> {
-        TODO("Not yet implemented")
-    }
+    override fun getMangaLatest(pageNumber: Int): List<MangaModel> = getJsonApi<Munity>(
+        "$baseUrl$mangaApiPath?sort=-lastReleasedAt&limit=20${if (pageNumber != 1) "&skip=${pageNumber * 20}" else ""}",
+        header
+    )
+        ?.items
+        ?.map {
+            MangaModel(
+                title = it.title.orEmpty(),
+                description = "",
+                mangaUrl = "$baseUrl$mangaApiPath/${it.slug}",
+                imageUrl = it.thumbnail.orEmpty(),
+                source = Sources.MANGAMUTINY
+            )
+        }.orEmpty()
 
     override val hasMorePages: Boolean = true
 

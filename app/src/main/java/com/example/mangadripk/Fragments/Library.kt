@@ -87,7 +87,7 @@ class Library : Fragment() {
         lateinit var dialog: AlertDialog
         lateinit var choice: String
 
-        val listItems = arrayOf("MangaHere", "MangaFourLife", "MangaPark", "NineAnime", "MangaMutiny")
+        val listItems = arrayOf("MangaHere", "MangaFourLife", "NineAnime")
         val builder = AlertDialog.Builder(activity)
         val checkInt = listItems.indexOf(source!!.text)
         builder.setTitle("Select Source")

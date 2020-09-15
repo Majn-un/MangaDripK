@@ -15,8 +15,10 @@ import com.example.mangadripk.Database.Source
 import com.example.mangadripk.R
 import com.example.mangadripk.Sources.Sources
 import com.example.mangadripk.Sources.manga.MangaFourLife
+import com.example.mangadripk.Sources.manga.Mangamutiny
 import com.google.android.material.tabs.TabLayout
 import com.programmersbox.gsonutils.fromJson
+import com.programmersbox.gsonutils.getJsonApi
 import com.programmersbox.manga_sources.mangasources.MangaModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,7 +35,7 @@ class FragAll : Fragment() {
     private val progressDialog = CustomProgressDialog()
     private var pageNumber = 1
     private var searchNumber = 1
-    private var list : List<MangaModel> = listOf()
+    private var list: List<MangaModel> = listOf()
     private val baseUrl = "https://www.mangahere.cc"
     lateinit var gridlayoutManager: GridLayoutManager
     var myFragment: View? = null
@@ -103,8 +105,6 @@ class FragAll : Fragment() {
     }
 
 
-
-
     private fun loadNewManga() {
         GlobalScope.launch {
             try {
@@ -115,12 +115,13 @@ class FragAll : Fragment() {
                     list = Sources.MANGA_HERE.getManga(pageNumber++).toList()
                 } else if (source == "NineAnime") {
                     list = Sources.NINE_ANIME.getManga(pageNumber++).toList()
-                } else if (source == "MangaPark") {
-                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
-//                    list = Sources.MANGA_PARK.getManga(pageNumber++).toList()
-                } else if (source == "MangaMutiny") {
-                    list = Sources.MANGAMUTINY.getManga(pageNumber++).toList()
                 }
+//                } else if (source == "MangaPark") {
+//                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+////                    list = Sources.MANGA_PARK.getManga(pageNumber++).toList()
+//                } else if (source == "MangaMutiny") {
+//                    list = Sources.MANGAMUTINY.getManga(pageNumber++).toList()
+//                }
 //                } else if (source == "Manganelo") {
 //                    list = Sources.MANGANELO.getManga(pageNumber++).toList()
 //                }
@@ -135,4 +136,5 @@ class FragAll : Fragment() {
             }
         }
     }
+
 }

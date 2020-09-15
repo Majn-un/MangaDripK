@@ -140,10 +140,11 @@ class FragRanked : Fragment() {
                     list = Sources.MANGA_HERE.getMangaRanked(pageNumber++).toList()
                 } else if (source == "NineAnime") {
                     list = Sources.NINE_ANIME.getMangaRanked(pageNumber++).toList()
-                } else if (source == "MangaPark") {
-                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
-//                    list = Sources.MANGA_PARK.getMangaRanked(pageNumber++).toList()
                 }
+//                } else if (source == "MangaPark") {
+//                    Toast.makeText(activity, "Not Available Currently", Toast.LENGTH_SHORT).show()
+////                    list = Sources.MANGA_PARK.getMangaRanked(pageNumber++).toList()
+//                }
                 mangaList.addAll(list)
                 requireActivity().runOnUiThread {
                     myAdapter?.notifyDataSetChanged()
