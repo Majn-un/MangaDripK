@@ -108,7 +108,7 @@ class SearchActivity : AppCompatActivity() {
                             )
                         }
 
-                    filterGayShit(res)
+                    filter1(res)
                 i++
                 }
             } catch (e: Exception) {
@@ -117,7 +117,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun filterGayShit(list: List<MangaModel>) {
+    private fun filter1(list: List<MangaModel>) {
         for (item in list) {
             val tagList: MutableList<String> = mutableListOf<String>()
             Thread.sleep(200)
