@@ -21,6 +21,7 @@ import java.util.*
 
 
 class UpdateActivity : AppCompatActivity() {
+//    we in this shit
     private var myAdapter: RecyclerViewAdapter? = null
     lateinit var gridlayoutManager: GridLayoutManager
     private val chapterList = mutableListOf<MangaModel>()
